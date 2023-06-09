@@ -1,0 +1,46 @@
+﻿@page
+@model AutomatedWorkplaceCarService.Pages.Account.RegistrationModel
+@{
+	ViewData["Title"] = "Регистрация";
+}
+
+<form method="post">
+	<div class="row justify-content-center mt-3">
+		<div class="col col-sm-8 col-lg-4">
+			<h1 class="text-center fw-bold">Регистрация</h1>
+			<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+			<div class="form-floating mt-3">
+				<input type="text" asp-for="Client.Login" class="form-control" placeholder="Логин">
+				<label>Логин <span class="text-danger">*</span></label>
+				<span asp-validation-for="Client.Login" class="text-danger"></span>
+			</div>
+			<div class="form-floating mt-3">
+				<input type="password" asp-for="Client.Password" class="form-control" placeholder="Пароль">
+				<label>Пароль <span class="text-danger">*</span></label>
+				<span asp-validation-for="Client.Password" class="text-danger"></span>
+			</div>
+			<div class="form-floating mt-3">
+				<input type="text" asp-for="Client.Surname" class="form-control" placeholder="Фамилия">
+				<label>Фамилия <span class="text-danger">*</span></label>
+				<span asp-validation-for="Client.Surname" class="text-danger"></span>
+			</div>
+			<div class="form-floating mt-3">
+				<input type="text" asp-for="Client.Name" class="form-control" placeholder="Имя">
+				<label>Имя <span class="text-danger">*</span></label>
+				<span asp-validation-for="Client.Name" class="text-danger"></span>
+			</div>
+			<div class="form-floating mt-3">
+				<input type="text" asp-for="Client.Patronymic" class="form-control" placeholder="Отчество">
+				<label>Отчество</label>
+			</div>
+			<div class="form-floating mt-3">
+				<input type="text" asp-for="Client.MobilePhone" class="form-control" placeholder="Мобильный номер">
+				<label>Мобильный номер <span class="text-danger">*</span></label>
+				<span asp-validation-for="Client.MobilePhone" class="text-danger"></span>
+			</div>
+			<div class="d-grid gap-2 mt-3">
+				<button type="submit" class="btn btn-primary btn-lg">Зарегистрироваться</button>
+			</div>
+		</div>
+	</div>
+</form>

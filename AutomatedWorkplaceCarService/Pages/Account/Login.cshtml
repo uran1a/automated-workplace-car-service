@@ -1,0 +1,30 @@
+﻿@page
+@model AutomatedWorkplaceCarService.Pages.Account.AuthenticationModel
+@{
+	ViewData["Title"] = "Вход";
+}
+<form method="post">
+	<div class="row justify-content-center mt-3">
+		<div class="col col-sm-8 col-lg-4">
+			<h1 class="text-center fw-bold">Вход</h1>
+			<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+			<div class="form-floating mt-3">
+				<input type="text" asp-for="Authentication.Login" class="form-control" id="floatingInput" placeholder="Логин">
+				<label for="floatingInput">Логин</label>
+				<span asp-validation-for="Authentication.Login" class="text-danger"></span>
+			</div>
+			<div class="form-floating mt-3">
+				<input type="password" asp-for="Authentication.Password" class="form-control" id="floatingInput" placeholder="Пароль">
+				<label for="floatingInput">Пароль</label>
+				<span asp-validation-for="Authentication.Password" class="text-danger"></span>
+			</div>
+			<div class="d-grid gap-2 mt-3">
+				<button type="submit" class="btn btn-primary btn-lg">Вход</button>
+			</div>
+			<div class="text-center mt-3">
+				<p>У нас нет аккаунта? <a asp-page="/Account/Registration" class="fw-bold">Регистрация</a></p>
+			</div>
+		</div>
+	</div>
+</form>
+
