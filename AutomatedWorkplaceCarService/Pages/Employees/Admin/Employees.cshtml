@@ -1,0 +1,40 @@
+﻿@page
+@model AutomatedWorkplaceCarService.Pages.Employees.Admin.EmployeesModel
+@{
+	ViewData["Title"] = "Сотрудники";
+}
+<div class="row">
+	<h1>Сотрудники</h1>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">ФИО</th>
+				<th scope="col">Логин</th>
+				<th scope="col">Пароль</th>
+				<th scope="col">Пост</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Employees)
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>@item.Surname @item.Name @item.Patronymic</td>
+					<td>@item.Login</td>
+					<td>@item.Password</td>
+					<td>@item.Post</td>
+					<td>
+						<button type="button" class="btn btn-primary">Редактирование</button>
+					</td>
+					<td>
+						<button type="button" class="btn btn-danger">Удаление</button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<button type="button" class="btn btn-primary">Добавить</button>
+</div>

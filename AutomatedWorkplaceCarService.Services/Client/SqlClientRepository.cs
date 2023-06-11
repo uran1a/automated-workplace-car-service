@@ -22,5 +22,10 @@ namespace AutomatedWorkplaceCarService.Services
         {
             return _context.Clients.FirstOrDefault(c => c.Login == login);
         }
+
+        public IEnumerable<Client> GetAllClients()
+        {
+            return _context.Clients.ToList();
+        }
     }
 }

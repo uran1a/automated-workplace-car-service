@@ -30,6 +30,8 @@ namespace AutomatedWorkplaceCarService.Pages.Account
                     {
                         case Role.Client:
                             return RedirectToPage("/Index");
+                        case Role.Admin:
+                            return RedirectToPage("/Employees/Admin/Clients");
                         default:
                             return RedirectToPage("/Error");
                     }

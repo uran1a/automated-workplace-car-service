@@ -11,5 +11,6 @@ namespace AutomatedWorkplaceCarService.Services
         public DbSet<User> Users { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 }
