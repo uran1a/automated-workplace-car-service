@@ -13,5 +13,7 @@ namespace AutomatedWorkplaceCarService.Models
         [RegularExpression(@"^\+[0-9]{11}$", ErrorMessage = "Пожалуйста, введите корректный номер телефона (Формат: +12223334455)")]
         [MaxLength(15)]
         public string MobilePhone { get; set; }
+        public List<Car> Cars { get; set; }
+        public List<Application> Applications { get; set; }
     }
 }

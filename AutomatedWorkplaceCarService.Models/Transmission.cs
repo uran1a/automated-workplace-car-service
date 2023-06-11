@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace AutomatedWorkplaceCarService.Models
 {
-    public class Employee : User
+    public enum Transmission
     {
-        public Post? Post { get; set; }
-        public List<Application> Applications { get; set; }
+        Mechanics,
+        Automatic,
+        Variator
     }
 }

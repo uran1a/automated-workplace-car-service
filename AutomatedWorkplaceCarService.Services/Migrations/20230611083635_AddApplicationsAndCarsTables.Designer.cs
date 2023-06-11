@@ -3,6 +3,7 @@ using System;
 using AutomatedWorkplaceCarService.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AutomatedWorkplaceCarService.Services.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611083635_AddApplicationsAndCarsTables")]
+    partial class AddApplicationsAndCarsTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +34,6 @@ namespace AutomatedWorkplaceCarService.Services.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("Amount")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("CarId")
                         .HasColumnType("integer");
 
                     b.Property<int>("ClientId")
@@ -59,8 +59,6 @@ namespace AutomatedWorkplaceCarService.Services.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CarId");
 
                     b.HasIndex("ClientId");
 
@@ -269,12 +267,6 @@ namespace AutomatedWorkplaceCarService.Services.Migrations
 
             modelBuilder.Entity("AutomatedWorkplaceCarService.Models.Application", b =>
                 {
-                    b.HasOne("AutomatedWorkplaceCarService.Models.Car", "Car")
-                        .WithMany("Applications")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("AutomatedWorkplaceCarService.Models.Client", "Client")
                         .WithMany("Applications")
                         .HasForeignKey("ClientId")
@@ -292,8 +284,6 @@ namespace AutomatedWorkplaceCarService.Services.Migrations
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Car");
 
                     b.Navigation("Client");
 
@@ -359,8 +349,6 @@ namespace AutomatedWorkplaceCarService.Services.Migrations
 
             modelBuilder.Entity("AutomatedWorkplaceCarService.Models.Car", b =>
                 {
-                    b.Navigation("Applications");
-
                     b.Navigation("Images");
                 });
 
