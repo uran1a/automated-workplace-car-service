@@ -15,9 +15,19 @@ namespace AutomatedWorkplaceCarService.Services
         {
             _context = context;
         }
+
+        public Employee Add(Employee newEmployee)
+        {
+            newEmployee.Role = Role.Employee;
+            _context.Employees.Add(newEmployee);
+            _context.SaveChanges();
+            return newEmployee;
+        }
+
         public IEnumerable<Employee> GetAllEmployees(int id)
         {
-            return _context.Employees.Where(e => e.Id != id).ToList();    
+            return _context.Employees
+                .Include(e => e.Post).Where(e => e.Id != id).ToList();    
         }
 
 		public IEnumerable<Post> GetAllPosts(string post)
@@ -30,5 +40,12 @@ namespace AutomatedWorkplaceCarService.Services
             return _context.Employees
                 .Include(e => e.Post).FirstOrDefault(e => e.Id == id);
         }
-	}
+
+        public Employee Update(Employee updatedEmployee)
+        {
+            _context.Employees.Update(updatedEmployee);
+            _context.SaveChanges();
+            return updatedEmployee;
+        }
+    }
 }

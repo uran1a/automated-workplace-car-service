@@ -1,39 +1,41 @@
-﻿@page
+﻿@page "{id?}"
 @using AutomatedWorkplaceCarService.Models
 @model AutomatedWorkplaceCarService.Pages.Employees.Admin.EditEmployeeModel
 @{
-	ViewData["Title"] = "Добавление сотрудника";
+	var pageTitle = Model.Employee.Id > 0 ? "Изменение данных сотрудника" : "Добавление сотрудника";
+    ViewData["Title"] = pageTitle;
 }
 <form method="post">
 	<div class="row justify-content-center mt-3">
 		<div class="col col-sm-8 col-lg-4">
-			<h1 class="text-center fw-bold">Добавление сотрудника</h1>
+			<h1 class="text-center fw-bold">@pageTitle</h1>
 			<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+			<input type="hidden" asp-for="Employee.Id" value="@Model.Employee.Id">
 			<div class="form-floating mt-3">
-				<input type="text" asp-for="Employee.Login" class="form-control" placeholder="Логин">
+				<input type="text" asp-for="Employee.Login" class="form-control" placeholder="Логин" value="@Model.Employee.Login">
 				<label>Логин <span class="text-danger">*</span></label>
 				<span asp-validation-for="Employee.Login" class="text-danger"></span>
 			</div>
 			<div class="form-floating mt-3">
-				<input type="password" asp-for="Employee.Password" class="form-control" placeholder="Пароль">
+				<input type="password" asp-for="Employee.Password" class="form-control" placeholder="Пароль" value="@Model.Employee.Password">
 				<label>Пароль <span class="text-danger">*</span></label>
 				<span asp-validation-for="Employee.Password" class="text-danger"></span>
 			</div>
 			<div class="form-floating mt-3">
-				<input type="text" asp-for="Employee.Surname" class="form-control" placeholder="Фамилия">
+				<input type="text" asp-for="Employee.Surname" class="form-control" placeholder="Фамилия" value="@Model.Employee.Surname">
 				<label>Фамилия <span class="text-danger">*</span></label>
 				<span asp-validation-for="Employee.Surname" class="text-danger"></span>
 			</div>
 			<div class="form-floating mt-3">
-				<input type="text" asp-for="Employee.Name" class="form-control" placeholder="Имя">
+				<input type="text" asp-for="Employee.Name" class="form-control" placeholder="Имя" value="@Model.Employee.Name">
 				<label>Имя <span class="text-danger">*</span></label>
 				<span asp-validation-for="Employee.Name" class="text-danger"></span>
 			</div>
 			<div class="form-floating mt-3">
-				<input type="text" asp-for="Employee.Patronymic" class="form-control" placeholder="Отчество">
+				<input type="text" asp-for="Employee.Patronymic" class="form-control" placeholder="Отчество" value="@Model.Employee.Patronymic">
 				<label>Отчество</label>
 			</div>
-			<select class="form-select mt-3">
+			<select asp-for="Employee.PostId" class="form-select mt-3">
 				<option selected>Выбирите должность</option>
 				@foreach(var item in Model.Posts)
 				{

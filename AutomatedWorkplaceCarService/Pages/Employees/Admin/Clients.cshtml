@@ -27,7 +27,7 @@
 					<td>@item.Password</td>
 					<td>@item.MobilePhone</td>
 					<td>
-						<a class="btn btn-primary" asp-route-id="@item.Id" asp-page="/Employees/Admin/EditEmployee">Редактирование</a>
+						<a class="btn btn-primary" asp-route-id="@item.Id" asp-page="/Employees/Admin/EditClient">Изменение</a>
 					</td>
 					<td>
 						<button type="button" class="btn btn-danger">Удаление</button>
@@ -36,5 +36,5 @@
 			}
 		</tbody>
 	</table>
-	<a class="btn btn-primary" asp-page="/Employees/Admin/EditEmployee">Добавить</a>
+	<a class="btn btn-primary" asp-page="/Employees/Admin/EditClient">Добавить</a>
 </div>

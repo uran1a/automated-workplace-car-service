@@ -12,5 +12,9 @@ namespace AutomatedWorkplaceCarService.Models
         public int? PostId { get; set; }
         public Post? Post { get; set; }
         public List<Application> Applications { get; set; }
+        public Employee()
+        {
+            Applications = new List<Application>();
+        }
     }
 }

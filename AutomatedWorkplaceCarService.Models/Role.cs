@@ -10,6 +10,6 @@ namespace AutomatedWorkplaceCarService.Models
     {
         Admin,
         Client,
-        Master
+        Employee
     }
 }

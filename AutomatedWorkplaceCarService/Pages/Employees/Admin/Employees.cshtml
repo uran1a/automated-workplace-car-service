@@ -25,9 +25,9 @@
 					<td>@item.Surname @item.Name @item.Patronymic</td>
 					<td>@item.Login</td>
 					<td>@item.Password</td>
-					<td>@item.Post</td>
+					<td>@item.Post.Name</td>
 					<td>
-						<button type="button" class="btn btn-primary">Редактирование</button>
+						<a class="btn btn-primary" asp-route-id="@item.Id" asp-page="/Employees/Admin/EditEmployee">Изменение</a>
 					</td>
 					<td>
 						<button type="button" class="btn btn-danger">Удаление</button>
@@ -36,5 +36,5 @@
 			}
 		</tbody>
 	</table>
-	<button type="button" class="btn btn-primary">Добавить</button>
+	<a class="btn btn-primary" asp-page="/Employees/Admin/EditEmployee">Добавить</a>
 </div>
