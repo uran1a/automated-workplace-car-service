@@ -2,6 +2,7 @@
 @model AutomatedWorkplaceCarService.Pages.Employees.Admin.EditEmployeeModel
 @{
 	var pageTitle = Model.Employee.Id > 0 ? "Изменение данных сотрудника" : "Добавление сотрудника";
+	var method = Model.Employee.Id > 0 ? "Изменить" : "Добавить";
     ViewData["Title"] = pageTitle;
 }
 <form method="post">
@@ -42,7 +43,7 @@
 				}
 			</select>
 			<div class="d-grid gap-2 mt-3">
-				<button type="submit" class="btn btn-primary btn-lg">Добавить</button>
+				<button type="submit" class="btn btn-primary btn-lg">@method</button>
 			</div>
 		</div>
 	</div>

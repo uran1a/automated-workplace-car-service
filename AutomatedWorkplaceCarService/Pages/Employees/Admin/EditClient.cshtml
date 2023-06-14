@@ -2,6 +2,7 @@
 @model AutomatedWorkplaceCarService.Pages.Employees.Admin.EditClientModel
 @{
 	var pageTitle = Model.Client.Id > 0 ? "Изменение данных клиента" : "Добавление клиента";
+	var method = Model.Client.Id > 0 ? "Изменить" : "Добавить";
     ViewData["Title"] = pageTitle;
 }
 <form method="post">
@@ -40,7 +41,7 @@
 				<span asp-validation-for="Client.MobilePhone" class="text-danger"></span>
 			</div>
 			<div class="d-grid gap-2 mt-3">
-				<button type="submit" class="btn btn-primary btn-lg">Добавить</button>
+				<button type="submit" class="btn btn-primary btn-lg">@method</button>
 			</div>
 		</div>
 	</div>
