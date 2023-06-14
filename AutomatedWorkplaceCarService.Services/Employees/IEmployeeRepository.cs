@@ -14,5 +14,6 @@ namespace AutomatedWorkplaceCarService.Services
         IEnumerable<Post> GetAllPosts(string post);
         Employee Update(Employee updatedEmployee);
         Employee Add(Employee newEmployee);
+        Employee Delete(int id);
     }
 }

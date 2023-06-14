@@ -17,5 +17,9 @@ namespace AutomatedWorkplaceCarService.Pages.Employees.Admin
         {
             Employees = _employeeRepository.GetAllEmployees(int.Parse(User.Identity.Name));
         }
+        public void OnPost(int id)
+        {
+
+        }
     }
 }

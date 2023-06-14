@@ -25,13 +25,13 @@
 					<td>@item.Surname @item.Name @item.Patronymic</td>
 					<td>@item.Login</td>
 					<td>@item.Password</td>
-					<td>@item.Post.Name</td>
+					<td>@item.Post!.Name</td>
 					<td>
 						<a class="btn btn-primary" asp-route-id="@item.Id" asp-page="/Employees/Admin/EditEmployee">Изменение</a>
 					</td>
 					<td>
-						<button type="button" class="btn btn-danger">Удаление</button>
-					</td>
+						<a class="btn btn-danger" asp-route-id="@item.Id" asp-page="/Employees/Admin/DeleteEmployee">Удаление</a>
+					</td>	
 				</tr>
 			}
 		</tbody>

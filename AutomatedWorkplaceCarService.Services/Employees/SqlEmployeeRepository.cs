@@ -24,6 +24,17 @@ namespace AutomatedWorkplaceCarService.Services
             return newEmployee;
         }
 
+        public Employee Delete(int id)
+        {
+            var employeeToDelete = _context.Employees.FirstOrDefault(e => e.Id == id);
+            if(employeeToDelete != null)
+            {
+                _context.Employees.Remove(employeeToDelete);
+                _context.SaveChanges();
+            }
+            return employeeToDelete;
+        }
+
         public IEnumerable<Employee> GetAllEmployees(int id)
         {
             return _context.Employees
