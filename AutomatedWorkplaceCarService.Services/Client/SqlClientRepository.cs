@@ -27,5 +27,28 @@ namespace AutomatedWorkplaceCarService.Services
         {
             return _context.Clients.ToList();
         }
+
+        public Client GetClient(int id)
+        {
+            return _context.Clients.FirstOrDefault(c => c.Id == id);
+        }
+
+        public Client Update(Client updatedClient)
+        {
+            _context.Update(updatedClient);
+            _context.SaveChanges();
+            return updatedClient;
+        }
+
+        public Client Delete(int id)
+        {
+            var employeeToDelete = _context.Clients.FirstOrDefault(c => c.Id == id);
+            if(employeeToDelete != null)
+            {
+                _context.Clients.Remove(employeeToDelete);
+                _context.SaveChanges();
+            }
+            return employeeToDelete;
+        }
     }
 }

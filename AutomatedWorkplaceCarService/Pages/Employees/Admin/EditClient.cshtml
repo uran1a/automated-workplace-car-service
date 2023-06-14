@@ -1,36 +1,37 @@
-﻿@page
-@model AutomatedWorkplaceCarService.Pages.Account.RegistrationModel
+﻿@page "{id?}"
+@model AutomatedWorkplaceCarService.Pages.Employees.Admin.EditClientModel
 @{
-	ViewData["Title"] = "Регистрация";
+	var pageTitle = Model.Client.Id > 0 ? "Изменение данных клиента" : "Добавление клиента";
+    ViewData["Title"] = pageTitle;
 }
-
 <form method="post">
 	<div class="row justify-content-center mt-3">
 		<div class="col col-sm-8 col-lg-4">
-			<h1 class="text-center fw-bold">Регистрация</h1>
+			<h1 class="text-center fw-bold">@pageTitle</h1>
 			<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+			<input type="hidden" asp-for="Client.Id" value="@Model.Client.Id">
 			<div class="form-floating mt-3">
-				<input type="text" asp-for="Client.Login" class="form-control" placeholder="Логин">
+				<input type="text" asp-for="Client.Login" class="form-control" placeholder="Логин" value="@Model.Client.Login">
 				<label>Логин <span class="text-danger">*</span></label>
 				<span asp-validation-for="Client.Login" class="text-danger"></span>
 			</div>
 			<div class="form-floating mt-3">
-				<input type="password" asp-for="Client.Password" class="form-control" placeholder="Пароль">
+				<input type="password" asp-for="Client.Password" class="form-control" placeholder="Пароль" value="@Model.Client.Password">
 				<label>Пароль <span class="text-danger">*</span></label>
 				<span asp-validation-for="Client.Password" class="text-danger"></span>
 			</div>
 			<div class="form-floating mt-3">
-				<input type="text" asp-for="Client.Name" class="form-control" placeholder="Имя">
+				<input type="text" asp-for="Client.Name" class="form-control" placeholder="Имя" value="@Model.Client.Name">
 				<label>Имя <span class="text-danger">*</span></label>
 				<span asp-validation-for="Client.Name" class="text-danger"></span>
 			</div>
 			<div class="form-floating mt-3">
-				<input type="text" asp-for="Client.Surname" class="form-control" placeholder="Фамилия">
+				<input type="text" asp-for="Client.Surname" class="form-control" placeholder="Фамилия" value="@Model.Client.Surname">
 				<label>Фамилия <span class="text-danger">*</span></label>
 				<span asp-validation-for="Client.Surname" class="text-danger"></span>
 			</div>
 			<div class="form-floating mt-3">
-				<input type="text" asp-for="Client.Patronymic" class="form-control" placeholder="Отчество">
+				<input type="text" asp-for="Client.Patronymic" class="form-control" placeholder="Отчество" value="@Model.Client.Patronymic">
 				<label>Отчество</label>
 			</div>
 			<div class="form-floating mt-3">
@@ -39,7 +40,7 @@
 				<span asp-validation-for="Client.MobilePhone" class="text-danger"></span>
 			</div>
 			<div class="d-grid gap-2 mt-3">
-				<button type="submit" class="btn btn-primary btn-lg">Зарегистрироваться</button>
+				<button type="submit" class="btn btn-primary btn-lg">Добавить</button>
 			</div>
 		</div>
 	</div>

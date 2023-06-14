@@ -14,15 +14,14 @@ namespace AutomatedWorkplaceCarService.Pages.Employees.Admin
         }
         [BindProperty]
         public Employee Employee { get; set; }
+        [BindProperty]
         public IEnumerable<Post> Posts { get; set; }
         public IActionResult OnGet(int? id)
         {
             if (id.HasValue)
                 Employee = _employeeRepository.GetEmployee(id.Value);
             else
-            {
                 Employee = new Employee();
-            }
             var currentEmployee = _employeeRepository.GetEmployee(int.Parse(User.Identity.Name));
             Posts = _employeeRepository.GetAllPosts(currentEmployee.Post.Name);
             if (Employee == null)
@@ -49,7 +48,9 @@ namespace AutomatedWorkplaceCarService.Pages.Employees.Admin
                 }
                 return RedirectToPage("/Employees/Admin/Employees");
             }
-            return RedirectToPage();
+            var currentEmployee = _employeeRepository.GetEmployee(int.Parse(User.Identity.Name));
+            Posts = _employeeRepository.GetAllPosts(currentEmployee.Post.Name);
+            return Page();
         }
     }
 }
