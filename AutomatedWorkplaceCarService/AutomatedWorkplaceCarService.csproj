@@ -22,8 +22,4 @@
     <ProjectReference Include="..\AutomatedWorkplaceCarService.Services\AutomatedWorkplaceCarService.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Clients\" />
-  </ItemGroup>
-
 </Project>

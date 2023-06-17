@@ -11,6 +11,7 @@
 			<h1 class="text-center fw-bold">@pageTitle</h1>
 			<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
 			<input type="hidden" asp-for="Client.Id" value="@Model.Client.Id">
+			<input type="hidden" asp-for="Client.Role" value="@Model.Client.Role">
 			<div class="form-floating mt-3">
 				<input type="text" asp-for="Client.Login" class="form-control" placeholder="Логин" value="@Model.Client.Login">
 				<label>Логин <span class="text-danger">*</span></label>

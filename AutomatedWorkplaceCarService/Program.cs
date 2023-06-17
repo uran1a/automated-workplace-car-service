@@ -17,6 +17,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddScoped<IUserRepository, SqlUserRepository>();
 builder.Services.AddScoped<IClientRepository, SqlClientRepository>();
 builder.Services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
+builder.Services.AddScoped<IApplicationRepository, SqlApplicationRepository>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

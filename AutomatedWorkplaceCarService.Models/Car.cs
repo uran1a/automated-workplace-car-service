@@ -18,6 +18,9 @@ namespace AutomatedWorkplaceCarService.Models
         public int ModelId { get; set; }
         public Model Model { get; set; }
         [Required]
+        public int BrandId { get; set; }
+        public Brand Brand { get; set; }
+        [Required]
         public Transmission Transmission { get; set; }
         [Required]
         public int OwnerId { get; set; }

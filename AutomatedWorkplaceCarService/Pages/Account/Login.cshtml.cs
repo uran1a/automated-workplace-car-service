@@ -29,7 +29,7 @@ namespace AutomatedWorkplaceCarService.Pages.Account
                     switch (user.Role)
                     {
                         case Role.Client:
-                            return RedirectToPage("/Index");
+                            return RedirectToPage("/Clients/Applications");
                         case Role.Admin:
                             return RedirectToPage("/Employees/Admin/Clients");
                         default:
