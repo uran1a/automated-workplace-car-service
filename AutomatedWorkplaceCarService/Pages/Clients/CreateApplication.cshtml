@@ -3,85 +3,98 @@
 @{
 	ViewData["Title"] = "Создание заявки";
 }
-<div class="row justify-content-center">
-	<h1>Создание заявку</h1>
-	<form method="post">
-		1. Выбор автомобиля
-		<div class="row justify-content-center mt-3">
-			<div class="col col-lg-5">
-				<div>
-					<img class="card-img-top border border-primary" height="405" id="imageAuto" src="/images/default/product-default-style-1-img-4.webp" asp-append-version="true" />
-					<input type="file" id="imageInpAuto" name="imageAuto" class="custom-file-input form-control" placeholder="BEee" />
-				</div>
-			</div>
-			<div class="col col-sm-8 col-lg-4">
-				<h1 class="text-center fw-bold">Автомобиль</h1>
-				<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
-				@*<span asp-validation-for="Client.Login" class="text-danger"></span>*@
-				<form ethod="post" asp-page-handler="SelectAuto">
-					<select class="form-control" asp-for="Car.Brand" onchange="this.form.submit();">
-						<option selected>Бренд</option>
-						@foreach (var item in Model.Brands)
-						{
-							<option value="@item.Id">@item.Name</option>
-						}
-					</select>
-				</form>
-				<select asp-for="Car.Model" class="form-select mt-3">
-					<option selected>Модель</option>
-					@foreach (var item in Model.Models)
-					{
-						<option value="@item.Id">@item.Name</option>
-					}
-				</select>
-				<select asp-for="Car.Transmission" class="form-select mt-3" asp-items="Html.GetEnumSelectList<Transmission>()">
-					<option value="">Тип трансмиссии</option>
-				</select>
-				<div class="form-floating mt-3">
-					<input type="number" asp-for="Car.YearOfRelease" class="form-control" placeholder="Год выпуска">
-					<label>Год выпуска <span class="text-danger">*</span></label>
-					<span asp-validation-for="Car.YearOfRelease" class="text-danger"></span>
-				</div>
-				<div class="form-floating mt-3">
-					<input type="number" asp-for="Car.EnginePower" class="form-control" placeholder="Мощность двигателя">
-					<label>Мощность двигателя (л.с) <span class="text-danger">*</span></label>
-					<span asp-validation-for="Car.EnginePower" class="text-danger"></span>
-				</div>
-				<div class="d-grid gap-2 mt-3">
-					<button type="submit" class="btn btn-primary btn-lg">Зарегистрироваться</button>
+
+<h1 class="text-center">Создание заявку</h1>
+<form method="post">
+	<div class="row justify-content-around mt-3 ">
+		<div class="col-8">
+			<div class="row justify-content-center p-3 border border-3 border-primary rounded ">
+				<div class="col">
+					<div class="row">
+						<h3 class="text-center fw-bold"><span class="text-danger">1.</span> Выбор автомобиля</h3>
+					</div>
+					<div class="row">
+						<div class="col-4 ">
+							<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+							@*<span asp-validation-for="Client.Login" class="text-danger"></span>*@
+							<select class="form-select mt-3" asp-for="Car.BrandId" onchange="this.form.submit();">
+								<option selected>Бренд</option>
+								@foreach (var item in Model.Brands)
+								{
+									<option value="@item.Id">@item.Name</option>
+								}
+							</select>
+							<select class="form-select mt-3">
+								<option selected>Модель</option>
+								@foreach (var item in Model.Models)
+								{
+									<option value="@item.Id">@item.Name</option>
+								}
+							</select>
+							@*<select class="form-select mt-3"
+									asp-items="Html.GetEnumSelectList<Transmission>()">
+								<option value="">Тип трансмиссии</option>
+							</select>*@
+							<div class="form-floating mt-3">
+								<input type="number" asp-for="Car.YearOfRelease" class="form-control"
+									   placeholder="Год выпуска">
+								<label>Год выпуска <span class="text-danger">*</span></label>
+								<span asp-validation-for="Car.YearOfRelease" class="text-danger"></span>
+							</div>
+							<div class="form-floating mt-3">
+								<input type="number" asp-for="Car.EnginePower" class="form-control"
+									   placeholder="Мощность двигателя">
+								<label>Мощность двигателя (л.с) <span class="text-danger">*</span></label>
+								<span asp-validation-for="Car.EnginePower" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="col-8">
+							<img class="card-img-top mt-2" height="405" id="imageAuto"
+								 src="/images/default/product-default-style-1-img-4.webp"
+								 asp-append-version="true" />
+							<input type="file" id="imageInpAuto" name="imageAuto"
+								   class="custom-file-input form-control" placeholder="BEee" />
+						</div>
+					</div>
+					<div class="row">
+						<h3 class="text-center fw-bold"><span class="text-danger">1.</span> Выбор автомобиля</h3>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="col-3">
+			<div class="row justify-content-around mb-3 p-3 border border-3 border-primary rounded">
 
-		<div class="row justify-content-center mt-3">
-			<div class="col col-lg-5">
-				2. Выбор услуги
-				<select asp-for="Car.Model" class="form-select mt-3">
+				<h3 class="text-center fw-bold"><span class="text-danger">2.</span> Выбор услуги</h3>
+				<select class="form-select mt-3">
 					<option selected>Модель</option>
 					@foreach (var item in Model.Models)
 					{
 						<option value="@item.Id">@item.Name</option>
 					}
 				</select>
-				<div class="form-group">
+				<div class="form-group mt-3 mb-3">
 					<label for="exampleFormControlTextarea1">Описание проблемы</label>
 					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 				</div>
+
 			</div>
-			<div class="col col-lg-5">
-				3. Выбор мастера
-				<select asp-for="Car.Model" class="form-select mt-3">
+			<div class="row  p-3 border border-3 border-primary rounded">
+				<h3 class="text-center fw-bold"><span class="text-danger">3.</span> Выбор мастера</h3>
+				<select class="form-select mt-3  mb-5">
 					<option selected>Модель</option>
 					@foreach (var item in Model.Models)
 					{
 						<option value="@item.Id">@item.Name</option>
 					}
 				</select>
+				<div class="d-grid gap-2 mt-3 sticky-top ">
+					<button class="btn btn-primary fs-5">Отправить заявку </button>
+				</div>
 			</div>
 		</div>
-	</form>
-
-</div>
+	</div>
+</form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function readURL(input, id) {

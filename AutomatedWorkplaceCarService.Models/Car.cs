@@ -21,12 +21,12 @@ namespace AutomatedWorkplaceCarService.Models
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
         [Required]
+        public int TransmissionId { get; set; }
         public Transmission Transmission { get; set; }
         [Required]
         public int OwnerId { get; set; }
         public Client Owner { get; set; }
         public List<Application> Applications { get; set; }
         public List<Image> Images { get; set; }
-
     }
 }

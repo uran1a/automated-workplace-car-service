@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedWorkplaceCarServic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedWorkplaceCarService.Services", "AutomatedWorkplaceCarService.Services\AutomatedWorkplaceCarService.Services.csproj", "{3DE9F5CC-891E-4E56-A918-A8CF794ACD47}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{12E0880B-34FB-438F-9EA5-B6335BBCDC6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3DE9F5CC-891E-4E56-A918-A8CF794ACD47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DE9F5CC-891E-4E56-A918-A8CF794ACD47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DE9F5CC-891E-4E56-A918-A8CF794ACD47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12E0880B-34FB-438F-9EA5-B6335BBCDC6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12E0880B-34FB-438F-9EA5-B6335BBCDC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12E0880B-34FB-438F-9EA5-B6335BBCDC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12E0880B-34FB-438F-9EA5-B6335BBCDC6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

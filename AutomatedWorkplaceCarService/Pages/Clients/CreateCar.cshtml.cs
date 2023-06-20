@@ -5,31 +5,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AutomatedWorkplaceCarService.Pages.Clients
 {
-    public class CreateApplicationModel : PageModel
+    public class CreateCarModel : PageModel
     {
-        private readonly IApplicationRepository _applicationRepository;
-        public CreateApplicationModel(IApplicationRepository applicationRepository)
+        private readonly ICarRepository _carRepository;
+        public CreateCarModel(ICarRepository carRepository)
         {
-            _applicationRepository = applicationRepository;
+            _carRepository = carRepository;
         }
-
         [BindProperty]
         public Car Car { get; set; }
         [BindProperty]
         public IEnumerable<Brand> Brands { get; set; }
         [BindProperty]
         public IEnumerable<Model> Models { get; set; }
-        public void OnGet()  
+        public IEnumerable<Transmission> Transmissions { get; set; }
+        public void OnGet()
         {
-
-        }
-        public void OnPost()
-        {
-
-        }
-        public void OnPostSelectAuto()
-        {
-
+            Brands = _carRepository.GetAllBrands();
+            Transmissions = _carRepository.GetAllTransmissions();
         }
     }
 }

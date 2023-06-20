@@ -14,13 +14,5 @@ namespace AutomatedWorkplaceCarService.Services
         {
             _context = context;
         }
-        public IEnumerable<Brand> GetAllBrands()
-        {
-            return _context.Brands.ToList();
-        }
-        public IEnumerable<Model> GetModels(int brandId)
-        {
-            return _context.Models.Where(m => m.BrandId == brandId);
-        }
     }
 }

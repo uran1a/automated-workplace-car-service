@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace AutomatedWorkplaceCarService.Services
 {
-    public interface IApplicationRepository
+    public interface ICarRepository
     {
+        IEnumerable<Brand> GetAllBrands();
+        IEnumerable<Transmission> GetAllTransmissions();
+        IEnumerable<Model> GetModels(int brandId);
     }
 }

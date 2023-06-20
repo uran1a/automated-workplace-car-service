@@ -1,0 +1,85 @@
+﻿version: '3'
+
+services:
+    aspnetwebclient:
+        container_name: 'webclient'
+
+        image: aspnetwebclient
+
+        build:
+          dockerfile: ./AutomatedWorkplaceCarService/Dockerfile
+          context: .
+
+        environment:
+          DATABASE_USERS: 'Host=postgres;Port=5432;Database=db_automated_workplace_car_service;Username=root;Password=root'
+
+        networks:
+          - postgres
+
+        depends_on:
+          - postgres
+        deploy:
+          resources:
+            limits:
+              cpus: '0.5'
+              memory: 512M
+
+        ports:
+          - '8080:80'    
+
+    postgres:
+        container_name: 'postgres'
+        image: postgres:latest
+        restart: always
+
+        environment:
+           POSTGRES_DB: 'db_automated_workplace_car_service'
+           POSTGRES_USER: 'root'
+           POSTGRES_PASSWORD: 'root'
+           PGDATA: '/var/lib/postgresql/data/pgdata'
+
+        volumes:
+            - ./postgres:/var/lib/postgresql/data 
+        ports:
+          - '5432:5432'
+        networks:
+          - postgres
+        deploy:
+          resources:
+            limits:
+              cpus: '0.5'
+              memory: 512M
+
+    pgadmin:
+        container_name: 'pgadmin'
+        image: dpage/pgadmin4:latest
+
+        restart: always
+
+        environment:
+          PGADMIN_DEFAULT_EMAIL: admin@admin.com
+          PGADMIN_DEFAULT_PASSWORD: root
+          PGADMIN_CONFIG_SERVER_MODE: 'False'
+
+        ports:
+          - '5050:80'
+        volumes:
+          - ./pgadmin:/var/lib/pgadmin
+        depends_on:
+          - postgres
+        networks:
+          - postgres
+
+        deploy:
+          resources:
+            limits:
+              cpus: '0.5'
+              memory: 512M
+
+volumes:
+  postgres:
+  pgadmin:
+
+networks:
+  postgres:
+    driver: bridge
