@@ -31,5 +31,5 @@ namespace AutomatedWorkplaceCarService.Models
         public int CarId { get; set; }
         public Car Car { get; set; }
         public List<Image> Images { get; set; }
-    }
+    }   
 }

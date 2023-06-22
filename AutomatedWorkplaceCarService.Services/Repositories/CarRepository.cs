@@ -1,16 +1,12 @@
-﻿using AutomatedWorkplaceCarService.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutomatedWorkplaceCarService.DAL.EF;
+using AutomatedWorkplaceCarService.DAL.Interfaces;
 
-namespace AutomatedWorkplaceCarService.Services 
-{ 
-    public class SqlCarRepository : ICarRepository
+namespace AutomatedWorkplaceCarService.DAL.Repositories
+{
+    public class CarRepository : ICarRepository
     {
         private readonly ApplicationDbContext _context;
-        public SqlCarRepository(ApplicationDbContext context)
+        public CarRepository(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedWorkplaceCarService", "AutomatedWorkplaceCarService\AutomatedWorkplaceCarService.csproj", "{7AC33D99-9F92-43C9-BB91-235D40624D10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedWorkplaceCarService.WEB", "AutomatedWorkplaceCarService\AutomatedWorkplaceCarService.WEB.csproj", "{7AC33D99-9F92-43C9-BB91-235D40624D10}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedWorkplaceCarService.Models", "AutomatedWorkplaceCarService.Models\AutomatedWorkplaceCarService.Models.csproj", "{12CFD7CD-9F7A-4DE6-92B1-6B512E692447}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedWorkplaceCarService.BLL", "AutomatedWorkplaceCarService.Models\AutomatedWorkplaceCarService.BLL.csproj", "{12CFD7CD-9F7A-4DE6-92B1-6B512E692447}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedWorkplaceCarService.Services", "AutomatedWorkplaceCarService.Services\AutomatedWorkplaceCarService.Services.csproj", "{3DE9F5CC-891E-4E56-A918-A8CF794ACD47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomatedWorkplaceCarService.DAL", "AutomatedWorkplaceCarService.Services\AutomatedWorkplaceCarService.DAL.csproj", "{3DE9F5CC-891E-4E56-A918-A8CF794ACD47}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{12E0880B-34FB-438F-9EA5-B6335BBCDC6F}"
 EndProject

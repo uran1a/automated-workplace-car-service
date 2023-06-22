@@ -1,11 +1,6 @@
-﻿using AutomatedWorkplaceCarService.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutomatedWorkplaceCarService.DAL.Entities;
 
-namespace AutomatedWorkplaceCarService.Services
+namespace AutomatedWorkplaceCarService.DAL.Interfaces
 {
     public interface IEmployeeRepository
     {

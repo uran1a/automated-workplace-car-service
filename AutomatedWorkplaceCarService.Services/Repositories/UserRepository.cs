@@ -1,11 +1,13 @@
-﻿using AutomatedWorkplaceCarService.Models;
+﻿using AutomatedWorkplaceCarService.DAL.EF;
+using AutomatedWorkplaceCarService.DAL.Entities;
+using AutomatedWorkplaceCarService.DAL.Interfaces;
 
-namespace AutomatedWorkplaceCarService.Services
+namespace AutomatedWorkplaceCarService.DAL.Repositories
 {
-    public class SqlUserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
-        public SqlUserRepository(ApplicationDbContext context)
+        public UserRepository(ApplicationDbContext context)
         {
             _context = context;
         }

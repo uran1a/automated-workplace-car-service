@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutomatedWorkplaceCarService.Services
+namespace AutomatedWorkplaceCarService.DAL.Interfaces
 {
     public interface IApplicationRepository
     {

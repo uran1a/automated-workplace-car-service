@@ -1,11 +1,13 @@
-﻿using AutomatedWorkplaceCarService.Models;
+﻿using AutomatedWorkplaceCarService.DAL.EF;
+using AutomatedWorkplaceCarService.DAL.Entities;
+using AutomatedWorkplaceCarService.DAL.Interfaces;
 
-namespace AutomatedWorkplaceCarService.Services
+namespace AutomatedWorkplaceCarService.DAL.Repositories
 {
-    public class SqlClientRepository : IClientRepository
+    public class ClientRepository : IClientRepository
     {
         private readonly ApplicationDbContext _context;
-        public SqlClientRepository(ApplicationDbContext context)
+        public ClientRepository(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -43,7 +45,7 @@ namespace AutomatedWorkplaceCarService.Services
         public Client Delete(int id)
         {
             var employeeToDelete = _context.Clients.FirstOrDefault(c => c.Id == id);
-            if(employeeToDelete != null)
+            if (employeeToDelete != null)
             {
                 _context.Clients.Remove(employeeToDelete);
                 _context.SaveChanges();
@@ -51,4 +53,3 @@ namespace AutomatedWorkplaceCarService.Services
             return employeeToDelete;
         }
     }
-}

@@ -1,17 +1,13 @@
-﻿using AutomatedWorkplaceCarService.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutomatedWorkplaceCarService.DAL.EF;
+using AutomatedWorkplaceCarService.DAL.Entities;
+using AutomatedWorkplaceCarService.DAL.Interfaces;
 
-namespace AutomatedWorkplaceCarService.Services
+namespace AutomatedWorkplaceCarService.DAL.Repositories
 {
-    public class SqlEmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly ApplicationDbContext _context;
-        public SqlEmployeeRepository(ApplicationDbContext context)
+        public EmployeeRepository(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -27,7 +23,7 @@ namespace AutomatedWorkplaceCarService.Services
         public Employee Delete(int id)
         {
             var employeeToDelete = _context.Employees.FirstOrDefault(e => e.Id == id);
-            if(employeeToDelete != null)
+            if (employeeToDelete != null)
             {
                 _context.Employees.Remove(employeeToDelete);
                 _context.SaveChanges();
@@ -38,16 +34,16 @@ namespace AutomatedWorkplaceCarService.Services
         public IEnumerable<Employee> GetAllEmployees(int id)
         {
             return _context.Employees
-                .Include(e => e.Post).Where(e => e.Id != id).ToList();    
+                .Include(e => e.Post).Where(e => e.Id != id).ToList();
         }
 
-		public IEnumerable<Post> GetAllPosts(string post)
-		{
+        public IEnumerable<Post> GetAllPosts(string post)
+        {
             return _context.Posts.Where(p => !p.Name.Contains(post)).ToList();
-		}
+        }
 
-		public Employee GetEmployee(int id)
-		{
+        public Employee GetEmployee(int id)
+        {
             return _context.Employees
                 .Include(e => e.Post).FirstOrDefault(e => e.Id == id);
         }

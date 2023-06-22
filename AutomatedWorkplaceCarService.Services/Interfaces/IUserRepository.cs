@@ -1,6 +1,6 @@
-﻿using AutomatedWorkplaceCarService.Models;
+﻿using AutomatedWorkplaceCarService.DAL.Entities;
 
-namespace AutomatedWorkplaceCarService.Services
+namespace AutomatedWorkplaceCarService.DAL.Interfaces
 {
     public interface IUserRepository
     {
