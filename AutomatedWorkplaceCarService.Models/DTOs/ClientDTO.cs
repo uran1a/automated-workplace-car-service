@@ -9,6 +9,5 @@ namespace AutomatedWorkplaceCarService.BLL.DTOs
     public class ClientDTO : UserDTO
     {
         public string MobilePhone { get; set; }
-      
     }
 }

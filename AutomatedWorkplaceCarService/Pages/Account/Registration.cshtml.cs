@@ -1,5 +1,7 @@
-using AutomatedWorkplaceCarService.Models;
-using AutomatedWorkplaceCarService.Services;
+using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.DTOs;
+using AutomatedWorkplaceCarService.BLL.Interfaces;
+using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -7,32 +9,33 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
 
-namespace AutomatedWorkplaceCarService.Pages.Account
+namespace AutomatedWorkplaceCarService.WEB.Pages.Account
 {
     public class RegistrationModel : PageModel
     {
-        private readonly IClientRepository _clientRepository;
-        public RegistrationModel(IClientRepository clientRepository)
+        private readonly IAuthentificationService _authentificationService;
+        private readonly IMapper _mapper;
+        public RegistrationModel(IAuthentificationService authentificationService, IMapper mapper)
         {
-            _clientRepository = clientRepository;
+            _authentificationService = authentificationService;
+            _mapper = mapper;
         }
         [BindProperty]
-        public Client Client { get; set; }
-        public void OnGet()
-        {
-        }
+        public ClientViewModel Client { get; set; }
+        public void OnGet(){}
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
                 if (Client != null)
                 {
-                    Client? client = _clientRepository.GetClientByLogin(Client.Login); //
-                    if (client == null)
+                    var user = _mapper.Map<UserViewModel>(await _authentificationService.GetUserAsync(Client.Login));
+                    if (user == null)
                     {
-                        var newClient = _clientRepository.Add(Client); //
-                        await Authenticate(newClient);
-                        return RedirectToPage("/Index");
+                        var clientDTO = _mapper.Map<ClientDTO>(Client);
+                        var newClient = await _authentificationService.AddClientAsync(clientDTO);
+                        await Authenticate(_mapper.Map<ClientViewModel>(newClient));
+                        return RedirectToPage("/Clients/Applications");
                     }
                     else
                     {
@@ -42,7 +45,7 @@ namespace AutomatedWorkplaceCarService.Pages.Account
             }
             return Page();
         }
-        private async Task Authenticate(Client client)
+        private async Task Authenticate(ClientViewModel client)
         {
             var claims = new List<Claim>
             {

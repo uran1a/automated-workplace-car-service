@@ -1,7 +1,5 @@
 using AutoMapper;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
-using AutomatedWorkplaceCarService.Models;
-using AutomatedWorkplaceCarService.Services;
 using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -9,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
 
-namespace AutomatedWorkplaceCarService.Pages.Account
+namespace AutomatedWorkplaceCarService.WEB.Pages.Account
 {
     public class AuthenticationModel : PageModel
     {
@@ -32,19 +30,20 @@ namespace AutomatedWorkplaceCarService.Pages.Account
                 if (user != null)
                 {
                     await Authenticate(user);
-                    
-                    var role = 
-                    if()
 
-                    switch (user.RoleId)
-                    {
-                        case Role.Client:
-                            return RedirectToPage("/Clients/Applications");
-                        case Role.Admin:
-                            return RedirectToPage("/Employees/Admin/Clients");
-                        default:
-                            return RedirectToPage("/Error");
-                    }
+                    var roleDTO = await _authentificationService.GetRoleAsync(user.RoleId);
+                    if(roleDTO == null)
+                        return RedirectToPage("/Error");
+                    var availableRoles = await _authentificationService.GetAllRolesAsync();
+
+                    if (user.RoleId == availableRoles["client"])
+                        return RedirectToPage("/Clients/Applications");
+                    else if(user.RoleId == availableRoles["admin"])
+                        return RedirectToPage("/Employees/Admin/Clients");
+                    else if(user.RoleId == availableRoles["employee"])
+                        return RedirectToPage("/Employees/Employee/Applications");
+                    else
+                        return RedirectToPage("/Error");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
