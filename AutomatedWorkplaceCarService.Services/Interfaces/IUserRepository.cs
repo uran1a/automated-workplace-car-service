@@ -4,6 +4,7 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
 {
     public interface IUserRepository
     {
-        User? GetUserByLoginAndPassword(string login, string password);
+        Task<User?> GetUserAsync(string login);
+        Task<User?> GetUserAsync(string login, string password);
     }
 }

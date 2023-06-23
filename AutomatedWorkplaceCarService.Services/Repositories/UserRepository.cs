@@ -1,6 +1,7 @@
 ﻿using AutomatedWorkplaceCarService.DAL.EF;
 using AutomatedWorkplaceCarService.DAL.Entities;
 using AutomatedWorkplaceCarService.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedWorkplaceCarService.DAL.Repositories
 {
@@ -11,10 +12,10 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
         {
             _context = context;
         }
-
-        public User? GetUserByLoginAndPassword(string login, string password)
+        public async Task<User?> GetUserAsync(string login) => await _context.Users.FirstOrDefaultAsync(u => u.Login.Equals(login));
+        public async Task<User?> GetUserAsync(string login, string password)
         {
-            return _context.Users.FirstOrDefault(p => p.Login == login && p.Password == password);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Login.Equals(login) && u.Password.Equals(password));
         }
     }
 }

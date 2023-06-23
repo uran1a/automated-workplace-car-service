@@ -4,11 +4,10 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
 {
     public interface IClientRepository
     {
-        IEnumerable<Client> GetAllClients();
-        Client GetClient(int id);
-        Client GetClientByLogin(string login);
-        Client Add(Client newClient);
-        Client Update(Client updatedClient);
-        Client Delete(int id);
+        Task<ICollection<Client>> GetAllClientsAsync();
+        Task<Client?> GetClientAsync(int id);
+        Task AddAsync(Client newClient);
+        void Update(Client updatedClient);
+        void Delete(Client clientToDelete);
     }
 }

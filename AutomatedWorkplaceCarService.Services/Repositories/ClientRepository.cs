@@ -1,55 +1,22 @@
 ﻿using AutomatedWorkplaceCarService.DAL.EF;
 using AutomatedWorkplaceCarService.DAL.Entities;
 using AutomatedWorkplaceCarService.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedWorkplaceCarService.DAL.Repositories
 {
     public class ClientRepository : IClientRepository
-    {
+{
         private readonly ApplicationDbContext _context;
         public ClientRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-
-        public Client Add(Client newClient)
-        {
-            newClient.Role = Role.Client;
-            _context.Clients.Add(newClient);
-            _context.SaveChanges();
-            return newClient;
-        }
-
-        public Client GetClientByLogin(string login)
-        {
-            return _context.Clients.FirstOrDefault(c => c.Login == login);
-        }
-
-        public IEnumerable<Client> GetAllClients()
-        {
-            return _context.Clients.ToList();
-        }
-
-        public Client GetClient(int id)
-        {
-            return _context.Clients.FirstOrDefault(c => c.Id == id);
-        }
-
-        public Client Update(Client updatedClient)
-        {
-            _context.Update(updatedClient);
-            _context.SaveChanges();
-            return updatedClient;
-        }
-
-        public Client Delete(int id)
-        {
-            var employeeToDelete = _context.Clients.FirstOrDefault(c => c.Id == id);
-            if (employeeToDelete != null)
-            {
-                _context.Clients.Remove(employeeToDelete);
-                _context.SaveChanges();
-            }
-            return employeeToDelete;
-        }
-    }
+        public async Task AddAsync(Client newClient) => await _context.Clients.AddAsync(newClient);
+        public async Task<Client?> GetClientAsync(string login) => await _context.Clients.FirstOrDefaultAsync(c => c.Login == login);
+        public async Task<ICollection<Client>> GetAllClientsAsync() => await _context.Clients.ToListAsync();
+        public async Task<Client?> GetClientAsync(int id) => await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
+        public void Update(Client updatedClient) => _context.Clients.Update(updatedClient);
+        public void Delete(Client clientToDelete) => _context.Clients.Remove(clientToDelete);
+     }
+}

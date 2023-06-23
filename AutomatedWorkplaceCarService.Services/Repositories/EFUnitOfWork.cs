@@ -11,6 +11,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
         public ClientRepository clientRepository;
         public EmployeeRepository employeeRepository;
         public UserRepository userRepository;
+        public RoleRepository roleRepository;
         
         public IApplicationRepository Applications
         {
@@ -60,10 +61,19 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
             }
         }
 
-        public void Save()
+        public IRoleRepository Roles
         {
-            throw new NotImplementedException();
+            get
+            {
+                if(roleRepository == null)
+                    roleRepository = new RoleRepository(_context);
+                return roleRepository;
+            }
         }
 
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

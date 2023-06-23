@@ -27,10 +27,10 @@ namespace AutomatedWorkplaceCarService.Pages.Account
             {
                 if (Client != null)
                 {
-                    Client? client = _clientRepository.GetClientByLogin(Client.Login);
+                    Client? client = _clientRepository.GetClientByLogin(Client.Login); //
                     if (client == null)
                     {
-                        var newClient = _clientRepository.Add(Client);
+                        var newClient = _clientRepository.Add(Client); //
                         await Authenticate(newClient);
                         return RedirectToPage("/Index");
                     }

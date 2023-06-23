@@ -1,5 +1,8 @@
+using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.Models;
 using AutomatedWorkplaceCarService.Services;
+using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -10,23 +13,30 @@ namespace AutomatedWorkplaceCarService.Pages.Account
 {
     public class AuthenticationModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
-        public AuthenticationModel(IUserRepository userRepository)
+        private readonly IAuthentificationService _authentificationService;
+        private readonly IMapper _mapper;
+        public AuthenticationModel(IAuthentificationService authentificationService, IMapper mapper)
         {
-            _userRepository = userRepository;
+            _authentificationService = authentificationService;
+            _mapper = mapper;
         }
         [BindProperty]
-        public Authentication Authentication { get; set; }
+        public AuthenticationViewModel Authentication { get; set; }
         public void OnGet() {}
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                var user = _userRepository.GetUserByLoginAndPassword(Authentication.Login, Authentication.Password);
+                var userDTO = await _authentificationService.GetUserAsync(Authentication.Login, Authentication.Password);
+                var user = _mapper.Map<UserViewModel>(userDTO);
                 if (user != null)
                 {
                     await Authenticate(user);
-                    switch (user.Role)
+                    
+                    var role = 
+                    if()
+
+                    switch (user.RoleId)
                     {
                         case Role.Client:
                             return RedirectToPage("/Clients/Applications");
@@ -40,7 +50,7 @@ namespace AutomatedWorkplaceCarService.Pages.Account
             }
             return Page();
         }
-        private async Task Authenticate(User user)
+        private async Task Authenticate(UserViewModel user)
         {
             var claims = new List<Claim>
             {

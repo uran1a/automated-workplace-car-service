@@ -1,5 +1,5 @@
-using AutomatedWorkplaceCarService.Models;
 using AutomatedWorkplaceCarService.Services;
+using AutomatedWorkplaceCarService.WEB.Infrastructure.AutoMapperProfiles;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,16 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Configuration.AddJsonFile("appsettings.json");
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
+/*builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(connection);
-});
+});*/
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
-builder.Services.AddScoped<IUserRepository, SqlUserRepository>();
+/*builder.Services.AddScoped<IUserRepository, SqlUserRepository>();
 builder.Services.AddScoped<IClientRepository, SqlClientRepository>();
 builder.Services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
-builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();*/
+/*services.AddTransient<IUnitOfWork, EFUnitOfWork>();*/
+builder.Services.AddAutoMapper(typeof(AppMappingProfile));
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

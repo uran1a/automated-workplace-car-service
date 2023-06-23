@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AutomatedWorkplaceCarService.DAL.Entities
 {
-    internal class Application
+    public class Application
     {
     }
 }

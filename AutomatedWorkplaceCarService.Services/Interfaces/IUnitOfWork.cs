@@ -14,6 +14,7 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
         IClientRepository Clients { get; }
         IEmployeeRepository Employees { get; }
         IUserRepository Users { get; }
-        void Save();
+        IRoleRepository Roles { get; }
+        Task SaveAsync();
     }
 }
