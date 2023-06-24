@@ -7,11 +7,12 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
     {
         private ApplicationDbContext _context;
         public ApplicationRepository applicationRepository;
-        public CarRepository carRepository;
+        /*public CarRepository carRepository;*/
         public ClientRepository clientRepository;
         public EmployeeRepository employeeRepository;
         public UserRepository userRepository;
         public RoleRepository roleRepository;
+        public PostRepository postRepository;
         
         public IApplicationRepository Applications
         {
@@ -22,7 +23,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
                 return applicationRepository;
             }
         }
-        public ICarRepository Cars
+       /* public ICarRepository Cars
         {
             get
             {
@@ -30,7 +31,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
                     carRepository = new CarRepository(_context);
                 return carRepository;
             }
-        }
+        }*/
         public IClientRepository Clients
         {
             get
@@ -70,7 +71,15 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
                 return roleRepository;
             }
         }
-
+        public IPostRepository Posts
+        {
+            get
+            {
+                if (postRepository == null)
+                    postRepository = new PostRepository(_context);
+                return postRepository;
+            }
+        }
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();

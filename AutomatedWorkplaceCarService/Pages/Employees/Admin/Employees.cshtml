@@ -1,5 +1,5 @@
 ﻿@page
-@model AutomatedWorkplaceCarService.Pages.Employees.Admin.EmployeesModel
+@model AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin.EmployeesModel
 @{
 	ViewData["Title"] = "Сотрудники";
 }
@@ -25,7 +25,7 @@
 					<td>@item.Surname @item.Name @item.Patronymic</td>
 					<td>@item.Login</td>
 					<td>@item.Password</td>
-					<td>@item.Post!.Name</td>
+					<td>@item.Post</td>
 					<td>
 						<a class="btn btn-primary" asp-route-id="@item.Id" asp-page="/Employees/Admin/EditEmployee">Изменение</a>
 					</td>

@@ -1,8 +1,6 @@
-using AutomatedWorkplaceCarService.Services;
 using AutomatedWorkplaceCarService.WEB.Infrastructure.AutoMapperProfiles;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using FluentValidation.AspNetCore;
 using AutomatedWorkplaceCarService.WEB.Models;
 using FluentValidation;
 using AutomatedWorkplaceCarService.WEB.Infrastructure.Validators;
@@ -24,7 +22,7 @@ builder.Services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();*/
 /*services.AddTransient<IUnitOfWork, EFUnitOfWork>();*/
 builder.Services.AddAutoMapper(typeof(AppMappingProfile));
-builder.Services.AddScoped<IValidator<ClientViewModel>, ClientViewModelValidator>();
+builder.Services.AddScoped<IValidator<ClientModel>, ClientModelValidator>();
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

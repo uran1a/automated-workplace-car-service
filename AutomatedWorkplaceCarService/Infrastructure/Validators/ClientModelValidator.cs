@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Validators
 {
-    public class ClientViewModelValidator : AbstractValidator<ClientViewModel>
+    public class ClientModelValidator : AbstractValidator<ClientModel>
     {
-        public ClientViewModelValidator()
+        public ClientModelValidator()
         {
             this.RuleFor(x => x.Name)
                 .NotEmpty()

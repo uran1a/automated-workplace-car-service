@@ -1,5 +1,5 @@
-﻿@page "{id?}"
-@model AutomatedWorkplaceCarService.Pages.Employees.Admin.EditEmployeeModel
+﻿@page
+@model AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin.EditEmployeeModel
 @{
 	var pageTitle = Model.Employee.Id > 0 ? "Изменение данных сотрудника" : "Добавление сотрудника";
 	var method = Model.Employee.Id > 0 ? "Изменить" : "Добавить";
@@ -11,7 +11,7 @@
 			<h1 class="text-center fw-bold">@pageTitle</h1>
 			<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
 			<input type="hidden" asp-for="Employee.Id" value="@Model.Employee.Id">
-			<input type="hidden" asp-for="Employee.Role" value="@Model.Employee.Role">
+			<input type="hidden" asp-for="Employee.RoleId" value="@Model.Employee.RoleId">
 			<div class="form-floating mt-3">
 				<input type="text" asp-for="Employee.Login" class="form-control" placeholder="Логин" value="@Model.Employee.Login">
 				<label>Логин <span class="text-danger">*</span></label>

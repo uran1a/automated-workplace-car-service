@@ -3,7 +3,7 @@ using AutomatedWorkplaceCarService.DAL.Interfaces;
 
 namespace AutomatedWorkplaceCarService.DAL.Repositories
 {
-    public class CarRepository : ICarRepository
+    /*public class CarRepository : ICarRepository
     {
         private readonly ApplicationDbContext _context;
         public CarRepository(ApplicationDbContext context)
@@ -24,5 +24,5 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
         {
             return _context.Models.Where(m => m.BrandId == brandId);
         }
-    }
+    }*/
 }

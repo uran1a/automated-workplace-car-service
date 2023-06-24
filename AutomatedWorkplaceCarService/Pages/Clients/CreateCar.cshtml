@@ -3,6 +3,7 @@
 @{
 	ViewData["Title"] = "Добавление автомобиля";
 }
+@*
 <div class="row m-3 mt-5 justify-content-center p-3 border border-3 border-primary rounded ">
 	<div class="col">
 		<div class="row justify-content-center">
@@ -23,7 +24,7 @@
 				{
 					<span class="text-danger">Необходимо выбрать "Бренд" автомобиля</span>
 				}
-				@*<span asp-validation-for=".Login" class="text-danger"></span>*@
+				<span asp-validation-for=".Login" class="text-danger"></span>
 				<select asp-for="Car.ModelId" class="form-select mt-3">
 					<option selected>Модель</option>
 					@foreach (var item in Model.Models)
@@ -67,6 +68,7 @@
 		</div>
 	</div>
 </div>
+*@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function readURL(input, id) {

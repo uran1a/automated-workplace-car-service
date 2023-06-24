@@ -1,29 +1,32 @@
-using AutomatedWorkplaceCarService.Models;
-using AutomatedWorkplaceCarService.Services;
+using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.Interfaces;
+using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AutomatedWorkplaceCarService.Pages.Employees.Admin
+namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
 {
     public class DeleteEmployeeModel : PageModel
     {
-        private readonly IEmployeeRepository _employeeRepository;
-        public DeleteEmployeeModel(IEmployeeRepository employeeRepository)
+        private readonly IAdminService _adminService;
+        private readonly IMapper _mapper;
+        public DeleteEmployeeModel(IAdminService adminService, IMapper mapper)
         {
-            _employeeRepository = employeeRepository;
+            _adminService = adminService;
+            _mapper = mapper;
         }
         [BindProperty]
-        public Employee Employee { get; set; } 
-        public IActionResult OnGet(int id)
+        public EmployeeModel Employee { get; set; } 
+        public async Task<IActionResult> OnGet(int id)
         {
-            Employee = _employeeRepository.GetEmployee(id);
+            Employee = _mapper.Map<EmployeeModel>(await _adminService.GetEmployeeAsync(id));
             if(Employee == null)
                 return RedirectToPage("/NotFound");
-            return Page();
+            return Page();  
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
-            Employee deletedEmployee = _employeeRepository.Delete(Employee.Id);
+            var deletedEmployee = _mapper.Map<EmployeeModel>(await _adminService.GetEmployeeAsync(Employee.Id));
             if (deletedEmployee == null)
                 return RedirectToPage("/NotFound");
             return RedirectToPage("/Employees/Admin/Employees");

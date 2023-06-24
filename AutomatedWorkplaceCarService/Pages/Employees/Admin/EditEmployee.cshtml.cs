@@ -1,55 +1,66 @@
-using AutomatedWorkplaceCarService.Models;
-using AutomatedWorkplaceCarService.Services;
+using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.DTOs;
+using AutomatedWorkplaceCarService.BLL.Interfaces;
+using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AutomatedWorkplaceCarService.Pages.Employees.Admin
+namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
 {
     public class EditEmployeeModel : PageModel
     {
-        private readonly IEmployeeRepository _employeeRepository;
-        public EditEmployeeModel(IEmployeeRepository employeeRepository)
+
+        private readonly IAdminService _adminService;
+        private readonly IMapper _mapper;
+        public EditEmployeeModel(IAdminService adminService, IMapper mapper)
         {
-            _employeeRepository = employeeRepository;
+            _adminService = adminService;
+            _mapper = mapper;
         }
         [BindProperty]
-        public Employee Employee { get; set; }
+        public Models.EditEmployeeModel Employee { get; set; }
         [BindProperty]
-        public IEnumerable<Post> Posts { get; set; }
-        public IActionResult OnGet(int? id)
+        public ICollection<PostModel> Posts { get; set; }
+        public async Task<IActionResult> OnGet(int? id)
         {
             if (id.HasValue)
-                Employee = _employeeRepository.GetEmployee(id.Value);
+                Employee = _mapper.Map<Models.EditEmployeeModel>(await _adminService.GetEmployeeAsync(id.Value));
             else
-                Employee = new Employee();
-            var currentEmployee = _employeeRepository.GetEmployee(int.Parse(User.Identity.Name));
-            Posts = _employeeRepository.GetAllPosts(currentEmployee.Post.Name);
+                Employee = new Models.EditEmployeeModel();
+            var currentEmployee = await _adminService.GetEmployeeAsync(int.Parse(User.Identity.Name));
+            if (currentEmployee == null)
+                return RedirectToPage("/NotFound");
+            Posts = _mapper.Map<ICollection<PostModel>>(await _adminService.GetAllPostsAsync(currentEmployee.Post.Id));
             if (Employee == null)
                 return RedirectToPage("/NotFound");
             return Page();
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
             {
-                if(Employee.Id > 0)
+                if (Employee.Id > 0)
                 {
-                    Employee = _employeeRepository.Update(Employee);
+                    var employeeDTO = _mapper.Map<EmployeeDTO>(Employee);
+                    Employee = _mapper.Map<Models.EditEmployeeModel>(await _adminService.UpdateEmployeeAsync(employeeDTO));
                     if (Employee == null)
                         return RedirectToPage("/NotFound");
                     TempData["SuccessMessage"] = $"Обновление сотрудника {Employee.Name} прошло успешно!";
                 }
                 else
                 {
-                    Employee = _employeeRepository.Add(Employee);
+                    var employeeDTO = _mapper.Map<EmployeeDTO>(Employee);
+                    Employee = _mapper.Map<Models.EditEmployeeModel>(await _adminService.AddEmployeeAsync(employeeDTO));
                     if (Employee == null)
                         return RedirectToPage("/NotFound");
                     TempData["SuccessMessage"] = $"Создание сотрудника {Employee.Name} прошло успешно!";
                 }
                 return RedirectToPage("/Employees/Admin/Employees");
             }
-            var currentEmployee = _employeeRepository.GetEmployee(int.Parse(User.Identity.Name));
-            Posts = _employeeRepository.GetAllPosts(currentEmployee.Post.Name);
+            var currentEmployee = await _adminService.GetEmployeeAsync(int.Parse(User.Identity.Name));
+            if (currentEmployee == null)
+                return RedirectToPage("/NotFound");
+            Posts = _mapper.Map<ICollection<PostModel>>(await _adminService.GetAllPostsAsync(currentEmployee.Post.Id));
             return Page();
         }
     }

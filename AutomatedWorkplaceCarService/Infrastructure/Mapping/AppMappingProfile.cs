@@ -8,7 +8,9 @@ namespace AutomatedWorkplaceCarService.WEB.Infrastructure.AutoMapperProfiles
     {
         public AppMappingProfile()
         {
-            CreateMap<UserViewModel, UserDTO>();
+            CreateMap<UserModel, UserDTO>();
+            CreateMap<EmployeeModel, EmployeeDTO>();
+            CreateMap<ClientModel, ClientDTO>();
         }
     }
 }

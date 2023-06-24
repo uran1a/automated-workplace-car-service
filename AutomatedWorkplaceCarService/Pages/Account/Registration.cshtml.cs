@@ -21,7 +21,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             _mapper = mapper;
         }
         [BindProperty]
-        public ClientViewModel Client { get; set; }
+        public ClientModel Client { get; set; }
         public void OnGet(){}
         public async Task<IActionResult> OnPostAsync()
         {
@@ -29,12 +29,12 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             {
                 if (Client != null)
                 {
-                    var user = _mapper.Map<UserViewModel>(await _authentificationService.GetUserAsync(Client.Login));
+                    var user = _mapper.Map<UserModel>(await _authentificationService.GetUserAsync(Client.Login));
                     if (user == null)
                     {
                         var clientDTO = _mapper.Map<ClientDTO>(Client);
                         var newClient = await _authentificationService.AddClientAsync(clientDTO);
-                        await Authenticate(_mapper.Map<ClientViewModel>(newClient));
+                        await Authenticate(_mapper.Map<ClientModel>(newClient));
                         return RedirectToPage("/Clients/Applications");
                     }
                     else
@@ -45,7 +45,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             }
             return Page();
         }
-        private async Task Authenticate(ClientViewModel client)
+        private async Task Authenticate(ClientModel client)
         {
             var claims = new List<Claim>
             {

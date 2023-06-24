@@ -1,21 +1,24 @@
-using AutomatedWorkplaceCarService.Models;
-using AutomatedWorkplaceCarService.Services;
-using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.Interfaces;
+using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AutomatedWorkplaceCarService.Pages.Employees.Admin
+namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
 {
     public class EmployeesModel : PageModel
     {
-        private readonly IEmployeeRepository _employeeRepository;
-        public EmployeesModel(IEmployeeRepository employeeRepository)
+        private readonly IAdminService _adminService;
+        private readonly IMapper _mapper;
+        public EmployeesModel(IAdminService adminService, IMapper mapper)
         {
-            _employeeRepository = employeeRepository;
+            _adminService = adminService;
+            _mapper = mapper;
         }
-        public IEnumerable<Employee> Employees { get; set; } 
-        public void OnGet()
+        public ICollection<EmployeeModel> Employees { get; set; } 
+        public ICollection<PostModel> Posts { get; set; } 
+        public async void OnGet()
         {
-            Employees = _employeeRepository.GetAllEmployees(int.Parse(User.Identity.Name));
+            Employees = _mapper.Map<ICollection<EmployeeModel>>(await _adminService.GetAllEmployeesAsync(int.Parse(User.Identity.Name)));
         }
         public void OnPost(int id)
         {

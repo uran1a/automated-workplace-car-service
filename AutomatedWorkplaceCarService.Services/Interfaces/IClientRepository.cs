@@ -7,7 +7,7 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
         Task<ICollection<Client>> GetAllClientsAsync();
         Task<Client?> GetClientAsync(int id);
         Task<Client> AddAsync(Client newClient);
-        void Update(Client updatedClient);
-        void Delete(Client clientToDelete);
+        Client Update(Client updatedClient);
+        Client Delete(Client clientToDelete);
     }
 }

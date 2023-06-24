@@ -18,7 +18,7 @@ namespace AutomatedWorkplaceCarService.BLL.Services
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Client, ClientDTO>()).CreateMapper();
             var cleint = mapper.Map<Client>(clientDTO);
             var newClient = await _db.Clients.AddAsync(cleint);
-            await _db.SaveAsync();
+            await _db.SaveAsync();  
             return mapper.Map<ClientDTO>(newClient);
         }
         public async Task<Dictionary<string, int>> GetAllRolesAsync()

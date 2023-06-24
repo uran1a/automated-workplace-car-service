@@ -4,11 +4,11 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
 {
     public interface IEmployeeRepository
     {
-        Employee GetEmployee(int id);
-        IEnumerable<Employee> GetAllEmployees(int id);
-        IEnumerable<Post> GetAllPosts(string post);
+        Task<ICollection<Employee>> GetAllEmployeesAsync();
+        Task<Employee> GetEmployeeAsync(int id);
+        Task<ICollection<Post>> GetAllPostsAsync(int postId);
+        Task<Employee> AddAsync(Employee newEmployee);
         Employee Update(Employee updatedEmployee);
-        Employee Add(Employee newEmployee);
-        Employee Delete(int id);
+        Employee Delete(Employee deletedEmployee);
     }
 }

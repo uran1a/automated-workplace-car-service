@@ -1,6 +1,6 @@
 ﻿namespace AutomatedWorkplaceCarService.WEB.Models
 {
-    public class ClientViewModel : UserViewModel
+    public class ClientModel : UserModel
     {
         public string MobilePhone { get; set; }
     }

@@ -1,13 +1,10 @@
-using AutomatedWorkplaceCarService.Models;
-using AutomatedWorkplaceCarService.Services;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AutomatedWorkplaceCarService.Pages.Clients
 {
     public class CreateCarModel : PageModel
     {
-        private readonly ICarRepository _carRepository;
+        /*private readonly ICarRepository _carRepository;
         public CreateCarModel(ICarRepository carRepository)
         {
             _carRepository = carRepository;
@@ -23,6 +20,7 @@ namespace AutomatedWorkplaceCarService.Pages.Clients
         {
             Brands = _carRepository.GetAllBrands();
             Transmissions = _carRepository.GetAllTransmissions();
-        }
+        }*/
+        public void OnGet() { }
     }
 }

@@ -19,14 +19,14 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             _mapper = mapper;
         }
         [BindProperty]
-        public AuthenticationViewModel Authentication { get; set; }
+        public Models.AuthenticationModel Authentication { get; set; }
         public void OnGet() {}
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
                 var userDTO = await _authentificationService.GetUserAsync(Authentication.Login, Authentication.Password);
-                var user = _mapper.Map<UserViewModel>(userDTO);
+                var user = _mapper.Map<UserModel>(userDTO);
                 if (user != null)
                 {
                     await Authenticate(user);
@@ -49,7 +49,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             }
             return Page();
         }
-        private async Task Authenticate(UserViewModel user)
+        private async Task Authenticate(UserModel user)
         {
             var claims = new List<Claim>
             {

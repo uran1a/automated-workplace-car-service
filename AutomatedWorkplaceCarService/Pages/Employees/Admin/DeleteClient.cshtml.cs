@@ -1,29 +1,32 @@
-using AutomatedWorkplaceCarService.Models;
-using AutomatedWorkplaceCarService.Services;
+using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.Interfaces;
+using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AutomatedWorkplaceCarService.Pages.Employees.Admin
+namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
 {
     public class DeleteClientModel : PageModel
     {
-        private readonly IClientRepository _clientRepository;
-        public DeleteClientModel(IClientRepository clientRepository)
+        private readonly IAdminService _adminService;
+        private readonly IMapper _mapper;
+        public DeleteClientModel(IAdminService adminservice, IMapper mapper)
         {
-            _clientRepository = clientRepository;
+            _adminService = adminservice;
+            _mapper = mapper;
         }
         [BindProperty]
-        public Client Client { get; set; }
-        public IActionResult OnGet(int id)
+        public ClientModel Client { get; set; }
+        public async Task<IActionResult> OnGet(int id)
         {
-            Client = _clientRepository.GetClient(id);
+            Client = _mapper.Map<ClientModel>(await _adminService.GetClientAsync(id));
             if (Client == null)
                 return RedirectToPage("/NotFound");
             return Page();
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
-            Client deletedClient = _clientRepository.Delete(Client.Id);
+            ClientModel deletedClient = _mapper.Map<ClientModel>(await _adminService.DeleteClientAsync(Client.Id)); //
             if (deletedClient == null)
                 return RedirectToPage("/NotFound");
             return RedirectToPage("/Employees/Admin/Clients");

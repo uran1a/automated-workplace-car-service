@@ -1,10 +1,11 @@
 ﻿@page
-@model AutomatedWorkplaceCarService.Pages.Clients.CreateApplicationModel
+@model AutomatedWorkplaceCarService.WEB.Pages.Clients.CreateApplicationModel
 @{
 	ViewData["Title"] = "Создание заявки";
 }
 
 <h1 class="text-center">Создание заявку</h1>
+@*
 <form method="post">
 	<div class="row justify-content-around mt-3 ">
 		<div class="col-8">
@@ -16,7 +17,7 @@
 					<div class="row">
 						<div class="col-4 ">
 							<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
-							@*<span asp-validation-for="Client.Login" class="text-danger"></span>*@
+							<span asp-validation-for="Client.Login" class="text-danger"></span>
 							<select class="form-select mt-3" asp-for="Car.BrandId" onchange="this.form.submit();">
 								<option selected>Бренд</option>
 								@foreach (var item in Model.Brands)
@@ -31,10 +32,6 @@
 									<option value="@item.Id">@item.Name</option>
 								}
 							</select>
-							@*<select class="form-select mt-3"
-									asp-items="Html.GetEnumSelectList<Transmission>()">
-								<option value="">Тип трансмиссии</option>
-							</select>*@
 							<div class="form-floating mt-3">
 								<input type="number" asp-for="Car.YearOfRelease" class="form-control"
 									   placeholder="Год выпуска">
@@ -95,6 +92,7 @@
 		</div>
 	</div>
 </form>
+*@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function readURL(input, id) {
