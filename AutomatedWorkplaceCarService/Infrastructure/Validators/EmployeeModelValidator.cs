@@ -5,7 +5,9 @@ namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Validators
 {
     public class EmployeeModelValidator : AbstractValidator<EmployeeModel>
     {
-        this.RuleFor(x => x.Name)
+        public EmployeeModelValidator()
+        {
+            this.RuleFor(x => x.Name)
                 .NotEmpty()
                 .WithMessage("Введите имя");
             this.RuleFor(x => x.Name)
@@ -23,10 +25,9 @@ namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Validators
             this.RuleFor(x => x.Password)
                 .NotEmpty()
                 .WithMessage("Введите пароль");
-            this.RuleFor(x => x.MobilePhone)
-                .NotNull()
-                .WithMessage("Введите мобильный телефон")
-                .Matches(new Regex(@"^\+[0-9]{11}$"))
-                .WithMessage("Пожалуйста, введите корректный номер телефона (Формат: +12223334455)");
+            this.RuleFor(x => x.PostId)
+                .GreaterThan(0)
+                .WithMessage("Выберите должность сотрудника");
+        }
     }
 }
