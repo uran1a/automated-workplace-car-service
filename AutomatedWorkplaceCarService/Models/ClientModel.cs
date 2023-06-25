@@ -2,6 +2,6 @@
 {
     public class ClientModel : UserModel
     {
-        public string MobilePhone { get; set; }
+        public string? MobilePhone { get; set; }
     }
 }

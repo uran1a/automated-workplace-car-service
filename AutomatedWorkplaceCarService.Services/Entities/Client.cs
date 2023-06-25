@@ -9,7 +9,7 @@ namespace AutomatedWorkplaceCarService.DAL.Entities
     public class Client : User
     {
         public string MobilePhone { get; set; }
-        public ICollection<Car> Cars { get; set; } = new List<Car>();
-        public ICollection<Application> Applications { get; set; } = new List<Application>();
+        public List<Car> Cars { get; set; } = new();
+        public List<Application> Applications { get; set; } = new();
     }
 }

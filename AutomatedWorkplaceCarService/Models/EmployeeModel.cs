@@ -2,6 +2,7 @@
 {
     public class EmployeeModel : UserModel
     {
-        public string Post { get; set; }
+        public int PostId { get; set; }
+        public string? PostName { get; set; }
     }
 }

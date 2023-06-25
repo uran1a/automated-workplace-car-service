@@ -24,7 +24,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
             {
                 Client = _mapper.Map<ClientModel>(await _adminService.GetClientAsync(id.Value));
                 if (Client == null)
-                    return RedirectToPage("/NotFound");
+                    return RedirectToPage("/Error");
             }
             else
                 Client = new ClientModel();
@@ -39,7 +39,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
                     var clientDTO = _mapper.Map<ClientDTO>(Client);
                     Client = _mapper.Map<ClientModel>(await _adminService.UpdateClientAsync(clientDTO));
                     if (Client == null)
-                        return RedirectToPage("/NotFound");
+                        return RedirectToPage("/Error");
                     TempData["SuccessMessage"] = $"Обновление сотрудника {Client.Name} прошло успешно!";
                 }
                 else
@@ -47,7 +47,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
                     var clientDTO = _mapper.Map<ClientDTO>(Client);
                     Client = _mapper.Map<ClientModel>(await _adminService.AddClientAsync(clientDTO));
                     if (Client == null)
-                        return RedirectToPage("/NotFound");
+                        return RedirectToPage("/Error");
                     TempData["SuccessMessage"] = $"Создание сотрудника {Client.Name} прошло успешно!";
                 }
                 return RedirectToPage("/Employees/Admin/Clients");

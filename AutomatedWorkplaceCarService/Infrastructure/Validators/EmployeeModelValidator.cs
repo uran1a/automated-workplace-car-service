@@ -1,14 +1,11 @@
 ﻿using AutomatedWorkplaceCarService.WEB.Models;
 using FluentValidation;
-using System.Text.RegularExpressions;
 
 namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Validators
 {
-    public class ClientModelValidator : AbstractValidator<ClientModel>
+    public class EmployeeModelValidator : AbstractValidator<EmployeeModel>
     {
-        public ClientModelValidator()
-        {
-            this.RuleFor(x => x.Name)
+        this.RuleFor(x => x.Name)
                 .NotEmpty()
                 .WithMessage("Введите имя");
             this.RuleFor(x => x.Name)
@@ -31,6 +28,5 @@ namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Validators
                 .WithMessage("Введите мобильный телефон")
                 .Matches(new Regex(@"^\+[0-9]{11}$"))
                 .WithMessage("Пожалуйста, введите корректный номер телефона (Формат: +12223334455)");
-        }
     }
 }

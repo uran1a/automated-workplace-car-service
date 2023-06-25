@@ -12,23 +12,20 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
         {
             _context = context;
         }
-        public async Task<Client> AddAsync(Client newClient)
+        public async Task AddAsync(Client newClient)
         {
-            var client = await _context.Clients.AddAsync(newClient);
-            return client.Entity;
+            await _context.Clients.AddAsync(newClient);
         }
         public async Task<Client?> GetClientAsync(string login) => await _context.Clients.FirstOrDefaultAsync(c => c.Login == login);
         public async Task<ICollection<Client>> GetAllClientsAsync() => await _context.Clients.ToListAsync();
         public async Task<Client?> GetClientAsync(int id) => await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
-        public Client Update(Client updatedClient)
+        public void Update(Client updatedClient)
         {
-            var client = _context.Clients.Update(updatedClient);
-            return client.Entity;
+            _context.Clients.Update(updatedClient);
         }
-        public Client Delete(Client clientToDelete)
+        public void Delete(Client clientToDelete)
         {
-            var client = _context.Clients.Remove(clientToDelete);
-            return client.Entity;
+            _context.Clients.Remove(clientToDelete);
         }
     }
 }

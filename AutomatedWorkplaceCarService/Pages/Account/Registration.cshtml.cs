@@ -34,6 +34,8 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
                     {
                         var clientDTO = _mapper.Map<ClientDTO>(Client);
                         var newClient = await _authentificationService.AddClientAsync(clientDTO);
+                        if(newClient == null)
+                            return RedirectToPage("/Error");
                         await Authenticate(_mapper.Map<ClientModel>(newClient));
                         return RedirectToPage("/Clients/Applications");
                     }

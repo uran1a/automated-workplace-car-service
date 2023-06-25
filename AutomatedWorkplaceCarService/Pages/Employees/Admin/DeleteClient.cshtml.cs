@@ -26,9 +26,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
         }
         public async Task<IActionResult> OnPost()
         {
-            ClientModel deletedClient = _mapper.Map<ClientModel>(await _adminService.DeleteClientAsync(Client.Id)); //
-            if (deletedClient == null)
-                return RedirectToPage("/NotFound");
+            await _adminService.DeleteClientAsync(Client.Id);
             return RedirectToPage("/Employees/Admin/Clients");
         }
     }

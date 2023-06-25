@@ -15,24 +15,38 @@ namespace AutomatedWorkplaceCarService.BLL.Services
         public AdminService(IUnitOfWork uow)
         {
             _db = uow;
-            _mapperClient = new MapperConfiguration(cfg => cfg.CreateMap<Client, ClientDTO>()).CreateMapper();
-            _mapperEmployee = new MapperConfiguration(cfg => cfg.CreateMap<Employee, EmployeeDTO>()).CreateMapper();
-            _mapperPost = new MapperConfiguration(cfg => cfg.CreateMap<Post, PostDTO>()).CreateMapper();
+            _mapperClient = new MapperConfiguration(cfg => {
+                cfg.CreateMap<ClientDTO, Client>().ReverseMap();
+            }).CreateMapper();
+            _mapperEmployee = new MapperConfiguration(cfg => {
+                cfg.CreateMap<EmployeeDTO, Employee>().ReverseMap();
+            }).CreateMapper();
+            _mapperPost = new MapperConfiguration(cfg => {
+                cfg.CreateMap<PostDTO, Post>().ReverseMap();
+            }).CreateMapper();
         }
-        public async Task<ClientDTO> AddClientAsync(ClientDTO clientDTO)
+        public async Task<ClientDTO?> AddClientAsync(ClientDTO clientDTO)
         {
             var cleint = _mapperClient.Map<Client>(clientDTO);
-            var newClient = await _db.Clients.AddAsync(cleint);
+            var role = await _db.Roles.GetRoleAsync("client");
+            if (role == null)
+                return null;
+            cleint.RoleId = role.Id;
+            await _db.Clients.AddAsync(cleint);
             await _db.SaveAsync();
-            return _mapperClient.Map<ClientDTO>(newClient);
+            return clientDTO;
         }
 
-        public async Task<EmployeeDTO> AddEmployeeAsync(EmployeeDTO employeeDTO)
+        public async Task<EmployeeDTO?> AddEmployeeAsync(EmployeeDTO employeeDTO)
         {
-            var employee = _mapperClient.Map<Employee>(employeeDTO);
-            var newEmployee = await _db.Employees.AddAsync(employee);
+            var employee = _mapperEmployee.Map<Employee>(employeeDTO);
+            var role = await _db.Roles.GetRoleAsync("employee");
+            if (role == null)
+                return null;
+            employee.RoleId = role.Id;
+            await _db.Employees.AddAsync(employee);
             await _db.SaveAsync();
-            return _mapperClient.Map<EmployeeDTO>(newEmployee);
+            return employeeDTO;
         }
 
         public async Task<ClientDTO?> DeleteClientAsync(int id)
@@ -40,9 +54,9 @@ namespace AutomatedWorkplaceCarService.BLL.Services
             var client = await _db.Clients.GetClientAsync(id);
             if (client == null)
                 return null;
-            var deletedClientDTO = _mapperClient.Map<ClientDTO>(_db.Clients.Delete(client));
+            _db.Clients.Delete(client);
             await _db.SaveAsync();
-            return deletedClientDTO;
+            return _mapperClient.Map<ClientDTO>(client);
         }
 
         public async Task<EmployeeDTO?> DeleteEmployeeAsync(int id)
@@ -50,26 +64,32 @@ namespace AutomatedWorkplaceCarService.BLL.Services
             var employee = await _db.Employees.GetEmployeeAsync(id);
             if (employee == null)
                 return null;
-            var deletedClientDTO = _mapperClient.Map<EmployeeDTO>(_db.Employees.Delete(employee));
+            _db.Employees.Delete(employee);
             await _db.SaveAsync();
-            return deletedClientDTO;
+            return _mapperEmployee.Map<EmployeeDTO>(employee);
         }
 
-        public async Task<ICollection<ClientDTO>> GetAllClientsAsync()
+        public async Task<List<ClientDTO>> GetAllClientsAsync()
         {
-            return _mapperClient.Map<ICollection<ClientDTO>>(await _db.Clients.GetAllClientsAsync());
+            var clients = await _db.Clients.GetAllClientsAsync();
+            if (clients == null)
+                clients = new List<Client>();
+            return _mapperClient.Map<List<ClientDTO>>(clients);
         }
 
-        public async Task<ICollection<EmployeeDTO>> GetAllEmployeesAsync(int id)
+        public async Task<List<EmployeeDTO>> GetAllEmployeesAsync(int id)
         {
             var employees = await _db.Employees.GetAllEmployeesAsync();
-            employees = employees.Where(e => e.Id != id).ToList();
-            return _mapperEmployee.Map<ICollection<EmployeeDTO>>(employees);
+            if (employees == null)
+                employees = new List<Employee>();
+            else
+                employees = employees.Where(e => e.Id != id).ToList();
+            return _mapperEmployee.Map<List<EmployeeDTO>>(employees);
         }
 
-        public async Task<ICollection<PostDTO>> GetAllPostsAsync(int postId)
+        public async Task<List<PostDTO>> GetAllPostsAsync(int postId)
         {
-            return _mapperPost.Map<ICollection<PostDTO>>(await _db.Posts.GetAllPostsAsync(postId));
+            return _mapperPost.Map<List<PostDTO>>(await _db.Posts.GetAllPostsAsync(postId));
         }
 
         public async Task<ClientDTO?> GetClientAsync(int id)
@@ -79,22 +99,22 @@ namespace AutomatedWorkplaceCarService.BLL.Services
          
         public async Task<EmployeeDTO?> GetEmployeeAsync(int id)
         {
-            return _mapperClient.Map<EmployeeDTO>(await _db.Employees.GetEmployeeAsync(id));
+            return _mapperEmployee.Map<EmployeeDTO>(await _db.Employees.GetEmployeeAsync(id));
         }
 
         public async Task<ClientDTO> UpdateClientAsync(ClientDTO clientDTO)
         {
             var client = _mapperClient.Map<Client>(clientDTO);
-            var updatedClient = _mapperClient.Map<ClientDTO>(_db.Clients.Update(client));
+            _db.Clients.Update(client);
             await _db.SaveAsync();
-            return updatedClient;
+            return clientDTO;
         }
         public async Task<EmployeeDTO> UpdateEmployeeAsync(EmployeeDTO employeeDTO)
         {
-            var employee = _mapperClient.Map<Employee>(employeeDTO);
-            var updatedEmployeeDTO = _mapperClient.Map<EmployeeDTO>(_db.Employees.Update(employee));
+            var employee = _mapperEmployee.Map<Employee>(employeeDTO);
+            _db.Employees.Update(employee);
             await _db.SaveAsync();
-            return updatedEmployeeDTO;
+            return employeeDTO;
         }
     }
 }

@@ -1,28 +1,39 @@
-using AutomatedWorkplaceCarService.WEB.Infrastructure.AutoMapperProfiles;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using AutomatedWorkplaceCarService.WEB.Models;
 using FluentValidation;
 using AutomatedWorkplaceCarService.WEB.Infrastructure.Validators;
+using AutomatedWorkplaceCarService.BLL.Interfaces;
+using AutomatedWorkplaceCarService.BLL.Services;
+using AutomatedWorkplaceCarService.DAL.Interfaces;
+using AutomatedWorkplaceCarService.DAL.Repositories;
+using AutomatedWorkplaceCarService.DAL.EF;
+using FluentValidation.AspNetCore;
+using AutomatedWorkplaceCarService.WEB.Infrastructure.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Configuration.AddJsonFile("appsettings.json");
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-/*builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
+builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(connection);
-});*/
+});
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
-/*builder.Services.AddScoped<IUserRepository, SqlUserRepository>();
-builder.Services.AddScoped<IClientRepository, SqlClientRepository>();
-builder.Services.AddScoped<IEmployeeRepository, SqlEmployeeRepository>();
-builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();*/
+builder.Services.AddScoped<IUnitOfWork, EFUnitOfWork>();
+builder.Services.AddScoped<IAuthentificationService, AuthentificationService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
 /*services.AddTransient<IUnitOfWork, EFUnitOfWork>();*/
-builder.Services.AddAutoMapper(typeof(AppMappingProfile));
+builder.Services.AddAutoMapper(
+    typeof(UserMappingProfile), typeof(ClientMappingProfile), typeof(EmployeeMappingProfile), typeof(PostMappingProfile)
+);
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddScoped<IValidator<ClientModel>, ClientModelValidator>();
+builder.Services.AddScoped<IValidator<AuthenticationModel>, AuthenticationModelValidator>();
+
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

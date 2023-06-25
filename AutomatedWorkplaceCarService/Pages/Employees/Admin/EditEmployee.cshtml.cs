@@ -18,19 +18,19 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
             _mapper = mapper;
         }
         [BindProperty]
-        public Models.EditEmployeeModel Employee { get; set; }
+        public EmployeeModel Employee { get; set; }
         [BindProperty]
         public ICollection<PostModel> Posts { get; set; }
         public async Task<IActionResult> OnGet(int? id)
         {
             if (id.HasValue)
-                Employee = _mapper.Map<Models.EditEmployeeModel>(await _adminService.GetEmployeeAsync(id.Value));
+                Employee = _mapper.Map<EmployeeModel>(await _adminService.GetEmployeeAsync(id.Value));
             else
-                Employee = new Models.EditEmployeeModel();
+                Employee = new EmployeeModel();
             var currentEmployee = await _adminService.GetEmployeeAsync(int.Parse(User.Identity.Name));
             if (currentEmployee == null)
                 return RedirectToPage("/NotFound");
-            Posts = _mapper.Map<ICollection<PostModel>>(await _adminService.GetAllPostsAsync(currentEmployee.Post.Id));
+            Posts = _mapper.Map<List<PostModel>>(await _adminService.GetAllPostsAsync(currentEmployee.PostId));
             if (Employee == null)
                 return RedirectToPage("/NotFound");
             return Page();
@@ -42,7 +42,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
                 if (Employee.Id > 0)
                 {
                     var employeeDTO = _mapper.Map<EmployeeDTO>(Employee);
-                    Employee = _mapper.Map<Models.EditEmployeeModel>(await _adminService.UpdateEmployeeAsync(employeeDTO));
+                    Employee = _mapper.Map<EmployeeModel>(await _adminService.UpdateEmployeeAsync(employeeDTO));
                     if (Employee == null)
                         return RedirectToPage("/NotFound");
                     TempData["SuccessMessage"] = $"Обновление сотрудника {Employee.Name} прошло успешно!";
@@ -50,7 +50,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
                 else
                 {
                     var employeeDTO = _mapper.Map<EmployeeDTO>(Employee);
-                    Employee = _mapper.Map<Models.EditEmployeeModel>(await _adminService.AddEmployeeAsync(employeeDTO));
+                    Employee = _mapper.Map<EmployeeModel>(await _adminService.AddEmployeeAsync(employeeDTO));
                     if (Employee == null)
                         return RedirectToPage("/NotFound");
                     TempData["SuccessMessage"] = $"Создание сотрудника {Employee.Name} прошло успешно!";
@@ -60,7 +60,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
             var currentEmployee = await _adminService.GetEmployeeAsync(int.Parse(User.Identity.Name));
             if (currentEmployee == null)
                 return RedirectToPage("/NotFound");
-            Posts = _mapper.Map<ICollection<PostModel>>(await _adminService.GetAllPostsAsync(currentEmployee.Post.Id));
+            Posts = _mapper.Map<List<PostModel>>(await _adminService.GetAllPostsAsync(currentEmployee.PostId));
             return Page();
         }
     }

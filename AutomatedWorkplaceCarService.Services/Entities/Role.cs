@@ -7,6 +7,6 @@ namespace AutomatedWorkplaceCarService.DAL.Entities
         public int Id { get; set; }
         [MaxLength(50)]
         public string Name { get; set; }
-        public ICollection<User> Users = new List<User>();
+        public List<User> Users = new();
     }
 }

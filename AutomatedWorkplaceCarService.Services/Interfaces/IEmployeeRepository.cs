@@ -7,8 +7,8 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
         Task<ICollection<Employee>> GetAllEmployeesAsync();
         Task<Employee> GetEmployeeAsync(int id);
         Task<ICollection<Post>> GetAllPostsAsync(int postId);
-        Task<Employee> AddAsync(Employee newEmployee);
-        Employee Update(Employee updatedEmployee);
-        Employee Delete(Employee deletedEmployee);
+        Task AddAsync(Employee newEmployee);
+        void Update(Employee updatedEmployee);
+        void Delete(Employee deletedEmployee);
     }
 }

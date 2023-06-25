@@ -13,27 +13,14 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
             _context = context;
         }
 
-        public async Task<Employee> AddAsync(Employee newEmployee)
+        public async Task AddAsync(Employee newEmployee)
         {
-            var employee = await _context.Employees.AddAsync(newEmployee);
-            return employee.Entity;
+            await _context.Employees.AddAsync(newEmployee);
         }
 
-        public Employee Delete(int id)
+        public void Delete(Employee employeeToDelete)
         {
-            var employeeToDelete = _context.Employees.FirstOrDefault(e => e.Id == id);
-            if (employeeToDelete != null)
-            {
-                _context.Employees.Remove(employeeToDelete);
-                _context.SaveChanges();
-            }
-            return employeeToDelete;
-        }
-
-        public Employee Delete(Employee employeeToDelete)
-        {
-            var employee = _context.Employees.Remove(employeeToDelete);
-            return employee.Entity;
+           _context.Employees.Remove(employeeToDelete);
         }
 
         public IEnumerable<Employee> GetAllEmployees(int id)
@@ -51,17 +38,14 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
         {
             return await _context.Posts.Where(p => p.Id != postId).ToListAsync();
         }
-
         public async Task<Employee> GetEmployeeAsync(int id)
         {
             return await _context.Employees.Include(e => e.Post).FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public Employee Update(Employee updatedEmployee)
+        public void Update(Employee updatedEmployee)
         {
             _context.Employees.Update(updatedEmployee);
-            _context.SaveChanges();
-            return updatedEmployee;
         }
     }
 }

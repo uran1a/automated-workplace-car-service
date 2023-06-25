@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\FluentValidation\" />
-    <Folder Include="Infrastructure\AutoMapperProfiles\" />
   </ItemGroup>
 
   <ItemGroup>

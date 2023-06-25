@@ -13,7 +13,11 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
         public UserRepository userRepository;
         public RoleRepository roleRepository;
         public PostRepository postRepository;
-        
+
+        public EFUnitOfWork(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public IApplicationRepository Applications
         {
             get

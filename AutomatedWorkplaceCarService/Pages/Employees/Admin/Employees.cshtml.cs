@@ -18,11 +18,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
         public ICollection<PostModel> Posts { get; set; } 
         public async void OnGet()
         {
-            Employees = _mapper.Map<ICollection<EmployeeModel>>(await _adminService.GetAllEmployeesAsync(int.Parse(User.Identity.Name)));
-        }
-        public void OnPost(int id)
-        {
-
+            Employees = _mapper.Map<List<EmployeeModel>>(_adminService.GetAllEmployeesAsync(int.Parse(User.Identity.Name)).Result);
         }
     }
 }

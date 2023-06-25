@@ -14,7 +14,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
         }
         public async Task<ICollection<Post>> GetAllPostsAsync(int postId)
         {
-            return await _context.Posts.Where(p => p.Id == postId).ToListAsync();
+            return await _context.Posts.Where(p => p.Id != postId).ToListAsync();
         }
     }
 }

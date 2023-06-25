@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,9 +16,9 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Users.Employees.Admin
             _mapper = mapper;
         }
         public ICollection<ClientModel> Clients { get; set; }
-        public async void OnGet()
+        public void OnGet()
         {
-            Clients = _mapper.Map<ICollection<ClientModel>>(await _adminService.GetAllClientsAsync());
+            Clients = _mapper.Map<List<ClientModel>>(_adminService.GetAllClientsAsync().Result);
         }
     }
 }
