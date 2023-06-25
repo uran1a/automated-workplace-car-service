@@ -26,7 +26,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
         }
         public async Task<IActionResult> OnPost()
         {
-            var deletedEmployee = _mapper.Map<EmployeeModel>(await _adminService.GetEmployeeAsync(Employee.Id));
+            var deletedEmployee = _mapper.Map<EmployeeModel>(await _adminService.DeleteEmployeeAsync(Employee.Id));
             if (deletedEmployee == null)
                 return RedirectToPage("/NotFound");
             return RedirectToPage("/Employees/Admin/Employees");

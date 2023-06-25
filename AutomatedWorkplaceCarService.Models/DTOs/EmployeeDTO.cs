@@ -8,7 +8,7 @@ namespace AutomatedWorkplaceCarService.BLL.DTOs
 {
     public class EmployeeDTO : UserDTO
     {
-        public int PostId { get; set; }
+        public int PostId { get; set;}
         public string PostName { get; set; }
     }
 }

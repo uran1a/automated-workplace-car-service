@@ -31,7 +31,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
 
         public async Task<ICollection<Employee>> GetAllEmployeesAsync()
         {
-            return await _context.Employees.ToListAsync();
+            return await _context.Employees.Include(e => e.Post).ToListAsync();
         }
 
         public async Task<ICollection<Post>> GetAllPostsAsync(int postId)
