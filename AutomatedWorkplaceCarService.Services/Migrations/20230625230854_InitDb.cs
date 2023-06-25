@@ -4,10 +4,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace AutomatedWorkplaceCarService.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddRoleTable : Migration
+    public partial class InitDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -151,19 +153,12 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                     YearOfRelease = table.Column<int>(type: "integer", nullable: false),
                     EnginePower = table.Column<int>(type: "integer", nullable: false),
                     ModelId = table.Column<int>(type: "integer", nullable: false),
-                    BrandId = table.Column<int>(type: "integer", nullable: false),
                     TransmissionId = table.Column<int>(type: "integer", nullable: false),
                     OwnerId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Cars_Brands_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brands",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cars_Models_ModelId",
                         column: x => x.ModelId,
@@ -262,6 +257,33 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "Posts",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "admin" },
+                    { 2, "client" },
+                    { 3, "employee" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Администратор" },
+                    { 2, "Автомеханик" },
+                    { 3, "Автоэлектрик" },
+                    { 4, "Автодиагност" },
+                    { 5, "Автомаляр" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Discriminator", "Login", "Name", "Password", "Patronymic", "PostId", "RoleId", "Surname" },
+                values: new object[] { 1, "Employee", "admin", "Иван", "123", "Иванович", 1, 1, "Иванов" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Application_CarId",
                 table: "Application",
@@ -286,11 +308,6 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                 name: "IX_Application_StageId",
                 table: "Application",
                 column: "StageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Cars_BrandId",
-                table: "Cars",
-                column: "BrandId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_ModelId",

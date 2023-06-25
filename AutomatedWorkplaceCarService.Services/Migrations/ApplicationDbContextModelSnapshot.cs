@@ -199,6 +199,23 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "client"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "employee"
+                        });
                 });
 
             modelBuilder.Entity("AutomatedWorkplaceCarService.DAL.Entities.Role", b =>
@@ -217,6 +234,33 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Администратор"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Автомеханик"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Автоэлектрик"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Автодиагност"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Автомаляр"
+                        });
                 });
 
             modelBuilder.Entity("AutomatedWorkplaceCarService.DAL.Entities.Service", b =>
@@ -344,6 +388,19 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                     b.HasIndex("PostId");
 
                     b.HasDiscriminator().HasValue("Employee");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Login = "admin",
+                            Name = "Иван",
+                            Password = "123",
+                            Patronymic = "Иванович",
+                            RoleId = 1,
+                            Surname = "Иванов",
+                            PostId = 1
+                        });
                 });
 
             modelBuilder.Entity("AutomatedWorkplaceCarService.DAL.Entities.Application", b =>
