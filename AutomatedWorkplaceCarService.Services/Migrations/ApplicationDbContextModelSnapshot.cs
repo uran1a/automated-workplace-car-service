@@ -99,6 +99,9 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BrandId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("EnginePower")
                         .HasColumnType("integer");
 
@@ -115,6 +118,8 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
 
                     b.HasIndex("ModelId");
 
@@ -147,7 +152,7 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -448,6 +453,12 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
 
             modelBuilder.Entity("AutomatedWorkplaceCarService.DAL.Entities.Car", b =>
                 {
+                    b.HasOne("AutomatedWorkplaceCarService.DAL.Entities.Brand", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AutomatedWorkplaceCarService.DAL.Entities.Model", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId")
@@ -465,6 +476,8 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                         .HasForeignKey("TransmissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Brand");
 
                     b.Navigation("Model");
 

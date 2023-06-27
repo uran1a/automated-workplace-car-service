@@ -14,6 +14,5 @@ namespace AutomatedWorkplaceCarService.BLL.DTOs.Car
         public int BrandId { get; set; }
         public int TransmissionId { get; set; }
         public int OwnerId { get; set; }
-        public List<ImageDTO> Images { get; set; } = new();
     }
 }

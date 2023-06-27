@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AutomatedWorkplaceCarService.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class InitStartData : Migration
+    public partial class InitDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -153,12 +153,19 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                     YearOfRelease = table.Column<int>(type: "integer", nullable: false),
                     EnginePower = table.Column<int>(type: "integer", nullable: false),
                     ModelId = table.Column<int>(type: "integer", nullable: false),
+                    BrandId = table.Column<int>(type: "integer", nullable: false),
                     TransmissionId = table.Column<int>(type: "integer", nullable: false),
                     OwnerId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cars_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cars_Models_ModelId",
                         column: x => x.ModelId,
@@ -236,7 +243,7 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FullName = table.Column<string>(type: "text", nullable: false),
+                    FileName = table.Column<string>(type: "text", nullable: false),
                     ContentType = table.Column<string>(type: "text", nullable: false),
                     Content = table.Column<byte[]>(type: "bytea", nullable: false),
                     ApplicationId = table.Column<int>(type: "integer", nullable: true),
@@ -308,6 +315,11 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                 name: "IX_Application_StageId",
                 table: "Application",
                 column: "StageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_BrandId",
+                table: "Cars",
+                column: "BrandId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_ModelId",

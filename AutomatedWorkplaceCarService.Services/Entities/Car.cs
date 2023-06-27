@@ -7,6 +7,8 @@
         public int EnginePower { get; set; }
         public int ModelId { get; set; }
         public Model Model { get; set; }
+        public int BrandId { get; set; }
+        public Brand Brand { get; set; }
         public int TransmissionId { get; set; }
         public Transmission Transmission { get; set; }
         public int OwnerId { get; set; }

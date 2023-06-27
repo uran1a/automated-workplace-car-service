@@ -12,6 +12,10 @@ namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
                /* .ForMember(
                     dest => dest.Id
                 );*/
+            /*CreateMap<CreateCarDTO, Car>()
+                .ForMember(
+                    dest => dest.ModelId
+                )*/
         }
     }
 }

@@ -9,7 +9,7 @@ namespace AutomatedWorkplaceCarService.DAL.Entities
     public class Image
     {
         public int Id { get; set; }
-        public string FullName { get; set; }
+        public string FileName { get; set; }
         public string ContentType { get; set; }
         public byte[] Content { get; set; }
         public int? ApplicationId { get; set; }

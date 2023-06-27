@@ -1,5 +1,6 @@
 using AutomatedWorkplaceCarService.BLL.DTOs.Brand;
 using AutomatedWorkplaceCarService.BLL.DTOs.Car;
+using AutomatedWorkplaceCarService.BLL.DTOs.Image;
 using AutomatedWorkplaceCarService.BLL.DTOs.Model;
 using AutomatedWorkplaceCarService.BLL.DTOs.Transmission;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
@@ -42,18 +43,18 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Clients
 
                 if(imageAuto != null)
                 {
-                    /*byte[] imageData = null;
+                    byte[] imageData = null;
                     using (var binaryReader = new BinaryReader(imageAuto.OpenReadStream()))
                     {
                         imageData = binaryReader.ReadBytes((int)imageAuto.Length);
                     }
-                    new ImageDTO
+                    var image = new CreateImageDTO()
                     {
-                        FileName = "image" + i,
-                        ContentType = images[i].ContentType,
-                        Content = imageData,
-                        PlacementId = placement.Id
-                    }*/
+                        FileName = imageAuto.FileName,
+                        ContentType = imageAuto.ContentType,
+                        Content = imageData
+                    };
+                    //_carService
                     
                 }
                 else
