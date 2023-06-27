@@ -1,74 +1,70 @@
 ﻿@page
-@model AutomatedWorkplaceCarService.Pages.Clients.CreateCarModel
+@model AutomatedWorkplaceCarService.WEB.Pages.Clients.CreateCarModel
 @{
 	ViewData["Title"] = "Добавление автомобиля";
 }
-@*
-<div class="row m-3 mt-5 justify-content-center p-3 border border-3 border-primary rounded ">
-	<div class="col">
-		<div class="row justify-content-center">
-			<h3 class="text-center fw-bold">Добавление автомобиля</h3>
-		</div>
-		<div class="row">
-			<div class="col-4 ">
-				<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
-				<span asp-validation-for="Car.BrandId" class="text-danger"></span>
-				<select asp-for="Car.BrandId" class="form-select mt-3" onchange="this.form.submit();">
-					<option selected>Бренд</option>
-					@foreach (var item in Model.Brands)
-					{
-					<option value="@item.Id">@item.Name</option>
-					}
-				</select>
-				@if(Model.Models.Count() == 0)
-				{
-					<span class="text-danger">Необходимо выбрать "Бренд" автомобиля</span>
-				}
-				<span asp-validation-for=".Login" class="text-danger"></span>
-				<select asp-for="Car.ModelId" class="form-select mt-3">
-					<option selected>Модель</option>
-					@foreach (var item in Model.Models)
-					{
-					<option value="@item.Id">@item.Name</option>
-					}
-				</select>
-				<span asp-validation-for="Car.TransmissionId" class="text-danger"></span>
-				<select asp-for="Car.TransmissionId" class="form-select mt-3" onchange="this.form.submit();">
-					<option selected>Тип трансмиссии</option>
-					@foreach (var item in Model.Transmissions)
-					{
-					<option value="@item.Id">@item.Name</option>
-					}
-				</select>
-				<div class="form-floating mt-3">
-					<input type="number" class="form-control" placeholder="Год выпуска">
-					<label>Год выпуска <span class="text-danger">*</span></label>
-					<span asp-validation-for="Car.YearOfRelease" class="text-danger"></span>
-				</div>
-				<div class="form-floating mt-3">
-					<input type="number" asp-for="Car.EnginePower" class="form-control"
-						   placeholder="Мощность двигателя">
-					<label>Мощность двигателя (л.с) <span class="text-danger">*</span></label>
-					<span asp-validation-for="Car.EnginePower" class="text-danger"></span>
-				</div>
+<form method="post" enctype="multipart/form-data">
+	<div class="row m-3 mt-5 justify-content-center p-3 border border-3 border-primary rounded ">
+		<div class="col">
+			<div class="row justify-content-center">
+				<h3 class="text-center fw-bold">Добавление автомобиля</h3>
 			</div>
-			<div class="col-8">
-				<img class="card-img-top mt-2" height="405" id="imageAuto"
-					 src="/images/default/product-default-style-1-img-4.webp" asp-append-version="true" />
-				<input type="file" id="imageInpAuto" name="imageAuto" class="custom-file-input form-control"
-					   placeholder="BEee" />
+			<div class="row">
+				<div class="col-4 ">
+					@*<input type="hidden" name="Brands" value="@Model.Brands"/> *@
+					<select asp-for="Car.BrandId" class="form-select mt-3" onchange="this.form.submit();">
+						<option selected value="-1">Бренд</option>
+						@foreach (var item in Model.Brands)
+						{
+						<option value="@item.Id">@item.Name</option>
+						}
+					</select>
+					<span asp-validation-for="Car.BrandId" class="text-danger"></span>
+					<select asp-for="Car.ModelId" class="form-select mt-3">
+						<option selected value="-1">Модель</option>
+						@foreach (var item in Model.Models)
+						{
+						<option value="@item.Id">@item.Name</option>
+						}
+					</select>
+					<span asp-validation-for="Car.ModelId" class="text-danger"></span>
+					<select asp-for="Car.TransmissionId" class="form-select mt-3">
+						<option selected value="-1">Тип трансмиссии</option>
+						@foreach (var item in Model.Transmissions)
+						{
+						<option value="@item.Id">@item.Name</option>
+						}
+					</select>
+					<span asp-validation-for="Car.TransmissionId" class="text-danger"></span>
+					<div class="form-floating mt-3">
+						<input asp-for="Car.YearOfRelease" class="form-control" placeholder="Год выпуска">
+						<label>Год выпуска <span class="text-danger">*</span></label>
+						<span asp-validation-for="Car.YearOfRelease" class="text-danger"></span>
+					</div>
+					<div class="form-floating mt-3">
+						<input asp-for="Car.EnginePower" class="form-control" placeholder="Мощность двигателя">
+						<label>Мощность двигателя (л/с) <span class="text-danger">*</span></label>
+						<span asp-validation-for="Car.EnginePower" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-8">
+					<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+					<img class="card-img-top mt-2" height="405" id="imageAuto"
+						 src="/images/default/product-default-style-1-img-4.webp" asp-append-version="true" />
+					<input type="file" id="imageInpAuto" name="imageAuto" class="custom-file-input form-control" placeholder="BEee" />
+				</div>
+				
 			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-4 col-sm-8">
-				<div class="d-grid gap-2 mt-3 sticky-top ">
-					<button class="btn btn-primary fs-5">Отправить заявку </button>
+			<div class="row justify-content-center">
+				<div class="col-4 col-sm-8">
+					<div class="d-grid gap-2 mt-3 sticky-top ">
+						<button class="btn btn-primary fs-5">Отправить заявку </button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-*@
+</form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function readURL(input, id) {

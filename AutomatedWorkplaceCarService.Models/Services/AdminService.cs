@@ -16,7 +16,9 @@ namespace AutomatedWorkplaceCarService.BLL.Services
         {
             _db = uow;
             _mapperClient = new MapperConfiguration(cfg => {
-                cfg.CreateMap<ClientDTO, Client>().ReverseMap();
+                cfg.CreateMap<ClientDTO, Client>()
+                    .ForMember(dest => dest.Role, opt => opt.UseDestinationValue())
+                    .ReverseMap();
             }).CreateMapper();
             _mapperEmployee = new MapperConfiguration(cfg => {
                 cfg.CreateMap<EmployeeDTO, Employee>().ReverseMap();
@@ -74,7 +76,9 @@ namespace AutomatedWorkplaceCarService.BLL.Services
             var clients = await _db.Clients.GetAllClientsAsync();
             if (clients == null)
                 clients = new List<Client>();
-            return _mapperClient.Map<List<ClientDTO>>(clients);
+            var clientDTOs = 
+                _mapperClient.Map<List<ClientDTO>>(clients);
+            return clientDTOs;
         }
 
         public async Task<List<EmployeeDTO>> GetAllEmployeesAsync(int id)

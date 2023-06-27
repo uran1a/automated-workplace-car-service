@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutomatedWorkplaceCarService.BLL.DTOs
+namespace AutomatedWorkplaceCarService.BLL.DTOs.Model
 {
     public class ModelDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int BrandId { get; set; }
-        public BrandDTO Brand { get; set; }
+        /*public BrandDTO Brand { get; set; }*/
     }
 }

@@ -22,6 +22,6 @@ namespace AutomatedWorkplaceCarService.BLL.DTOs
         public int ServiceId { get; set; }
         public ServiceDTO Service { get; set; }
         public int CarId { get; set; }
-        public CarDTO Car { get; set; }
+        /*public CarDTO Car { get; set; }*/
     }
 }

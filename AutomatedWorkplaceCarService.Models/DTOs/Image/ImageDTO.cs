@@ -13,8 +13,7 @@ namespace AutomatedWorkplaceCarService.BLL.DTOs
         public string ContentType { get; set; }
         public byte[] Content { get; set; }
         public int? ApplicationId { get; set; }
-        public ApplicationDTO? Application { get; set; }
         public int? CarId { get; set; }
-        public CarDTO? Car { get; set; }
+       /*public CarDTO? Car { get; set; }*/
     }
 }
