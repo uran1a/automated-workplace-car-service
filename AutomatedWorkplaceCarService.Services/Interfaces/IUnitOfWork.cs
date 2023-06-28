@@ -10,7 +10,7 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
     public interface IUnitOfWork
     {
         IApplicationRepository Applications { get; }
-        /*ICarRepository Cars { get; }*/
+        ICarRepository Cars { get; }
         IClientRepository Clients { get; }
         IEmployeeRepository Employees { get; }
         IUserRepository Users { get; }
@@ -19,6 +19,7 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
         IBrandRepository Brands { get; }
         IModelRepository Models { get; }
         ITransmissionRepository Transmissions { get; }
+        IImageRepository Images { get; }
         Task SaveAsync();
     }
 }

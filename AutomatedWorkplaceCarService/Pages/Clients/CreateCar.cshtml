@@ -11,7 +11,7 @@
 			</div>
 			<div class="row">
 				<div class="col-4 ">
-					@*<input type="hidden" name="Brands" value="@Model.Brands"/> *@
+					@*<input type="hidden" name="Brands" value="@Model.Brands"/>*@
 					<select asp-for="Car.BrandId" class="form-select mt-3" onchange="this.form.submit();">
 						<option selected value="-1">Бренд</option>
 						@foreach (var item in Model.Brands)
@@ -53,7 +53,6 @@
 						 src="/images/default/product-default-style-1-img-4.webp" asp-append-version="true" />
 					<input type="file" id="imageInpAuto" name="imageAuto" class="custom-file-input form-control" placeholder="BEee" />
 				</div>
-				
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-4 col-sm-8">

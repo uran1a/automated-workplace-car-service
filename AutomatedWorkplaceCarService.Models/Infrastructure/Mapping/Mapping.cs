@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
 {
@@ -16,11 +11,13 @@ namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
                 cfg.AddProfile<BrandMappingProfile>();
                 cfg.AddProfile<ModelMappingProfile>();
                 cfg.AddProfile<TransmissionMappingProfile>();
+                cfg.AddProfile<CarMappingProfile>();
+                cfg.AddProfile<ImageMappingProfile>();
+                cfg.AddProfile<ClientMappingProfile>();
             });
             var mapper = config.CreateMapper();
             return mapper;
         });
-
         public static IMapper Mapper => Lazy.Value;
     }
 }

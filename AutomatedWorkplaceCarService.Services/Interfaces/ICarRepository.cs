@@ -4,8 +4,8 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
 {
     public interface ICarRepository
     {
-        IEnumerable<Brand> GetAllBrands();
-        IEnumerable<Transmission> GetAllTransmissions();
-        IEnumerable<Model> GetModels(int brandId);
+        Car Add(Car car);
+        List<Car> GetAllCars();
+        Task<Car> GetCarAsync(int id);
     }
 }

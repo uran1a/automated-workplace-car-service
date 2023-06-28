@@ -7,7 +7,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
     {
         private ApplicationDbContext _context;
         public IApplicationRepository applicationRepository;
-        /*public CarRepository carRepository;*/
+        public ICarRepository carRepository;
         public IClientRepository clientRepository;
         public IEmployeeRepository employeeRepository;
         public IUserRepository userRepository;
@@ -16,6 +16,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
         public IBrandRepository brandRepository;
         public IModelRepository modelRepository;
         public ITransmissionRepository transmissionRepository;
+        public IImageRepository imageRepository;
 
         public EFUnitOfWork(ApplicationDbContext context)
         {
@@ -30,7 +31,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
                 return applicationRepository;
             }
         }
-       /* public ICarRepository Cars
+        public ICarRepository Cars
         {
             get
             {
@@ -38,7 +39,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
                     carRepository = new CarRepository(_context);
                 return carRepository;
             }
-        }*/
+        }
         public IClientRepository Clients
         {
             get
@@ -117,6 +118,15 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
             }
         }
 
+        public IImageRepository Images
+        {
+            get
+            {
+                if (imageRepository == null)
+                    imageRepository = new ImageRepository(_context);
+                return imageRepository;
+            }
+        }
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();

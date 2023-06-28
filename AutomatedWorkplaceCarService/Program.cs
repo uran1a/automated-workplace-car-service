@@ -29,6 +29,7 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ITransmissionService, TransmissionService>();
+builder.Services.AddScoped<IImageService, ImageService>();
 /*services.AddTransient<IUnitOfWork, EFUnitOfWork>();*/
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //typeof(UserMappingProfile), typeof(ClientMappingProfile), typeof(EmployeeMappingProfile), typeof(PostMappingProfile)

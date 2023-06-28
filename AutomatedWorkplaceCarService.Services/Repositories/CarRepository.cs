@@ -1,28 +1,37 @@
 ﻿using AutomatedWorkplaceCarService.DAL.EF;
+using AutomatedWorkplaceCarService.DAL.Entities;
 using AutomatedWorkplaceCarService.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedWorkplaceCarService.DAL.Repositories
 {
-    /*public class CarRepository : ICarRepository
+    public class CarRepository : ICarRepository
     {
         private readonly ApplicationDbContext _context;
         public CarRepository(ApplicationDbContext context)
         {
             _context = context;
         }
-        public IEnumerable<Brand> GetAllBrands()
+        public Car Add(Car car)
         {
-            return _context.Brands.ToList();
+            var newCar = _context.Cars.Add(car);
+            return newCar.Entity;
         }
 
-        public IEnumerable<Transmission> GetAllTransmissions()
+        public List<Car> GetAllCars()
         {
-            return _context.Transmissions.ToList();
+            return _context.Cars.ToList();
         }
 
-        public IEnumerable<Model> GetModels(int brandId)
+        public Task<Car> GetCarAsync(int id)
         {
-            return _context.Models.Where(m => m.BrandId == brandId);
+            return _context.Cars
+                .Include(c => c.Model)
+                .Include(c => c.Brand)
+                .Include(c => c.Transmission)
+                .Include(c => c.Owner)
+                .Include(c => c.Applications)
+                .Include(c => c.Images).FirstOrDefaultAsync(c => c.Id == id);
         }
-    }*/
+    }
 }

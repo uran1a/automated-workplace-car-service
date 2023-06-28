@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutomatedWorkplaceCarService.DAL.Entities;
 
 namespace AutomatedWorkplaceCarService.DAL.Interfaces
 {
     public interface IImageRepository
     {
-        
+        void Add(Image image);
     }
 }

@@ -10,6 +10,6 @@ namespace AutomatedWorkplaceCarService.BLL.Interfaces
 {
     public interface ICarService
     {
-        //Task<CreateCarDTO?> AddAsync(CreateCarDTO carDTO, CreateImageDTO imageDTO);
+        Task<CarDTO> Add(CreateCarDTO carDTO);
     }
 }

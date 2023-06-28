@@ -14,11 +14,13 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Clients
         private readonly ICarService _carService;
         private readonly IBrandService _brandService;
         private readonly ITransmissionService _transmissionService;
-        public CreateCarModel(ICarService carService, IBrandService brandService, ITransmissionService transmissionService)
+        private readonly IImageService _imageService;
+        public CreateCarModel(ICarService carService, IBrandService brandService, ITransmissionService transmissionService, IImageService imageService)
         {
             _carService = carService;
             _brandService = brandService;
             _transmissionService = transmissionService;
+            _imageService = imageService;
         }
         [BindProperty]
         public CreateCarDTO Car { get; set; }
@@ -48,14 +50,18 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Clients
                     {
                         imageData = binaryReader.ReadBytes((int)imageAuto.Length);
                     }
-                    var image = new CreateImageDTO()
+                    var imageDTO = new CreateImageDTO()
                     {
                         FileName = imageAuto.FileName,
                         ContentType = imageAuto.ContentType,
                         Content = imageData
                     };
-                    //_carService
-                    
+                    Car.OwnerId = int.Parse(User.Identity.Name);
+                    var newCarDTO = await _carService.Add(Car);
+                    await _imageService.AddImages(new List<CreateImageDTO>() { imageDTO }, newCarDTO.Id, true);
+
+                    TempData["SuccessMessage"] = $"ƒобавление автомобил€ {newCarDTO.Brand.Name} {newCarDTO.Model.Name} прошло успешно!";
+                    return RedirectToPage("/Clients/Cars");
                 }
                 else
                 {
