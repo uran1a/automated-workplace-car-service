@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.DTOs.Image;
 using AutomatedWorkplaceCarService.DAL.Entities;
 
@@ -24,6 +25,8 @@ namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
                  .ForMember(
                     dest => dest.ApplicationId,
                     opt => opt.MapFrom(src => src.ApplicationId));
+            CreateMap<Image, ImageDTO>();
+                 
         }
     }
 }

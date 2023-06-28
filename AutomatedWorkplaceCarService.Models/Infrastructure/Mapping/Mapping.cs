@@ -14,6 +14,7 @@ namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
                 cfg.AddProfile<CarMappingProfile>();
                 cfg.AddProfile<ImageMappingProfile>();
                 cfg.AddProfile<ClientMappingProfile>();
+                cfg.AddProfile<ApplicationMappingProfile>();
             });
             var mapper = config.CreateMapper();
             return mapper;

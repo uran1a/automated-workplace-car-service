@@ -5,5 +5,43 @@
 }
 <div class="row justify-content-center">
 	<h1>Ваши автомобили</h1>
+	@foreach(var car in Model.Cars)
+	{
+		<div class="col-12 col-sm-6 col-lg-6">
+			<div class="card-deck">
+				<div class="card m-3">
+					<div class="card-header text-center cardHeaderStyle">
+						<h3>@car.Brand.Name @car.Model.Name</h3>
+					</div>
+					<div class="text-center cardBodyStyle">
+						@if(@car.Images != null)
+						{
+							@if(@car.Images.Count > 0)
+							{
+								<img class="card-image-top imageThumbnail" src="data:image/jpeg;base64,@(Convert.ToBase64String(car.Images[0].Content))" asp-append-version="true" />
+							}
+							else
+							{
+								<img class="card-image-top imageThumbnail" src="" alt="Фото авто" asp-append-version="true" />
+							}
+						}
+					</div>
+					<div class="card-body">
+						<p class="card-text">
+							Тип трансмиссии: @car.Transmission.Name<br/>
+							Год выпуска: @car.YearOfRelease г.<br/>
+							Мощность двигателя: @car.EnginePower л/c<br/>
+						</p>
+					</div>
+					<div class="card-footer text-center">
+						<a asp-page="/Employees/Details" asp-route-Id="@car.Id" class="btn btn-success m-1 buttonShadow">View</a>
+						<a asp-page="/Employees/Edit" asp-route-Id="@car.Id" class="btn btn-primary m-1 buttonShadow">Edit</a>
+						<a asp-page="/Employees/Delete" asp-route-Id="@car.Id" class="btn btn-danger m-1 buttonShadow">Delete</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
 	<a class="btn btn-primary" asp-page="/Clients/CreateCar">Добавить автомобиль</a>
 </div>
+

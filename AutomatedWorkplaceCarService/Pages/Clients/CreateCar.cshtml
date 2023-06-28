@@ -11,7 +11,6 @@
 			</div>
 			<div class="row">
 				<div class="col-4 ">
-					@*<input type="hidden" name="Brands" value="@Model.Brands"/>*@
 					<select asp-for="Car.BrandId" class="form-select mt-3" onchange="this.form.submit();">
 						<option selected value="-1">Бренд</option>
 						@foreach (var item in Model.Brands)

@@ -18,12 +18,18 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
             return newCar.Entity;
         }
 
-        public List<Car> GetAllCars()
+        public async Task<List<Car>> GetAllCarsAsync()
         {
-            return _context.Cars.ToList();
+            return await _context.Cars
+                .Include(c => c.Model)
+                .Include(c => c.Brand)
+                .Include(c => c.Transmission)
+                .Include(c => c.Owner)
+                .Include(c => c.Applications)
+                .Include(c => c.Images).ToListAsync();
         }
 
-        public Task<Car> GetCarAsync(int id)
+        public Task<Car?> GetCarAsync(int id)
         {
             return _context.Cars
                 .Include(c => c.Model)
