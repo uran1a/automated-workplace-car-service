@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;

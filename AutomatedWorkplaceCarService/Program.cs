@@ -36,8 +36,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddScoped<IValidator<ClientModel>, ClientModelValidator>();
 builder.Services.AddScoped<IValidator<AuthenticationModel>, AuthenticationModelValidator>();
-builder.Services.AddScoped<IValidator<EmployeeModel>, EmployeeModelValidator>();
 builder.Services.AddScoped<IValidator<CreateCarDTO>, CarValidator>();
+builder.Services.AddScoped<IValidator<EmployeeModel>, EmployeeModelValidator>();
 
 builder.Services.AddRazorPages();
 

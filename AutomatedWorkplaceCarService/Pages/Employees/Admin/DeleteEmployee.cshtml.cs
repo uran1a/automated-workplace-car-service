@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.WEB.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
         }
         public async Task<IActionResult> OnPost()
         {
-            var deletedEmployee = _mapper.Map<EmployeeModel>(await _adminService.DeleteEmployeeAsync(Employee.Id));
+            var deletedEmployee = await _adminService.DeleteEmployeeAsync(Employee.Id);
             if (deletedEmployee == null)
                 return RedirectToPage("/NotFound");
             return RedirectToPage("/Employees/Admin/Employees");

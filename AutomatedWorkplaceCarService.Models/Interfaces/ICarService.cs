@@ -1,10 +1,4 @@
 ﻿using AutomatedWorkplaceCarService.BLL.DTOs.Car;
-using AutomatedWorkplaceCarService.BLL.DTOs.Image;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutomatedWorkplaceCarService.BLL.Interfaces
 {
@@ -12,6 +6,8 @@ namespace AutomatedWorkplaceCarService.BLL.Interfaces
     {
         Task<CarDTO> Add(CreateCarDTO carDTO);
         Task<List<CarDTO>> GetAllCarsAsync();
+        Task<List<CarTableDTO>> GetCarsAsync(int ownerId);
         Task<CarDTO> GetCarAsync(int id);
+
     }
 }

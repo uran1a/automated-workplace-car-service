@@ -18,7 +18,8 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Users.Employees.Admin
         public ICollection<ClientModel> Clients { get; set; }
         public void OnGet()
         {
-            Clients = _mapper.Map<List<ClientModel>>(_adminService.GetAllClientsAsync().Result);
+            var clientDTOs = _adminService.GetAllClientsAsync().Result;
+            Clients = _mapper.Map<List<ClientModel>>(clientDTOs);
         }
     }
 }

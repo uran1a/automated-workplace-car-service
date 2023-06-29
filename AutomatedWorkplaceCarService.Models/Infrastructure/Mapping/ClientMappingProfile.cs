@@ -13,7 +13,7 @@ namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
     {
         public ClientMappingProfile()
         {
-            CreateMap<Client, ClientDTO>();
+            CreateMap<Client, ClientDTO>().ReverseMap();
         }
         
     }

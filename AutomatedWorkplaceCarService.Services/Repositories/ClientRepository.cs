@@ -17,7 +17,7 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
             await _context.Clients.AddAsync(newClient);
         }
         public async Task<Client?> GetClientAsync(string login) => await _context.Clients.FirstOrDefaultAsync(c => c.Login == login);
-        public async Task<ICollection<Client>> GetAllClientsAsync()
+        public async Task<List<Client>> GetAllClientsAsync()
         {
             return await _context.Clients.Include(c => c.Role).ToListAsync();
         }

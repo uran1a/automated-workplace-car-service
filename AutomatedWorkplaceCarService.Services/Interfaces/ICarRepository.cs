@@ -6,6 +6,7 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
     {
         Car Add(Car car);
         Task<List<Car>> GetAllCarsAsync();
+        Task<List<Car>> GetCarsAsync(int ownerId);
         Task<Car?> GetCarAsync(int id);
     }
 }

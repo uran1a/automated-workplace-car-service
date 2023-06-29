@@ -16,6 +16,9 @@ namespace AutomatedWorkplaceCarService.DAL.EF
         public DbSet<Transmission> Transmissions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Specialization> Specializations { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Stage> Stages { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

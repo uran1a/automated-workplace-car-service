@@ -29,6 +29,18 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
                 .Include(c => c.Images).ToListAsync();
         }
 
+        public async Task<List<Car>> GetCarsAsync(int ownerId)
+        {
+            return await _context.Cars
+                .Include(c => c.Model)
+                .Include(c => c.Brand)
+                .Include(c => c.Transmission)
+                .Include(c => c.Owner)
+                .Include(c => c.Applications)
+                .Include(c => c.Images)
+                .Where(c => c.OwnerId == ownerId).ToListAsync();
+        }
+
         public Task<Car?> GetCarAsync(int id)
         {
             return _context.Cars

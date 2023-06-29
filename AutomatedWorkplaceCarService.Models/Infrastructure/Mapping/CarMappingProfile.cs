@@ -64,6 +64,7 @@ namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
                 .ForMember(
                     dest => dest.EnginePower,
                     opt => opt.MapFrom(src => src.EnginePower));
+            CreateMap<Car, CarTableDTO>();
         }
     }
 }

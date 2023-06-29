@@ -23,6 +23,12 @@ namespace AutomatedWorkplaceCarService.BLL.Services
             return Mapping.Mapper.Map<CarDTO>(car);
         }
 
+        public async Task<List<CarTableDTO>> GetCarsAsync(int ownerId)
+        {
+            var cars = await _db.Cars.GetCarsAsync(ownerId);
+            return Mapping.Mapper.Map<List<CarTableDTO>>(cars);
+        }
+
         public async Task<List<CarDTO>> GetAllCarsAsync()
         {
             var cars = await _db.Cars.GetAllCarsAsync();

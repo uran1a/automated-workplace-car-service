@@ -8,7 +8,14 @@ namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Mapping
     {
         public EmployeeMappingProfile()
         {
-            CreateMap<EmployeeModel, EmployeeDTO>().ReverseMap();
+            CreateMap<EmployeeDTO, EmployeeModel>()
+                .ForMember(
+                    dest => dest.PostId,
+                    opt => opt.MapFrom(src => src.PostId))
+                .ForMember(
+                    dest => dest.PostName,
+                    opt => opt.MapFrom(src => src.Post.Name));
+            CreateMap<EmployeeModel, EmployeeDTO>();
         }
     }
 }
