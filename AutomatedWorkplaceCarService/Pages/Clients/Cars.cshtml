@@ -4,7 +4,14 @@
 	ViewData["Title"] = "Автомобили";
 }
 <div class="row justify-content-center">
-	<h1>Ваши автомобили</h1>
+	<div class="col">
+		<h1>Ваши автомобили</h1>
+	</div>
+	<div class="col text-end">
+		<a class="btn btn-primary btn-lg" asp-page="/Clients/CreateCar">Добавить автомобиль</a>
+	</div>
+</div>
+<div class="row justify-content-center">
 	@foreach(var car in Model.Cars)
 	{
 		<div class="col-12 col-sm-6 col-lg-6">
@@ -42,6 +49,5 @@
 			</div>
 		</div>
 	}
-	<a class="btn btn-primary" asp-page="/Clients/CreateCar">Добавить автомобиль</a>
 </div>
 

@@ -1,4 +1,5 @@
-﻿using AutomatedWorkplaceCarService.BLL.DTOs.Car;
+﻿using AutomatedWorkplaceCarService.BLL.DTOs.Application;
+using AutomatedWorkplaceCarService.BLL.DTOs.Car;
 
 namespace AutomatedWorkplaceCarService.BLL.DTOs
 {

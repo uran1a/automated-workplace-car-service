@@ -1,5 +1,6 @@
 using AutoMapper;
 using AutomatedWorkplaceCarService.BLL.DTOs;
+using AutomatedWorkplaceCarService.BLL.DTOs.Application;
 using AutomatedWorkplaceCarService.BLL.DTOs.Car;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.WEB.ViewModels;
