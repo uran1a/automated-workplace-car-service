@@ -1,0 +1,98 @@
+﻿@page "{id}"
+@model AutomatedWorkplaceCarService.WEB.Pages.Employees.Master.EvaluationApplicationModel
+@{
+    ViewData["Title"] = "Оценка заявки";
+}
+<form method="post">
+    <input type="hidden" asp-for="EvaluationApplication.Id" value="@Model.Application.Id"/>
+    <div class="row justify-content-around mt-3">
+        <div class="col-8">
+            <div class="row mb-3 mt-5 justify-content-center p-3 border border-3 border-primary rounded ">
+                <div class="col">
+                    <div class="row">
+                        <h4 class="fw-bold">Автомобиль:</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 ">
+                            <select class="form-select mt-3" disabled>
+                                <option selected>@Model.Application.Car.Brand.Name</option>
+                            </select>
+                            <select class="form-select mt-3" disabled>
+                                <option selected>@Model.Application.Car.Model.Name</option>
+                            </select>
+                             <select class="form-select mt-3" disabled>
+                                <option selected>@Model.Application.Car.Transmission.Name</option>
+                            </select>
+                            <div class="form-floating mt-3">
+                                <input class="form-control" placeholder="Год выпуска" value="@Model.Application.Car.YearOfRelease" readonly>
+                                <label>Год выпуска</label>
+                            </div>
+                            <div class="form-floating mt-3">
+                                <input class="form-control" placeholder="Мощность двигателя" value="@Model.Application.Car.EnginePower" readonly>
+                                <label>Мощность двигателя (л/с)</label>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            @*<img class="card-img-top mt-2" height="405" id="imageAuto" src="BMW_M3.jpg" asp-append-version="true" />*@
+                            <img class="card-image-top imageThumbnail" height="405" src="data:image/jpeg;base64,@(Convert.ToBase64String(@Model.Application.Car.Images[0].Content))" asp-append-version="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row gx-5">
+                <div class="col-6">
+                    <div class="row justify-content-around mb-3 p-3 border border-3 border-primary rounded">
+                        <div class="col">
+                            <div class="row">
+                                <h4 class="fw-bold">Услуга:</h4>
+                            </div>
+                            <div class="row">
+                                <select class="form-select mt-3" disabled>
+                                    <option selected>@Model.Application.Service.Name</option>
+                                </select>
+                                <div class="form-group mt-3 mb-3 p-0">
+                                    <label for="exampleFormControlTextarea1">Описание проблемы</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" readonly>@Model.Application.Descriptions</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row  p-3 border border-3 border-primary rounded">
+                        <div class="col">
+                            <div class="row">
+                                <h4 class="fw-bold">Оценка:</h4>
+                            </div>
+                            <label class="mb-1">Период оказания услуги:</label>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <input asp-for="EvaluationApplication.StartWork" id="startDate" class="form-control" min="2023-07-01" type="date" />
+                                    <span id="startDateSelected"></span>
+                                    <span asp-validation-for="EvaluationApplication.StartWork" class="text-danger"></span>
+                                </div>
+                                <div class="col">
+                                    <input asp-for="EvaluationApplication.EndWork" id="endDate" class="form-control" type="date" />
+                                    <span id="endDateSelected"></span>
+                                    <span asp-validation-for="EvaluationApplication.EndWork" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating mt-3">
+                                        <input asp-for="EvaluationApplication.Amount" name="applicationAmount" class="form-control" placeholder="Сумма за услугу">
+                                        <label>Сумма за услугу (руб.)<span class="text-danger">*</span></label>
+                                        <span asp-validation-for="EvaluationApplication.Amount" class="text-danger"></span>
+                                    </div>
+                                    <div class="d-grid gap-2 mt-3 sticky-top ">
+                                        <button class="btn btn-primary fs-5">Отправить клиенту</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

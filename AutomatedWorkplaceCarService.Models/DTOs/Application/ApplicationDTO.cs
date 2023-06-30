@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutomatedWorkplaceCarService.BLL.DTOs.Car;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,6 @@ namespace AutomatedWorkplaceCarService.BLL.DTOs.Application
         public int ServiceId { get; set; }
         public ServiceDTO Service { get; set; }
         public int CarId { get; set; }
-        /*public CarDTO Car { get; set; }*/
+        public CarDTO Car { get; set; }
     }
 }

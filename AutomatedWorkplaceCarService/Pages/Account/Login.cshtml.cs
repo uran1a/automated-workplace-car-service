@@ -41,7 +41,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
                     else if(user.RoleId == availableRoles["admin"])
                         return RedirectToPage("/Employees/Admin/Clients");
                     else if(user.RoleId == availableRoles["employee"])
-                        return RedirectToPage("/Employees/Employee/Applications");
+                        return RedirectToPage("/Employees/Master/Applications");
                     else
                         return RedirectToPage("/Error");
                 }

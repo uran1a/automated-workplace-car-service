@@ -25,9 +25,26 @@ namespace AutomatedWorkplaceCarService.BLL.Services
             await _context.SaveChangesAsync();
         }
 
-        public List<ApplicationCardDTO> GetApplications(int clientId)
+        public async Task<ApplicationDTO> GetApplication(int id)
         {
-            var applications = _context.Applications
+            var application = await _context.Applications
+                .Include(a => a.Service)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Brand)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Model)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Transmission)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Images)
+                .Include(a => a.Stage)
+                .FirstOrDefaultAsync(a => a.Id == id);
+            return _mapper.Map<ApplicationDTO>(application);
+        }
+
+        public async Task<List<ApplicationCardDTO>> GetApplications(int clientId)
+        {
+            var applications = await _context.Applications
                 .Where(a => a.ClientId == clientId)
                 .Include(a => a.Service)
                 .Include(a => a.Car)
@@ -36,7 +53,24 @@ namespace AutomatedWorkplaceCarService.BLL.Services
                 .ThenInclude(c => c.Model)
                 .Include(a => a.Car)
                 .ThenInclude(c => c.Images)
-                .Include(a => a.Stage).ToList();
+                .Include(a => a.Stage)
+                .ToListAsync();
+            return _mapper.Map<List<ApplicationCardDTO>>(applications);
+        }
+
+        public async Task<List<ApplicationCardDTO>> GetApplications(int employeeId, int stageId)
+        {
+            var applications = await _context.Applications
+                .Where(a => a.EmployeeId == employeeId && a.StageId == stageId)
+                .Include(a => a.Service)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Brand)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Model)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Images)
+                .Include(a => a.Stage)
+                .ToListAsync();
             return _mapper.Map<List<ApplicationCardDTO>>(applications);
         }
     }

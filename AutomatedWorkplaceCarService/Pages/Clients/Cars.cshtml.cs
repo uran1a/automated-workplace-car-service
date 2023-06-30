@@ -14,9 +14,10 @@ namespace AutomatedWorkplaceCarService.Pages.Clients
         }
         [BindProperty]
         public List<CarDTO> Cars { get; set; }
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Cars = _carService.GetAllCarsAsync().Result;
+            Cars = await _carService.GetAllCarsAsync();
+            return this.Page();
         }
     }
 }

@@ -42,6 +42,7 @@ builder.Services.AddScoped<IValidator<AuthenticationViewModel>, AuthenticationMo
 builder.Services.AddScoped<IValidator<CreateCarDTO>, CarValidator>();
 builder.Services.AddScoped<IValidator<EmployeeViewModel>, EmployeeModelValidator>();
 builder.Services.AddScoped<IValidator<CreateApplicationViewModel>, CreateApplicationModelValidator>();
+builder.Services.AddScoped<IValidator<EvaluationApplicationViewModel>, EvaluationApplicatonViewModelValidator>();
 
 builder.Services.AddRazorPages();
 

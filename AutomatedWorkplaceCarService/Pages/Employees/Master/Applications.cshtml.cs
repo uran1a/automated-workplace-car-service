@@ -4,7 +4,7 @@ using AutomatedWorkplaceCarService.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AutomatedWorkplaceCarService.Pages.Clients
+namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Master
 {
     public class ApplicationsModel : PageModel
     {
@@ -16,10 +16,14 @@ namespace AutomatedWorkplaceCarService.Pages.Clients
             _applicationService = applicationService;
             _mapper = mapper;
         }
-        public List<ApplicationCardDTO> Applications { get; set; }
+        [BindProperty]
+        public List<ApplicationCardDTO> PendingApplications { get; set; }
+        [BindProperty]
+        public List<ApplicationCardDTO> ActiveApplications { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
-            Applications = await _applicationService.GetApplications(int.Parse(User.Identity!.Name!));
+            PendingApplications = await _applicationService.GetApplications(int.Parse(User.Identity!.Name!), 1);
+            ActiveApplications = await _applicationService.GetApplications(int.Parse(User.Identity!.Name!), 2);
             return Page();
         }
     }

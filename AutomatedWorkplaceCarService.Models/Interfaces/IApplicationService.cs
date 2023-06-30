@@ -11,6 +11,9 @@ namespace AutomatedWorkplaceCarService.BLL.Interfaces
     public interface IApplicationService
     {
         Task AddAsync(ApplicationDTO applicationDTO);
-        List<ApplicationCardDTO> GetApplications(int clientId);
+        Task<List<ApplicationCardDTO>> GetApplications(int clientId);
+        Task<List<ApplicationCardDTO>> GetApplications(int employeeId, int stageId);
+        Task<ApplicationDTO> GetApplication(int id);
+
     }
 }
