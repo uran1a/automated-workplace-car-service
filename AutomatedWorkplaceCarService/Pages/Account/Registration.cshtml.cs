@@ -1,7 +1,7 @@
 using AutoMapper;
 using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
-using AutomatedWorkplaceCarService.WEB.Models;
+using AutomatedWorkplaceCarService.WEB.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             _mapper = mapper;
         }
         [BindProperty]
-        public ClientModel Client { get; set; }
+        public ClientViewModel Client { get; set; }
         public void OnGet(){}
         public async Task<IActionResult> OnPostAsync()
         {
@@ -29,14 +29,14 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             {
                 if (Client != null)
                 {
-                    var user = _mapper.Map<UserModel>(await _authentificationService.GetUserAsync(Client.Login));
+                    var user = _mapper.Map<UserViewModel>(await _authentificationService.GetUserAsync(Client.Login));
                     if (user == null)
                     {
                         var clientDTO = _mapper.Map<ClientDTO>(Client);
                         var newClient = await _authentificationService.AddClientAsync(clientDTO);
                         if(newClient == null)
                             return RedirectToPage("/Error");
-                        await Authenticate(_mapper.Map<ClientModel>(newClient));
+                        await Authenticate(_mapper.Map<ClientViewModel>(newClient));
                         return RedirectToPage("/Clients/Applications");
                     }
                     else
@@ -47,7 +47,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             }
             return Page();
         }
-        private async Task Authenticate(ClientModel client)
+        private async Task Authenticate(ClientViewModel client)
         {
             var claims = new List<Claim>
             {

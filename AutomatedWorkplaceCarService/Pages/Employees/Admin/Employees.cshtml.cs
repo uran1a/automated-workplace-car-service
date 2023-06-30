@@ -1,7 +1,7 @@
 using AutoMapper;
 using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
-using AutomatedWorkplaceCarService.WEB.Models;
+using AutomatedWorkplaceCarService.WEB.ViewModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
@@ -15,11 +15,11 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
             _adminService = adminService;
             _mapper = mapper;
         }
-        public ICollection<EmployeeModel> Employees { get; set; } 
-        public ICollection<PostModel> Posts { get; set; } 
+        public ICollection<EmployeeViewModel> Employees { get; set; } 
+        public ICollection<PostViewModel> Posts { get; set; } 
         public async void OnGet()
         {
-            Employees = _mapper.Map<List<EmployeeModel>>(_adminService.GetAllEmployeesAsync(int.Parse(User.Identity.Name)).Result);
+            Employees = _mapper.Map<List<EmployeeViewModel>>(_adminService.GetAllEmployeesAsync(int.Parse(User.Identity.Name)).Result);
         }
     }
 }

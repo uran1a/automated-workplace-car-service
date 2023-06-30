@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutomatedWorkplaceCarService.DAL.Entities
+﻿namespace AutomatedWorkplaceCarService.DAL.Entities
 {
     public class Application
     {
         public int Id { get; set; }
-        public DateTime StartWork { get; set; }
-        public DateTime EndWork { get; set; }
+        public DateTime? StartWork { get; set; }
+        public DateTime? EndWork { get; set; }
         public int Amount { get; set; }
         public string Descriptions { get; set; }
         public int StageId { get; set; }

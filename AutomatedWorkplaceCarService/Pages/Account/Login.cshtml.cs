@@ -1,6 +1,6 @@
 using AutoMapper;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
-using AutomatedWorkplaceCarService.WEB.Models;
+using AutomatedWorkplaceCarService.WEB.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -19,14 +19,14 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             _mapper = mapper;
         }
         [BindProperty]
-        public Models.AuthenticationModel Authentication { get; set; }
+        public AuthenticationViewModel Authentication { get; set; }
         public void OnGet() {}
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
                 var userDTO = await _authentificationService.GetUserAsync(Authentication.Login, Authentication.Password);
-                var user = _mapper.Map<UserModel>(userDTO);
+                var user = _mapper.Map<UserViewModel>(userDTO);
                 if (user != null)
                 {
                     await Authenticate(user);
@@ -49,7 +49,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             }
             return Page();
         }
-        private async Task Authenticate(UserModel user)
+        private async Task Authenticate(UserViewModel user)
         {
             var claims = new List<Claim>
             {

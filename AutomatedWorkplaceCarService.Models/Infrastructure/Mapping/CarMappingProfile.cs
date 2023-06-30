@@ -45,26 +45,36 @@ namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
                 .ForMember(
                     dest => dest.Applications,
                     opt => opt.MapFrom(src => src.Applications));
-            CreateMap<CreateCarDTO, Car>()
+            CreateMap<CreateCarDTO, Car>();
+            /*.ForMember(
+                dest => dest.BrandId,
+                opt => opt.MapFrom(src => src.BrandId))
+            .ForMember(
+                dest => dest.ModelId,
+                opt => opt.MapFrom(src => src.ModelId))
+            .ForMember(
+                dest => dest.TransmissionId,
+                opt => opt.MapFrom(src => src.TransmissionId))
+            .ForMember(
+                dest => dest.OwnerId,
+                opt => opt.MapFrom(src => src.OwnerId))
+            .ForMember(
+                dest => dest.YearOfRelease,
+                opt => opt.MapFrom(src => src.YearOfRelease))
+            .ForMember(
+                dest => dest.EnginePower,
+                opt => opt.MapFrom(src => src.EnginePower));*/
+            CreateMap<Car, CarTableDTO>()
                 .ForMember(
-                    dest => dest.BrandId,
-                    opt => opt.MapFrom(src => src.BrandId))
+                    dest => dest.BrandName,
+                    opt => opt.MapFrom(src => src.Brand.Name))
                 .ForMember(
-                    dest => dest.ModelId,
-                    opt => opt.MapFrom(src => src.ModelId))
+                    dest => dest.ModelName,
+                    opt => opt.MapFrom(src => src.Model.Name))
                 .ForMember(
-                    dest => dest.TransmissionId,
-                    opt => opt.MapFrom(src => src.TransmissionId))
-                .ForMember(
-                    dest => dest.OwnerId,
-                    opt => opt.MapFrom(src => src.OwnerId))
-                .ForMember(
-                    dest => dest.YearOfRelease,
-                    opt => opt.MapFrom(src => src.YearOfRelease))
-                .ForMember(
-                    dest => dest.EnginePower,
-                    opt => opt.MapFrom(src => src.EnginePower));
-            CreateMap<Car, CarTableDTO>();
+                    dest => dest.TransmissionName,
+                    opt => opt.MapFrom(src => src.Transmission.Name));
+                
         }
     }
 }

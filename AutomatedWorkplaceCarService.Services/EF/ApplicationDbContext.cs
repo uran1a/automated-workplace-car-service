@@ -19,6 +19,7 @@ namespace AutomatedWorkplaceCarService.DAL.EF
         public DbSet<Specialization> Specializations { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Stage> Stages { get; set; }
+        public DbSet<Application> Applications { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

@@ -11,9 +11,11 @@ namespace AutomatedWorkplaceCarService.BLL.Services
     public class CarService : ICarService
     {
         private readonly IUnitOfWork _db;
-        public CarService(IUnitOfWork uow)
+        private readonly IMapper _mapper;
+        public CarService(IUnitOfWork uow, IMapper mapper)
         {
             _db = uow;
+            _mapper = mapper;
         }
         public async Task<CarDTO> Add(CreateCarDTO carDTO)
         {
@@ -26,7 +28,7 @@ namespace AutomatedWorkplaceCarService.BLL.Services
         public async Task<List<CarTableDTO>> GetCarsAsync(int ownerId)
         {
             var cars = await _db.Cars.GetCarsAsync(ownerId);
-            return Mapping.Mapper.Map<List<CarTableDTO>>(cars);
+            return _mapper.Map<List<CarTableDTO>>(cars);
         }
 
         public async Task<List<CarDTO>> GetAllCarsAsync()

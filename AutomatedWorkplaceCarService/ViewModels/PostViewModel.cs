@@ -1,6 +1,6 @@
-﻿namespace AutomatedWorkplaceCarService.WEB.Models
+﻿namespace AutomatedWorkplaceCarService.WEB.ViewModels
 {
-    public class PostModel
+    public class PostViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using AutomatedWorkplaceCarService.WEB.Models;
+using AutomatedWorkplaceCarService.WEB.ViewModels;
 using FluentValidation;
 using AutomatedWorkplaceCarService.WEB.Infrastructure.Validators;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
@@ -30,14 +30,18 @@ builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ITransmissionService, TransmissionService>();
 builder.Services.AddScoped<IImageService, ImageService>();
-/*services.AddTransient<IUnitOfWork, EFUnitOfWork>();*/
+builder.Services.AddScoped<IServiceService, ServiceService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-//typeof(UserMappingProfile), typeof(ClientMappingProfile), typeof(EmployeeMappingProfile), typeof(PostMappingProfile)
+
 builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddScoped<IValidator<ClientModel>, ClientModelValidator>();
-builder.Services.AddScoped<IValidator<AuthenticationModel>, AuthenticationModelValidator>();
+builder.Services.AddScoped<IValidator<ClientViewModel>, ClientModelValidator>();
+builder.Services.AddScoped<IValidator<AuthenticationViewModel>, AuthenticationModelValidator>();
 builder.Services.AddScoped<IValidator<CreateCarDTO>, CarValidator>();
-builder.Services.AddScoped<IValidator<EmployeeModel>, EmployeeModelValidator>();
+builder.Services.AddScoped<IValidator<EmployeeViewModel>, EmployeeModelValidator>();
+builder.Services.AddScoped<IValidator<CreateApplicationViewModel>, CreateApplicationModelValidator>();
 
 builder.Services.AddRazorPages();
 

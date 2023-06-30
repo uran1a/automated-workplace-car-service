@@ -1,7 +1,7 @@
 using AutoMapper;
 using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
-using AutomatedWorkplaceCarService.WEB.Models;
+using AutomatedWorkplaceCarService.WEB.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,10 +17,10 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
             _mapper = mapper;
         }
         [BindProperty]
-        public EmployeeModel Employee { get; set; } 
+        public EmployeeViewModel Employee { get; set; } 
         public async Task<IActionResult> OnGet(int id)
         {
-            Employee = _mapper.Map<EmployeeModel>(await _adminService.GetEmployeeAsync(id));
+            Employee = _mapper.Map<EmployeeViewModel>(await _adminService.GetEmployeeAsync(id));
             if(Employee == null)
                 return RedirectToPage("/NotFound");
             return Page();  

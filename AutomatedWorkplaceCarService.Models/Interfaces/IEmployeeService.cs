@@ -2,8 +2,8 @@
 
 namespace AutomatedWorkplaceCarService.BLL.Interfaces
 {
-    public interface IServiceService
+    public interface IEmployeeService
     {
-        Task<List<ServiceDTO>> GetAvailableServices();
+        Task<List<EmployeeDTO>> GetEmployeesAsync(int serviceId);
     }
 }

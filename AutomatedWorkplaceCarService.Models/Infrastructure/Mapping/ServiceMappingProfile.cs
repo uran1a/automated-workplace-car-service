@@ -4,11 +4,11 @@ using AutomatedWorkplaceCarService.DAL.Entities;
 
 namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
 {
-    public class ApplicationMappingProfile : Profile
+    public class ServiceMappingProfile : Profile
     {
-        public ApplicationMappingProfile()
+        public ServiceMappingProfile()
         {
-            CreateMap<Application, ApplicationDTO>().ReverseMap();
+            CreateMap<Service, ServiceDTO>();
         }
     }
 }

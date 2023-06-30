@@ -1,6 +1,6 @@
-﻿namespace AutomatedWorkplaceCarService.WEB.Models
+﻿namespace AutomatedWorkplaceCarService.WEB.ViewModels
 {
-    public class UserModel
+    public class UserViewModel
     {
         public int Id { get; set; }
         public string? Surname { get; set; }

@@ -1,9 +1,9 @@
-﻿using AutomatedWorkplaceCarService.WEB.Models;
+﻿using AutomatedWorkplaceCarService.WEB.ViewModels;
 using FluentValidation;
 
 namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Validators
 {
-    public class AuthenticationModelValidator : AbstractValidator<AuthenticationModel>
+    public class AuthenticationModelValidator : AbstractValidator<AuthenticationViewModel>
     {
         public AuthenticationModelValidator()
         {

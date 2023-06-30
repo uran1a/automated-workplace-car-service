@@ -4,11 +4,11 @@ using AutomatedWorkplaceCarService.WEB.ViewModels;
 
 namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Mapping
 {
-    public class PostMappingProfile : Profile
+    public class ApplicationMappingProfile : Profile
     {
-        public PostMappingProfile()
+        public ApplicationMappingProfile()
         {
-            CreateMap<PostViewModel, PostDTO>().ReverseMap();
+            CreateMap<CreateApplicationViewModel, ApplicationDTO>();
         }
     }
 }

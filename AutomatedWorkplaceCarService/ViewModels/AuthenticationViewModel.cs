@@ -1,6 +1,6 @@
-﻿namespace AutomatedWorkplaceCarService.WEB.Models
+﻿namespace AutomatedWorkplaceCarService.WEB.ViewModels
 {
-    public class AuthenticationModel
+    public class AuthenticationViewModel
     {
         public string? Login { get; set; }
         public string? Password { get; set; }

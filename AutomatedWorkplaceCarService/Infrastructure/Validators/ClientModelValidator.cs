@@ -1,10 +1,10 @@
-﻿using AutomatedWorkplaceCarService.WEB.Models;
+﻿using AutomatedWorkplaceCarService.WEB.ViewModels;
 using FluentValidation;
 using System.Text.RegularExpressions;
 
 namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Validators
 {
-    public class ClientModelValidator : AbstractValidator<ClientModel>
+    public class ClientModelValidator : AbstractValidator<ClientViewModel>
     {
         public ClientModelValidator()
         {

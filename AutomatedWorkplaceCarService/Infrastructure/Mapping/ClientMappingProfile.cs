@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutomatedWorkplaceCarService.BLL.DTOs;
-using AutomatedWorkplaceCarService.WEB.Models;
+using AutomatedWorkplaceCarService.WEB.ViewModels;
 
 namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Mapping
 {
@@ -8,7 +8,7 @@ namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Mapping
     {
         public ClientMappingProfile()
         {
-            CreateMap<ClientDTO, ClientModel>()
+            CreateMap<ClientDTO, ClientViewModel>()
                  .ForMember(
                     dest => dest.Id,
                     opt => opt.MapFrom(src => src.Id))
