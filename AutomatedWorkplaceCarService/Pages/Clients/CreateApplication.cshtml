@@ -47,7 +47,7 @@
 						<h3 class="text-center fw-bold"><span class="text-danger">2.</span> Выбор услуги</h3>
 						<span asp-validation-for="Application.ServiceId" class="text-danger"></span>
 						<select asp-for="Application.ServiceId" class="form-select mt-3" onchange="this.form.submit();">
-							<option selected>Услуга</option>
+							<option value="-1" selected>Услуга</option>
 							@if(Model.Services != null)
 							{
 								@foreach (var service in Model.Services)
@@ -57,7 +57,7 @@
 							}
 						</select>
 						<div class="form-group mt-3 mb-3 p-0">
-							<label for="exampleFormControlTextarea1">Описание проблемы</label>
+							<label for="exampleFormControlTextarea1" class="mb-1">Описание проблемы: </label><br />
 							<span asp-validation-for="Application.Descriptions" class="text-danger"></span>
 							<textarea asp-for="Application.Descriptions" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
 						</div>
@@ -68,12 +68,12 @@
 						<h3 class="text-center fw-bold"><span class="text-danger">3.</span> Выбор мастера</h3>
 						<span asp-validation-for="Application.EmployeeId" class="text-danger"></span>
 						<select asp-for="Application.EmployeeId" class="form-select mt-3 mb-5">
-							<option selected>Мастер</option>
+							<option value="-1" selected>Мастер</option>
 							@if(Model.Employees != null)
 							{
 								@foreach (var item in Model.Employees)
 								{
-									<option value="@item.Id">@item.Name</option>
+									<option value="@item.Id">@item.Post.Name | @item.Surname @item.Name @item.Patronymic</option>
 								}
 							}
 						</select>

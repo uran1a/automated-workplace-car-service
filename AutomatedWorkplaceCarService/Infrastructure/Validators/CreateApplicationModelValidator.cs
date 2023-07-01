@@ -12,7 +12,6 @@ namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Validators
                 .WithMessage("Подробнее опишите услуги, которую требуется оказать автомобилю");
             this.RuleFor(x => x.CarId)
                 .NotEmpty()
-                .GreaterThanOrEqualTo(0)
                 .WithMessage("Выберите автомобиль, которому трубуется оказать услугу");
             this.RuleFor(x => x.ServiceId)
                 .NotEmpty()

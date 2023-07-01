@@ -25,6 +25,16 @@ namespace AutomatedWorkplaceCarService.BLL.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task AddEvaluationApplicationAsync(EvaluationApplicationDTO evaluationApplicationDTO)
+        {
+            await _context.Applications
+                .Where(a => a.Id == evaluationApplicationDTO.Id)
+                .ExecuteUpdateAsync(s => s
+                    .SetProperty(a => a.StartWork, e => e.StartWork)
+                    .SetProperty(a => a.EndWork, e => e.EndWork)
+                    .SetProperty(a => a.Amount, e => e.Amount)
+                    .SetProperty(a => a.StageId, e => 2));
+        }
         public async Task<ApplicationDTO> GetApplication(int id)
         {
             var application = await _context.Applications

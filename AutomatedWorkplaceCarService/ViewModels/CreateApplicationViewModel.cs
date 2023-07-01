@@ -7,6 +7,6 @@
         public int ClientId { get; set; }
         public int EmployeeId { get; set; }
         public int ServiceId { get; set; }
-        public int CarId { get; set; }
+        public int? CarId { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace AutomatedWorkplaceCarService.BLL.Services
                 .Where(s => s.ServiceId == serviceId)
                 .Select(s => s.PostId).ToListAsync();
             var employees = await _context.Employees
+                .Include(e => e.Post)
                 .Where(e => e.PostId != null)
                 .Where(e => postIds.Contains((int)e.PostId!)).ToListAsync();
             return _mapper.Map<List<EmployeeDTO>>(employees);

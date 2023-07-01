@@ -14,6 +14,7 @@ namespace AutomatedWorkplaceCarService.BLL.Interfaces
         Task<List<ApplicationCardDTO>> GetApplications(int clientId);
         Task<List<ApplicationCardDTO>> GetApplications(int employeeId, int stageId);
         Task<ApplicationDTO> GetApplication(int id);
+        Task AddEvaluationApplicationAsync(EvaluationApplicationDTO evaluationApplicationDTO);
 
     }
 }

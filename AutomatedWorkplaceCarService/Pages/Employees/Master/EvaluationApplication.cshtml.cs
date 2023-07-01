@@ -1,3 +1,5 @@
+using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.DTOs.Application;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.WEB.ViewModels;
@@ -9,9 +11,11 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Master
     public class EvaluationApplicationModel : PageModel
     {
         private readonly IApplicationService _applicationService;
-        public EvaluationApplicationModel(IApplicationService applicationService)
+        private readonly IMapper _mapper;
+        public EvaluationApplicationModel(IApplicationService applicationService, IMapper mapper)
         {
             _applicationService = applicationService;
+            _mapper = mapper;
         }
         public ApplicationDTO Application { get; set; }
         [BindProperty]
@@ -25,8 +29,10 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Master
         {
             if (ModelState.IsValid)
             {
-
-                return Page();
+                var evaluationApplicationDTO = _mapper.Map<EvaluationApplicationDTO>(EvaluationApplication);
+                await _applicationService.AddEvaluationApplicationAsync(evaluationApplicationDTO);
+                TempData["SuccessMessage"] = $"Заявка отправлена на подтверждение клиенту!";
+                return RedirectToPage("/Employees/Master/Applications");
             }
             Application = await _applicationService.GetApplication(EvaluationApplication.Id);
             return Page();
