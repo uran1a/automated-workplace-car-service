@@ -3,6 +3,7 @@ using System;
 using AutomatedWorkplaceCarService.DAL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AutomatedWorkplaceCarService.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230701181526_UpdateImagesTable")]
+    partial class UpdateImagesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("EndWork")
-                        .HasColumnType("Date");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("integer");
@@ -56,7 +59,7 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("StartWork")
-                        .HasColumnType("Date");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

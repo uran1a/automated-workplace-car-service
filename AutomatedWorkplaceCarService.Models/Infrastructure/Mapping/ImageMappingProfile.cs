@@ -21,10 +21,7 @@ namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
                     opt => opt.MapFrom(src => src.Content))
                  .ForMember(
                     dest => dest.CarId,
-                    opt => opt.MapFrom(src => src.CarId))
-                 .ForMember(
-                    dest => dest.ApplicationId,
-                    opt => opt.MapFrom(src => src.ApplicationId));
+                    opt => opt.MapFrom(src => src.CarId));
             CreateMap<Image, ImageDTO>();
                  
         }

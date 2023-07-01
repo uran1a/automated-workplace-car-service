@@ -58,7 +58,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Clients
                     };
                     Car.OwnerId = int.Parse(User.Identity.Name);
                     var newCarDTO = await _carService.Add(Car);
-                    await _imageService.AddImages(new List<CreateImageDTO>() { imageDTO }, newCarDTO.Id, true);
+                    await _imageService.AddImages(new List<CreateImageDTO>() { imageDTO }, newCarDTO.Id);
 
                     TempData["SuccessMessage"] = $"ƒобавление автомобил€ {newCarDTO.Brand.Name} {newCarDTO.Model.Name} прошло успешно!";
                     return RedirectToPage("/Clients/Cars");

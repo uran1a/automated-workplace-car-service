@@ -4,6 +4,6 @@ namespace AutomatedWorkplaceCarService.BLL.Interfaces
 {
     public interface IImageService
     {
-        Task AddImages(List<CreateImageDTO> images, int id, bool isCar);
+        Task AddImages(List<CreateImageDTO> images, int id);
     }
 }

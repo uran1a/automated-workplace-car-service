@@ -7,7 +7,6 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
     {
         private ApplicationDbContext _context;
         public IApplicationRepository applicationRepository;
-        public ICarRepository carRepository;
         public IClientRepository clientRepository;
         public IEmployeeRepository employeeRepository;
         public IUserRepository userRepository;
@@ -31,15 +30,6 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
                 return applicationRepository;
             }
         }
-        public ICarRepository Cars
-        {
-            get
-            {
-                if(carRepository == null)
-                    carRepository = new CarRepository(_context);
-                return carRepository;
-            }
-        }
         public IClientRepository Clients
         {
             get
@@ -49,7 +39,6 @@ namespace AutomatedWorkplaceCarService.DAL.Repositories
                 return clientRepository;
             }
         }
-        
         public IEmployeeRepository Employees
         {
             get

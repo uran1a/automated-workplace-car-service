@@ -27,14 +27,25 @@ namespace AutomatedWorkplaceCarService.BLL.Services
 
         public async Task AddEvaluationApplicationAsync(EvaluationApplicationDTO evaluationApplicationDTO)
         {
-            await _context.Applications
-                .Where(a => a.Id == evaluationApplicationDTO.Id)
-                .ExecuteUpdateAsync(s => s
-                    .SetProperty(a => a.StartWork, e => e.StartWork)
-                    .SetProperty(a => a.EndWork, e => e.EndWork)
-                    .SetProperty(a => a.Amount, e => e.Amount)
-                    .SetProperty(a => a.StageId, e => 2));
+            var application = await _context.Applications.FirstOrDefaultAsync(a => a.Id == evaluationApplicationDTO.Id);
+            if (application == null) return;
+            application.StartWork = evaluationApplicationDTO.StartWork;
+            application.EndWork = evaluationApplicationDTO.EndWork;
+            application.Amount = evaluationApplicationDTO.Amount;
+            application.StageId = 2;
+
+            _context.Applications.Update(application);
+            await _context.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var application = await _context.Applications.FirstOrDefaultAsync(a => a.Id == id);
+            if (application == null) return;
+            _context.Applications.Remove(application);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<ApplicationDTO> GetApplication(int id)
         {
             var application = await _context.Applications
@@ -48,6 +59,7 @@ namespace AutomatedWorkplaceCarService.BLL.Services
                 .Include(a => a.Car)
                 .ThenInclude(c => c.Images)
                 .Include(a => a.Stage)
+                .Include(a => a.Employee)
                 .FirstOrDefaultAsync(a => a.Id == id);
             return _mapper.Map<ApplicationDTO>(application);
         }
@@ -82,6 +94,14 @@ namespace AutomatedWorkplaceCarService.BLL.Services
                 .Include(a => a.Stage)
                 .ToListAsync();
             return _mapper.Map<List<ApplicationCardDTO>>(applications);
+        }
+
+        public async Task MakeApplicationConfirmed(int id)
+        {
+            await _context.Applications
+                .Where(a => a.Id == id)
+                .ExecuteUpdateAsync(s => s
+                    .SetProperty(a => a.StageId, e => 3));
         }
     }
 }

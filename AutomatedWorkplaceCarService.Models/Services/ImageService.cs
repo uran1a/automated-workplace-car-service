@@ -13,20 +13,11 @@ namespace AutomatedWorkplaceCarService.BLL.Services
         {
             _db = uow;
         }
-        public async Task AddImages(List<CreateImageDTO> images, int id, bool isCar)
+        public async Task AddImages(List<CreateImageDTO> images, int id)
         {
             foreach(var imageDTO in images)
             {
-                if (isCar)
-                {
-                    imageDTO.CarId = id;
-                    imageDTO.ApplicationId = null;
-                }
-                else
-                {
-                    imageDTO.CarId = null;
-                    imageDTO.ApplicationId = id;
-                }
+                imageDTO.CarId = id;
                 _db.Images.Add(Mapping.Mapper.Map<Image>(imageDTO));
                 await _db.SaveAsync();  
             }

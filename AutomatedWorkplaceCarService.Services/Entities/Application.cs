@@ -1,10 +1,14 @@
-﻿namespace AutomatedWorkplaceCarService.DAL.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AutomatedWorkplaceCarService.DAL.Entities
 {
     public class Application
     {
         public int Id { get; set; }
-        public DateTime? StartWork { get; set; }
-        public DateTime? EndWork { get; set; }
+        [Column(TypeName = "Date")]
+        public DateTime StartWork { get; set; }
+        [Column(TypeName = "Date")]
+        public DateTime EndWork { get; set; }
         public int Amount { get; set; }
         public string Descriptions { get; set; }
         public int StageId { get; set; }

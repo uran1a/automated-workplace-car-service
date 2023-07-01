@@ -67,20 +67,18 @@
                             <label class="mb-1">Период оказания услуги:</label>
                             <div class="row justify-content-center">
                                 <div class="col">
-                                    <input asp-for="EvaluationApplication.StartWork" id="startDate" class="form-control" min="2023-07-01" type="date" />
-                                    <span id="startDateSelected"></span>
+                                    <input type="date" asp-for="EvaluationApplication.StartWork" id="startDate" class="form-control" min="2023-07-01" />
                                     <span asp-validation-for="EvaluationApplication.StartWork" class="text-danger"></span>
                                 </div>
                                 <div class="col">
-                                    <input asp-for="EvaluationApplication.EndWork" id="endDate" class="form-control" type="date" />
-                                    <span id="endDateSelected"></span>
+                                    <input type="date" asp-for="EvaluationApplication.EndWork" id="endDate" class="form-control" />
                                     <span asp-validation-for="EvaluationApplication.EndWork" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <div class="form-floating mt-3">
-                                        <input asp-for="EvaluationApplication.Amount" name="applicationAmount" class="form-control" placeholder="Сумма за услугу">
+                                        <input asp-for="EvaluationApplication.Amount" class="form-control" placeholder="Сумма за услугу">
                                         <label>Сумма за услугу (руб.)<span class="text-danger">*</span></label>
                                         <span asp-validation-for="EvaluationApplication.Amount" class="text-danger"></span>
                                     </div>

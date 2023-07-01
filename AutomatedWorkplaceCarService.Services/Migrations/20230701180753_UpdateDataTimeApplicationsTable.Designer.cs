@@ -3,6 +3,7 @@ using System;
 using AutomatedWorkplaceCarService.DAL.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AutomatedWorkplaceCarService.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230701180753_UpdateDataTimeApplicationsTable")]
+    partial class UpdateDataTimeApplicationsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("EndWork")
-                        .HasColumnType("Date");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("integer");
@@ -56,7 +59,7 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("StartWork")
-                        .HasColumnType("Date");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -138,7 +141,10 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CarId")
+                    b.Property<int?>("ApplicationId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("CarId")
                         .HasColumnType("integer");
 
                     b.Property<byte[]>("Content")
@@ -154,6 +160,8 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
 
                     b.HasIndex("CarId");
 
@@ -506,11 +514,15 @@ namespace AutomatedWorkplaceCarService.DAL.Migrations
 
             modelBuilder.Entity("AutomatedWorkplaceCarService.DAL.Entities.Image", b =>
                 {
+                    b.HasOne("AutomatedWorkplaceCarService.DAL.Entities.Application", "Application")
+                        .WithMany()
+                        .HasForeignKey("ApplicationId");
+
                     b.HasOne("AutomatedWorkplaceCarService.DAL.Entities.Car", "Car")
                         .WithMany("Images")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CarId");
+
+                    b.Navigation("Application");
 
                     b.Navigation("Car");
                 });
