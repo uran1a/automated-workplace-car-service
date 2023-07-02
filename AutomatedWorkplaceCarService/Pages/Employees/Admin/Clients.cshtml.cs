@@ -8,17 +8,17 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Users.Employees.Admin
 {
     public class ClientsModel : PageModel
     {
-        private readonly IAdminService _adminService;
+        private readonly IClientService _clientService;
         private readonly IMapper _mapper;
-        public ClientsModel(IAdminService adminservice, IMapper mapper)
+        public ClientsModel(IClientService clientService, IMapper mapper)
         {
-            _adminService = adminservice;
+            _clientService = clientService;
             _mapper = mapper;
         }
         public ICollection<ClientViewModel> Clients { get; set; }
         public void OnGet()
         {
-            var clientDTOs = _adminService.GetAllClientsAsync().Result;
+            var clientDTOs = _clientService.GetAllClientsAsync().Result;
             Clients = _mapper.Map<List<ClientViewModel>>(clientDTOs);
         }
     }

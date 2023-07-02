@@ -11,11 +11,13 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
 {
     public class AuthenticationModel : PageModel
     {
-        private readonly IAuthentificationService _authentificationService;
+        private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
         private readonly IMapper _mapper;
-        public AuthenticationModel(IAuthentificationService authentificationService, IMapper mapper)
+        public AuthenticationModel(IUserService userService, IRoleService roleService, IMapper mapper)
         {
-            _authentificationService = authentificationService;
+            _userService = userService;
+            _roleService = roleService;
             _mapper = mapper;
         }
         [BindProperty]
@@ -25,16 +27,16 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
         {
             if (ModelState.IsValid)
             {
-                var userDTO = await _authentificationService.GetUserAsync(Authentication.Login, Authentication.Password);
+                var userDTO = await _userService.GetUserAsync(Authentication.Login, Authentication.Password);
                 var user = _mapper.Map<UserViewModel>(userDTO);
                 if (user != null)
                 {
                     await Authenticate(user);
 
-                    var roleDTO = await _authentificationService.GetRoleAsync(user.RoleId);
+                    var roleDTO = await _roleService.GetRoleAsync(user.RoleId);
                     if(roleDTO == null)
                         return RedirectToPage("/Error");
-                    var availableRoles = await _authentificationService.GetAllRolesAsync();
+                    var availableRoles = await _roleService.GetAllRolesAsync();
 
                     if (user.RoleId == availableRoles["client"])
                         return RedirectToPage("/Clients/Applications");

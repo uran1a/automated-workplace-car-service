@@ -13,11 +13,14 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
 {
     public class RegistrationModel : PageModel
     {
-        private readonly IAuthentificationService _authentificationService;
         private readonly IMapper _mapper;
-        public RegistrationModel(IAuthentificationService authentificationService, IMapper mapper)
+        private readonly IUserService _userService;
+        private readonly IClientService _clientService;
+
+        public RegistrationModel(IUserService userService, IClientService clientService, IMapper mapper)
         {
-            _authentificationService = authentificationService;
+            _userService = userService;
+            _clientService = clientService;
             _mapper = mapper;
         }
         [BindProperty]
@@ -29,11 +32,11 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Account
             {
                 if (Client != null)
                 {
-                    var user = _mapper.Map<UserViewModel>(await _authentificationService.GetUserAsync(Client.Login));
+                    var user = _mapper.Map<UserViewModel>(await _userService.GetUserAsync(Client.Login));
                     if (user == null)
                     {
                         var clientDTO = _mapper.Map<ClientDTO>(Client);
-                        var newClient = await _authentificationService.AddClientAsync(clientDTO);
+                        var newClient = await _clientService.AddClientAsync(clientDTO);
                         if(newClient == null)
                             return RedirectToPage("/Error");
                         await Authenticate(_mapper.Map<ClientViewModel>(newClient));

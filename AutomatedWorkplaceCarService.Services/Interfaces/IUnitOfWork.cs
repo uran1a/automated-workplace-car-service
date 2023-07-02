@@ -10,10 +10,6 @@ namespace AutomatedWorkplaceCarService.DAL.Interfaces
     public interface IUnitOfWork
     {
         IApplicationRepository Applications { get; }
-        IClientRepository Clients { get; }
-        IEmployeeRepository Employees { get; }
-        IUserRepository Users { get; }
-        IRoleRepository Roles { get; }
         IPostRepository Posts { get; }
         IBrandRepository Brands { get; }
         IModelRepository Models { get; }

@@ -9,25 +9,25 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
 {
     public class DeleteEmployeeModel : PageModel
     {
-        private readonly IAdminService _adminService;
+        private readonly IEmployeeService _employeeService;
         private readonly IMapper _mapper;
-        public DeleteEmployeeModel(IAdminService adminService, IMapper mapper)
+        public DeleteEmployeeModel(IEmployeeService employeeService, IMapper mapper)
         {
-            _adminService = adminService;
+            _employeeService = employeeService;
             _mapper = mapper;
         }
         [BindProperty]
         public EmployeeViewModel Employee { get; set; } 
         public async Task<IActionResult> OnGet(int id)
         {
-            Employee = _mapper.Map<EmployeeViewModel>(await _adminService.GetEmployeeAsync(id));
+            Employee = _mapper.Map<EmployeeViewModel>(await _employeeService.GetEmployeeAsync(id));
             if(Employee == null)
                 return RedirectToPage("/NotFound");
             return Page();  
         }
         public async Task<IActionResult> OnPost()
         {
-            var deletedEmployee = await _adminService.DeleteEmployeeAsync(Employee.Id);
+            var deletedEmployee = await _employeeService.DeleteEmployeeAsync(Employee.Id);
             if (deletedEmployee == null)
                 return RedirectToPage("/NotFound");
             return RedirectToPage("/Employees/Admin/Employees");

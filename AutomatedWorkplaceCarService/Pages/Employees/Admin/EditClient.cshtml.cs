@@ -9,11 +9,11 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
 {
     public class EditClientModel : PageModel
     {
-        private readonly IAdminService _adminService;
+        private readonly IClientService _clientService;
         private readonly IMapper _mapper;
-        public EditClientModel(IAdminService adminService, IMapper mapper)
+        public EditClientModel(IClientService clientService, IMapper mapper)
         {
-            _adminService = adminService;
+            _clientService = clientService;
             _mapper = mapper;
         }
         [BindProperty]
@@ -22,7 +22,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
         {
             if (id.HasValue)
             {
-                Client = _mapper.Map<ClientViewModel>(await _adminService.GetClientAsync(id.Value));
+                Client = _mapper.Map<ClientViewModel>(await _clientService.GetClientAsync(id.Value));
                 if (Client == null)
                     return RedirectToPage("/Error");
             }
@@ -37,7 +37,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
                 if (Client.Id > 0)
                 {
                     var clientDTO = _mapper.Map<ClientDTO>(Client);
-                    Client = _mapper.Map<ClientViewModel>(await _adminService.UpdateClientAsync(clientDTO));
+                    Client = _mapper.Map<ClientViewModel>(await _clientService.UpdateClientAsync(clientDTO));
                     if (Client == null)
                         return RedirectToPage("/Error");
                     TempData["SuccessMessage"] = $"Обновление сотрудника {Client.Name} прошло успешно!";
@@ -45,7 +45,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
                 else
                 {
                     var clientDTO = _mapper.Map<ClientDTO>(Client);
-                    Client = _mapper.Map<ClientViewModel>(await _adminService.AddClientAsync(clientDTO));
+                    Client = _mapper.Map<ClientViewModel>(await _clientService.AddClientAsync(clientDTO));
                     if (Client == null)
                         return RedirectToPage("/Error");
                     TempData["SuccessMessage"] = $"Создание сотрудника {Client.Name} прошло успешно!";

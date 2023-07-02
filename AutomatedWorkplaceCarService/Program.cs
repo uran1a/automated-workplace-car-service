@@ -23,9 +23,13 @@ builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 });
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
+
 builder.Services.AddScoped<IUnitOfWork, EFUnitOfWork>();
-builder.Services.AddScoped<IAuthentificationService, AuthentificationService>();
-builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ITransmissionService, TransmissionService>();
