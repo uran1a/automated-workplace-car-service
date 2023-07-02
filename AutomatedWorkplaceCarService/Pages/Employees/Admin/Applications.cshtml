@@ -1,0 +1,47 @@
+﻿@page
+@model AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin.ApplicationsModel
+@{
+	ViewData["Title"] = "Заявки";
+}
+<div class="row">
+	<h1>Клиенты</h1>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Период работы</th>
+				<th scope="col">Цена (руб.)</th>
+				<th scope="col">Индив.номер Автомобиля</th>
+				<th scope="col">Автомобиль</th>
+				<th scope="col">Индив.номер Мастера</th>
+				<th scope="col">Мастер</th>
+				<th scope="col">Индив.номер Клиента</th>
+				<th scope="col">Клиент</th>
+				<th scope="col">Статус</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			@*@if(Model.Clients != null){
+				@foreach (var item in Model.Clients)
+				{
+					<tr>
+						<td>@item.Id</td>
+						<td>@item.Surname @item.Name @item.Patronymic</td>
+						<td>@item.Login</td>
+						<td>@item.Password</td>
+						<td>@item.MobilePhone</td>
+						<td>
+							<a class="btn btn-primary" asp-route-id="@item.Id" asp-page="/Employees/Admin/EditClient">Изменение</a>
+						</td>
+						<td>
+							<a class="btn btn-danger" asp-route-id="@item.Id" asp-page="/Employees/Admin/DeleteClient">Удаление</a>
+						</td>
+					</tr>
+				}
+			}*@
+		</tbody>
+	</table>
+	<a class="btn btn-primary" asp-page="/Employees/Admin/EditClient">Добавить</a>
+</div>

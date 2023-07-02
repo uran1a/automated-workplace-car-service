@@ -1,9 +1,8 @@
 ﻿namespace AutomatedWorkplaceCarService.WEB.ViewModels
 {
-    public class EmployeeViewModel : UserViewModel
+    public class EmployeeProfileViewModel : UserViewModel
     {
         public int? PostId { get; set; }
         public string? PostName { get; set; }
-        public int? CountApplication { get; set; }
     }
 }

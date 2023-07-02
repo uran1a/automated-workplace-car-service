@@ -43,7 +43,9 @@ namespace AutomatedWorkplaceCarService.BLL.Services
 
 		public async Task<List<EmployeeDTO>> GetAllEmployeesAsync(int id)
 		{
-            var employees = await _context.Employees.ToListAsync();
+            var employees = await _context.Employees
+                .Include(e => e.Post)
+                .Include(e => e.Applications).ToListAsync();
             if (employees == null) employees = new List<Employee>();
             else employees = employees.Where(e => e.Id != id).ToList();
             return _mapper.Map<List<EmployeeDTO>>(employees);

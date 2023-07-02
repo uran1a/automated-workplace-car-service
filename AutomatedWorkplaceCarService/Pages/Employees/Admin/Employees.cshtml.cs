@@ -20,7 +20,8 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
         public ICollection<PostViewModel> Posts { get; set; } 
         public async Task<IActionResult> OnGetAsync()
         {
-            Employees = _mapper.Map<List<EmployeeViewModel>>(_employeeService.GetAllEmployeesAsync(int.Parse(User.Identity.Name)));
+            var employeeDTOs = await _employeeService.GetAllEmployeesAsync(int.Parse(User.Identity.Name));
+            Employees = _mapper.Map<List<EmployeeViewModel>>(employeeDTOs);
             return Page();
         }
     }

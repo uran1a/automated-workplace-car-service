@@ -13,6 +13,7 @@
 				<th scope="col">Логин</th>
 				<th scope="col">Пароль</th>
 				<th scope="col">Пост</th>
+				<th scope="col">Кол-во заявок</th>
 				<th scope="col"></th>
 				<th scope="col"></th>
 			</tr>
@@ -27,6 +28,7 @@
 						<td>@item.Login</td>
 						<td>@item.Password</td>
 						<td>@item.PostName</td>
+						<td>@item.CountApplication</td>
 						<td>
 							<a class="btn btn-primary" asp-route-id="@item.Id" asp-page="/Employees/Admin/EditEmployee">Изменение</a>
 						</td>

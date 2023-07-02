@@ -10,11 +10,11 @@ namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Mapping
         {
             CreateMap<EmployeeDTO, EmployeeViewModel>()
                 .ForMember(
-                    dest => dest.PostId,
-                    opt => opt.MapFrom(src => src.PostId))
-                .ForMember(
                     dest => dest.PostName,
-                    opt => opt.MapFrom(src => src.Post.Name));
+                    opt => opt.MapFrom(src => src.Post.Name))
+                .ForMember(
+                    dest => dest.CountApplication,
+                    opt => opt.MapFrom(src => src.Applications.Count));
             CreateMap<EmployeeViewModel, EmployeeDTO>();
         }
     }

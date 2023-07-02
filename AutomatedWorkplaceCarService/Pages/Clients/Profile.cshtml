@@ -7,6 +7,8 @@
 	<div class="row justify-content-center mt-3">
 		<div class="col col-sm-8 col-lg-4">
 			<h1 class="text-center fw-bold">Персональные данные</h1>
+			<input type="hidden" asp-for="Client.Id" value="@Model.Client.Id" />
+			<input type="hidden" asp-for="Client.RoleId" value="@Model.Client.RoleId" />
 			<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
 			<div class="form-floating mt-3">
 				<input type="text" asp-for="Client.Login" value="@Model.Client.Login" class="form-control" placeholder="Логин">

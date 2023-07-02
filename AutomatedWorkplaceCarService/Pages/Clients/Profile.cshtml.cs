@@ -1,4 +1,5 @@
 using AutoMapper;
+using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.WEB.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,17 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Clients
         public async Task<IActionResult> OnGetAsync()
         {
             Client = _mapper.Map<ClientViewModel>(await _clientService.GetClientAsync(int.Parse(User!.Identity!.Name)));
+            return Page();
+        }
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (ModelState.IsValid)
+            {
+                var client = await _clientService.UpdateClientAsync(_mapper.Map<ClientDTO>(Client));
+
+                TempData["SuccessMessage"] = $"{client.Name} ваши персональные данные успешно обновлены!";
+                return RedirectToPage("/Clients/Applications");
+            }
             return Page();
         }
     }
