@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace AutomatedWorkplaceCarService.WEB.Infrastructure.Validators
 {
-    public class EvaluationApplicatonViewModelValidator : AbstractValidator<EvaluationApplicationViewModel>
+    public class EvaluationApplicatonModelValidator : AbstractValidator<EvaluationApplicationViewModel>
     {
-        public EvaluationApplicatonViewModelValidator()
+        public EvaluationApplicatonModelValidator()
         {
             this.RuleFor(x => x.StartWork)
                 .NotEmpty()

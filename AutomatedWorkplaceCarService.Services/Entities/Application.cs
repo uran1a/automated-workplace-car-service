@@ -21,5 +21,6 @@ namespace AutomatedWorkplaceCarService.DAL.Entities
         public Service Service { get; set; }
         public int CarId { get; set; }
         public Car Car { get; set; }
+        public string? WorkshopAddress { get; set; }
     }
 }

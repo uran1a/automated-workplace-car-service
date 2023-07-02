@@ -24,5 +24,6 @@ namespace AutomatedWorkplaceCarService.BLL.DTOs.Application
         public ServiceDTO Service { get; set; }
         public int CarId { get; set; }
         public CarDTO Car { get; set; }
+        public string? WorkshopAddress { get; set; }
     }
 }

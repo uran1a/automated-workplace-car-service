@@ -26,6 +26,26 @@ namespace AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping
                 .ForMember(
                     dest => dest.ImageCarContent,
                     opt => opt.MapFrom(src => src.Car.Images[0].Content));
+            CreateMap<Application, ApplicaitonMasterCardDTO>()
+                .ForMember(
+                    dest => dest.ServiceName,
+                    opt => opt.MapFrom(src => src.Service.Name))
+                .ForMember(
+                    dest => dest.StageName,
+                    opt => opt.MapFrom(src => src.Stage.Name))
+                .ForMember(
+                    dest => dest.ModelName,
+                    opt => opt.MapFrom(src => src.Car.Model.Name))
+                .ForMember(
+                    dest => dest.BrandName,
+                    opt => opt.MapFrom(src => src.Car.Brand.Name))
+                .ForMember(
+                    dest => dest.ClientFullName,
+                    opt => opt.MapFrom(src => src.Client.Surname + " " + src.Client.Name + " " + src.Client.Patronymic))
+                .ForMember(
+                    dest => dest.ImageCarContent,
+                    opt => opt.MapFrom(src => src.Car.Images[0].Content));
+
         }
     }
 }

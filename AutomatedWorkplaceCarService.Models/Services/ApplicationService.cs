@@ -38,6 +38,15 @@ namespace AutomatedWorkplaceCarService.BLL.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task CompleteApplication(int id, string workshopAddress)
+        {
+            await _context.Applications
+               .Where(a => a.Id == id)
+               .ExecuteUpdateAsync(s => s
+                   .SetProperty(a => a.StageId, e => 4)
+                   .SetProperty(a => a.WorkshopAddress, e => workshopAddress));
+        }
+
         public async Task DeleteAsync(int id)
         {
             var application = await _context.Applications.FirstOrDefaultAsync(a => a.Id == id);
@@ -60,6 +69,7 @@ namespace AutomatedWorkplaceCarService.BLL.Services
                 .ThenInclude(c => c.Images)
                 .Include(a => a.Stage)
                 .Include(a => a.Employee)
+                .ThenInclude(e => e.Post)
                 .FirstOrDefaultAsync(a => a.Id == id);
             return _mapper.Map<ApplicationDTO>(application);
         }
@@ -94,6 +104,22 @@ namespace AutomatedWorkplaceCarService.BLL.Services
                 .Include(a => a.Stage)
                 .ToListAsync();
             return _mapper.Map<List<ApplicationCardDTO>>(applications);
+        }
+
+        public async Task<List<ApplicaitonMasterCardDTO>> GetMasterApplications(int employeeId, int stageId)
+        {
+            var applications = await _context.Applications
+                .Where(a => a.EmployeeId == employeeId && a.StageId == stageId)
+                .Include(a => a.Service)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Brand)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Model)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Images)
+                .Include(a => a.Client)
+                .ToListAsync();
+            return _mapper.Map<List<ApplicaitonMasterCardDTO>>(applications);
         }
 
         public async Task MakeApplicationConfirmed(int id)

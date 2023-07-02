@@ -33,6 +33,7 @@ builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<IStageService, StageService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -42,7 +43,8 @@ builder.Services.AddScoped<IValidator<AuthenticationViewModel>, AuthenticationMo
 builder.Services.AddScoped<IValidator<CreateCarDTO>, CarValidator>();
 builder.Services.AddScoped<IValidator<EmployeeViewModel>, EmployeeModelValidator>();
 builder.Services.AddScoped<IValidator<CreateApplicationViewModel>, CreateApplicationModelValidator>();
-builder.Services.AddScoped<IValidator<EvaluationApplicationViewModel>, EvaluationApplicatonViewModelValidator>();
+builder.Services.AddScoped<IValidator<EvaluationApplicationViewModel>, EvaluationApplicatonModelValidator>();
+builder.Services.AddScoped<IValidator<CompleteApplicationViewModel>, CompleteApplicationModelValidator>();
 
 builder.Services.AddRazorPages();
 

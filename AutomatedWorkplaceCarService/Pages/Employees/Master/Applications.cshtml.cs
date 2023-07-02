@@ -17,13 +17,13 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Master
             _mapper = mapper;
         }
         [BindProperty]
-        public List<ApplicationCardDTO> PendingApplications { get; set; }
+        public List<ApplicaitonMasterCardDTO> PendingApplications { get; set; }
         [BindProperty]
-        public List<ApplicationCardDTO> ActiveApplications { get; set; }
+        public List<ApplicaitonMasterCardDTO> ActiveApplications { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
-            PendingApplications = await _applicationService.GetApplications(int.Parse(User.Identity!.Name!), 1);
-            ActiveApplications = await _applicationService.GetApplications(int.Parse(User.Identity!.Name!), 2);
+            PendingApplications = await _applicationService.GetMasterApplications(int.Parse(User.Identity!.Name!), 1);
+            ActiveApplications = await _applicationService.GetMasterApplications(int.Parse(User.Identity!.Name!), 3);
             return Page();
         }
     }
