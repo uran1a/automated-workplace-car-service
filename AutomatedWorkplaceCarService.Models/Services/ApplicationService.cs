@@ -55,6 +55,19 @@ namespace AutomatedWorkplaceCarService.BLL.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<ApplicationDTO>> GetAllApplicationsAsync()
+        {
+            var applications = await _context.Applications
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Brand)
+                .Include(a => a.Car)
+                .ThenInclude(c => c.Model)
+                .Include(a => a.Employee)
+                .Include(a => a.Client)
+                .Include(a => a.Stage).ToListAsync();
+            return _mapper.Map<List<ApplicationDTO>>(applications);
+        }
+
         public async Task<ApplicationDTO> GetApplication(int id)
         {
             var application = await _context.Applications
@@ -70,6 +83,7 @@ namespace AutomatedWorkplaceCarService.BLL.Services
                 .Include(a => a.Stage)
                 .Include(a => a.Employee)
                 .ThenInclude(e => e.Post)
+                .Include(a => a.Client)
                 .FirstOrDefaultAsync(a => a.Id == id);
             return _mapper.Map<ApplicationDTO>(application);
         }

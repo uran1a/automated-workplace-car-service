@@ -35,7 +35,7 @@ namespace AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin
                 var employee = await _employeeService.UpdateEmployeeAsync(_mapper.Map<EmployeeDTO>(Employee));
 
                 TempData["SuccessMessage"] = $"{employee.Name} ваши персональные данные успешно обновлены!";
-                return RedirectToPage("/Employees/Master/Applications");
+                return RedirectToPage("/Employees/Admin/Applications");
             }
             return Page();
         }

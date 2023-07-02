@@ -1,0 +1,113 @@
+﻿@page
+@model AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin.EditApplicationModel
+@{
+	ViewData["Title"] = "Создание заявки";
+}
+
+<h1 class="text-center">Создание заявку</h1>
+<form method="post">
+	<div class="row justify-content-around mt-3 ">
+		<div class="col-8">
+			<div class="row mb-3 p-3 border border-3 border-primary rounded ">
+				<div class="col">
+					<div asp-validation-summary="ModelOnly" class="text-danger text-center"></div>
+					<div class="row justify-content-center">
+						<div class="col">
+							<div class="text-center">
+								<h4 class="fw-bold">Клиент:</h4>
+							</div>
+						</div>
+						<div class="col">
+							<span asp-validation-for="Application.ClientId" class="text-danger"></span>
+							<select asp-for="Application.ClientId" class="form-select" onchange="this.form.submit();">
+								<option value="-1" selected>Клиент</option>
+								@if (Model.Clients != null)
+								{
+									@foreach (var item in Model.Clients)
+									{
+										<option value="@item.Id">@item.Id | @item.Surname @item.Name @item.Patronymic</option>
+									}
+								}
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row  mb-3 justify-content-center p-3 border border-3 border-primary rounded ">
+				<div class="col">
+					<div class="row justify-content-center">
+						<h3 class="text-center fw-bold"><span class="text-danger">1.</span> Выберите автомобиль</h3>
+					</div>
+					<span asp-validation-for="Application.CarId" class="text-danger"></span>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col"></th>
+								<th scope="col">Бренд</th>
+								<th scope="col">Модель</th>
+								<th scope="col">Трансмиссия</th>
+							</tr>
+						</thead>
+						<tbody>
+							@if(Model.Cars != null)
+							{
+								@foreach (var car in Model.Cars)
+								{
+									<tr>
+										<td><input type="radio" asp-for="Application.CarId" value="@car.Id"></td>
+										<td>@car.BrandName</td>
+										<td>@car.ModelName</td>
+										<td>@car.TransmissionName</td>
+									</tr>
+								}
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row gx-5">
+				<div class="col-6">
+					<div class="row justify-content-around mb-3 p-3 border border-3 border-primary rounded">
+
+						<h3 class="text-center fw-bold"><span class="text-danger">2.</span> Выбор услуги</h3>
+						<span asp-validation-for="Application.ServiceId" class="text-danger"></span>
+						<select asp-for="Application.ServiceId" class="form-select mt-3" onchange="this.form.submit();">
+							<option value="-1" selected>Услуга</option>
+							@if(Model.Services != null)
+							{
+								@foreach (var service in Model.Services)
+								{
+									<option value="@service.Id">@service.Name</option>
+								}
+							}
+						</select>
+						<div class="form-group mt-3 mb-3 p-0">
+							<label for="exampleFormControlTextarea1" class="mb-1">Описание проблемы: </label><br />
+							<span asp-validation-for="Application.Descriptions" class="text-danger"></span>
+							<textarea asp-for="Application.Descriptions" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="row  p-3 border border-3 border-primary rounded">
+						<h3 class="text-center fw-bold"><span class="text-danger">3.</span> Выбор мастера</h3>
+						<span asp-validation-for="Application.EmployeeId" class="text-danger"></span>
+						<select asp-for="Application.EmployeeId" class="form-select mt-3 mb-5">
+							<option value="-1" selected>Мастер</option>
+							@if(Model.Employees != null)
+							{
+								@foreach (var item in Model.Employees)
+								{
+									<option value="@item.Id">@item.Post.Name | @item.Surname @item.Name @item.Patronymic</option>
+								}
+							}
+						</select>
+						<div class="d-grid gap-2 mt-3 sticky-top ">
+							<button class="btn btn-primary fs-5">Отправить заявку</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
