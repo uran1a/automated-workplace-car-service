@@ -5,8 +5,6 @@ using FluentValidation;
 using AutomatedWorkplaceCarService.WEB.Infrastructure.Validators;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.BLL.Services;
-using AutomatedWorkplaceCarService.DAL.Interfaces;
-using AutomatedWorkplaceCarService.DAL.Repositories;
 using AutomatedWorkplaceCarService.DAL.EF;
 using FluentValidation.AspNetCore;
 using AutomatedWorkplaceCarService.WEB.Infrastructure.Mapping;
@@ -24,7 +22,6 @@ builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
 
-builder.Services.AddScoped<IUnitOfWork, EFUnitOfWork>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IUserService, UserService>();

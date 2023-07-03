@@ -4,7 +4,6 @@ using AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.DAL.EF;
 using AutomatedWorkplaceCarService.DAL.Entities;
-using AutomatedWorkplaceCarService.DAL.Interfaces;
 
 namespace AutomatedWorkplaceCarService.BLL.Services
 {

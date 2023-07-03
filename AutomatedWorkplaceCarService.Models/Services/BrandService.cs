@@ -2,23 +2,24 @@
 using AutomatedWorkplaceCarService.BLL.DTOs.Brand;
 using AutomatedWorkplaceCarService.BLL.Infrastructure.Mapping;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
-using AutomatedWorkplaceCarService.DAL.Interfaces;
+using AutomatedWorkplaceCarService.DAL.EF;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutomatedWorkplaceCarService.BLL.Services
 {
     public class BrandService : IBrandService
     {
-        private readonly IUnitOfWork _db;
+        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public BrandService(IUnitOfWork uow, IMapper mapper)
+        public BrandService(ApplicationDbContext context, IMapper mapper)
         {
-            _db = uow;
+            _context = context;
             _mapper = mapper;
         }
         public async Task<List<BrandDTO>> GetAllBrandsAsync()
         {
-            return _mapper.Map<List<BrandDTO>>(await _db.Brands.GetAllBrandsAsync());
+            return _mapper.Map<List<BrandDTO>>(await _context.Brands.Include(b => b.Models).ToListAsync());
         }
     }
 }
