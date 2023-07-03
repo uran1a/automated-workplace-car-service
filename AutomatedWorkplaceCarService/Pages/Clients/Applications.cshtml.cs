@@ -17,9 +17,11 @@ namespace AutomatedWorkplaceCarService.Pages.Clients
             _mapper = mapper;
         }
         public List<ApplicationCardDTO> Applications { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
-            Applications = await _applicationService.GetApplications(int.Parse(User.Identity!.Name!));
+            Applications = await _applicationService.SearchAsync(SearchTerm, int.Parse(User.Identity!.Name!));
             return Page();
         }
     }

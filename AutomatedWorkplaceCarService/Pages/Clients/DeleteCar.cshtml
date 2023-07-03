@@ -1,0 +1,25 @@
+﻿@page
+@model AutomatedWorkplaceCarService.WEB.Pages.Clients.DeleteCarModel
+@{
+	ViewData["Title"] = "Удаление автомобиля"; 
+}
+<h1 class="text-center mb-3">Подтверждение удаления автомобиля</h1>
+<div class="alert alert-danger">
+	<div class="row">
+		<div class="col-12 col-md-6 col-xl-4 offset-sm-0 offset-md-3 offset-xl-4">
+			<div class="text-center text-secondary">
+				<h4>Индивидуальный номер: <span class="text-primary">@Model.Car.Id</span></h4><hr />
+				<h4>Aвтомобиль: <span class="text-primary">@Model.Car.Brand.Name @Model.Car.Model.Name</span></h4><hr />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col text-center">
+			<h5>Вы уверены, что хотите удалить автомобиль - @Model.Car.Brand.Name @Model.Car.Model.Name?</h5>
+			<form method="post">
+				<button type="submit" class="btn btn-danger">Да</button>
+				<a class="btn btn-success" asp-page="/Employees/Admin/Cars">Нет</a>
+			</form>
+		</div>
+	</div>
+</div>

@@ -143,5 +143,17 @@ namespace AutomatedWorkplaceCarService.BLL.Services
                 .ExecuteUpdateAsync(s => s
                     .SetProperty(a => a.StageId, e => 3));
         }
+
+        public async Task<List<ApplicationCardDTO>> SearchAsync(string searchTerm, int clientId)
+        {
+            List<ApplicationCardDTO> applications = await this.GetApplications(clientId);
+            if (string.IsNullOrWhiteSpace(searchTerm))
+                return applications;
+            return applications
+                .Where(a => a.ModelName.ToLower().Contains(searchTerm.ToLower()) || 
+                    a.BrandName.ToLower().Contains(searchTerm.ToLower()) ||
+                    a.ServiceName.ToLower().Contains(searchTerm.ToLower())
+                ).ToList();
+        }
     }
 }

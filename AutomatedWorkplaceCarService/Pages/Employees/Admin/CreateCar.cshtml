@@ -1,5 +1,5 @@
 ﻿@page
-@model AutomatedWorkplaceCarService.WEB.Pages.Clients.CreateCarModel
+@model AutomatedWorkplaceCarService.WEB.Pages.Employees.Admin.CreateCarModel
 @{
 	ViewData["Title"] = "Добавление автомобиля";
 }
@@ -11,6 +11,13 @@
 			</div>
 			<div class="row">
 				<div class="col-4 ">
+					<select asp-for="Car.OwnerId" class="form-select mt-3">
+						<option selected value="-1">Клиент</option>
+						@foreach (var item in Model.Clients)
+						{
+						<option value="@item.Id">@item.Id | @item.Surname @item.Name @item.Patronymic</option>
+						}
+					</select>
 					<select asp-for="Car.BrandId" class="form-select mt-3" onchange="this.form.submit();">
 						<option selected value="-1">Бренд</option>
 						@foreach (var item in Model.Brands)

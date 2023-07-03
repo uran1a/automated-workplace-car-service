@@ -3,6 +3,14 @@
 @{
 	ViewData["Title"] = "Автомобили";
 }
+<form method="get" class="mt-2 mb-3">
+	<div class="input-group">
+		<input asp-for="SearchTerm" class="form-control me-2" type="search" placeholder="Бренд, модель, сервис...">
+		<div class="input-group-append">
+			<button type="submit" class="btn btn-outline-primary">Поиск</button>
+		</div>
+	</div>
+</form>
 <div class="row justify-content-center">
 	<div class="col">
 		<h1>Ваши автомобили</h1>
@@ -41,9 +49,7 @@
 						</p>
 					</div>
 					<div class="card-footer text-center">
-						<a asp-page="/Employees/Details" asp-route-Id="@car.Id" class="btn btn-success m-1 buttonShadow">View</a>
-						<a asp-page="/Employees/Edit" asp-route-Id="@car.Id" class="btn btn-primary m-1 buttonShadow">Edit</a>
-						<a asp-page="/Employees/Delete" asp-route-Id="@car.Id" class="btn btn-danger m-1 buttonShadow">Delete</a>
+						<a asp-page="/Clients/DeleteCar" asp-route-Id="@car.Id" class="btn btn-danger m-1">Удалить</a>
 					</div>
 				</div>
 			</div>

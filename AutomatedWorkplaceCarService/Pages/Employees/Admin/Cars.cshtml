@@ -17,7 +17,6 @@
 				<th scope="col">Клиент</th>
 				<th scope="col">Кол-во заявок</th>
 				<th scope="col"></th>
-				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,15 +33,12 @@
 						<td>@item.Owner.Surname @item.Owner.Name @item.Owner.Patronymic</td>
 						<td>@item.Applications.Count</td>
 						<td>
-							<a class="btn btn-primary" asp-route-id="@item.Id" asp-page="/Employees/Admin/EditClient">Изменение</a>
-						</td>
-						<td>
-							<a class="btn btn-danger" asp-route-id="@item.Id" asp-page="/Employees/Admin/DeleteClient">Удаление</a>
+							<a class="btn btn-danger" asp-route-id="@item.Id" asp-page="/Employees/Admin/DeleteCar">Удаление</a>
 						</td>
 					</tr>
-				}
+				} 
 			}
 		</tbody>
 	</table>
-	<a class="btn btn-primary" asp-page="/Employees/Admin/EditClient">Добавить</a>
+	<a class="btn btn-primary" asp-page="/Employees/Admin/CreateCar">Добавить</a>
 </div>
