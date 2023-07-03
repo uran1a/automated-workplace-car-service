@@ -22,11 +22,11 @@ namespace AutomatedWorkplaceCarService.BLL.Services
 
 		public async Task<ClientDTO?> AddClientAsync(ClientDTO clientDTO)
 		{
-			var cleint = _mapper.Map<Client>(clientDTO);
-			var role = _roleService.GetRoleAsync("client");
+			var client = _mapper.Map<Client>(clientDTO);
+			var role = await _roleService.GetRoleAsync("client");
 			if (role == null) return null;
-			cleint.RoleId = role.Id;
-			await _context.Clients.AddAsync(cleint);
+			client.RoleId = role.Id;
+			await _context.Clients.AddAsync(client);
 			await _context.SaveChangesAsync();
 			return clientDTO;
 		}

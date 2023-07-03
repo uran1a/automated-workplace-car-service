@@ -2,11 +2,13 @@ using AutoMapper;
 using AutomatedWorkplaceCarService.BLL.DTOs;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
 using AutomatedWorkplaceCarService.WEB.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AutomatedWorkplaceCarService.WEB.Pages.Clients
 {
+    [Authorize]
     public class ProfileModel : PageModel
     {
         private readonly IClientService _clientService;

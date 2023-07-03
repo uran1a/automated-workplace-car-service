@@ -1,11 +1,13 @@
 using AutoMapper;
 using AutomatedWorkplaceCarService.BLL.DTOs.Application;
 using AutomatedWorkplaceCarService.BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AutomatedWorkplaceCarService.Pages.Clients
 {
+    [Authorize]
     public class ApplicationsModel : PageModel
     {
         private readonly IApplicationService _applicationService;
